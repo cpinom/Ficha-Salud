@@ -1,0 +1,57 @@
+.custom-select-container {
+  width: 350px;
+
+  ::ng-deep .mat-select {
+    font-size: 16px;
+    min-height: 45px;
+  }
+
+  ::ng-deep .mat-select-trigger {
+    padding: 8px 12px;
+  }
+}
+
+::ng-deep ngx-mat-select-search {
+  padding: 8px 12px;
+  font-size: 14px;
+  display: block;
+
+  .mat-input-element {
+    padding: 8px 10px;
+    font-size: 14px;
+    height: 40px;
+    border-radius: 4px;
+  }
+
+  .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: transparent !important;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-outline {
+  background-color: transparent !important;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-outline {
+  background-color: transparent !important;
+}
+
+.mat-mdc-select
+ {
+    display: inline-block !important;
+    width: 100% !important;
+    outline: none !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    -webkit-font-smoothing: antialiased !important;
+    color: var(--mat-select-enabled-trigger-text-color) !important;
+    font-family: var(--mat-select-trigger-text-font) !important;
+    line-height: var(--mat-select-trigger-text-line-height) !important;
+    font-size: var(--mat-select-trigger-text-size) !important;
+    font-weight: var(--mat-select-trigger-text-weight) !important;
+    letter-spacing: var(--mat-select-trigger-text-tracking) !important;
+    border-bottom: 1px solid #ced4da !important;
+}

@@ -1,0 +1,205 @@
+
+
+      <main id="main" class="container">
+        <section class="row breadcrumb">
+          <span class="breadcrumb-item">Inicio</span>
+          <span class="breadcrumb-item active detCursoB">Detalle Curso</span>
+          <span class="breadcrumb-item detFichasEstb" style="display: none;">Detalle Fichas por Estudiante</span>
+        </section>
+        
+
+        <section id="detalleComentarios" class="" *ngIf="mostrarListaEstudiantes">
+          <div class="card" id="detalle">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <!-- Enfermer&iacute;a B&aacute;sica-->
+              <h4 id="titleEB" style="display: none;" class="float-left heading h4-responsive mb-0">Detalle Curso <span class="px-2">&#124;</span> Enfermer&iacute;a B&aacute;sica</h4>
+
+              <!-- M&eacute;dico Quir&uacute;rgico -->
+              <h4 id="titleMQ" style="display: none;" class="float-left heading h4-responsive mb-0">Detalle Curso <span class="px-2">&#124;</span> M&eacute;dico Quir&uacute;rgico</h4>
+
+              <!-- Salud Digital -->
+              <h4 id="titleSD" style="display: none;" class="float-left heading h4-responsive mb-0">Detalle Curso <span class="px-2">&#124;</span> Salud Digital</h4>
+
+              <!-- Pr&aacute;ctica Profesional -->
+              <h4 id="titlePP" style="display: none;" class="float-left heading h4-responsive mb-0">Detalle Curso <span class="px-2">&#124;</span> Pr&aacute;ctica Profesional</h4>
+
+
+              <div class="d-flex align-items-center">
+                <div class="badge badge-warning font-weight-normal">{{ficharevisadascompletadas}} Fichas Pendientes de Revisar</div>
+              </div>
+            </div>
+
+            <div class="row justify-content-between">
+              <div class="col-md-4 mt-3">
+                <p class="mb-3">
+                  <span class="mr-2 font-weight-bold">Sede: </span>
+                  <span> {{sedeDesc}}</span>
+                </p>
+              </div>
+              <div class="col-md-4 mt-3">
+                <p class="mb-3">
+                  <span class="mr-2 font-weight-bold">Secci&oacute;n:  </span>
+                  <span>{{planDesc}}</span>
+                </p>
+              </div>
+              <div class="col-md-4 mt-3">
+                <p class="mb-3">
+                  <span class="mr-2 font-weight-bold">Cantidad Estudiantes: </span>
+                  <span> {{cantidadAlumnos}}</span>
+                </p>
+              </div>
+            </div>
+
+            <!-- Tabla New -->
+            <div class="row mb-4">
+              <div class="col-12">
+                <table appDataTable [data]="listestudiante" id="TablaReporteFixedColumn" class="datatables tabla-reporte-fixed-column table-bordered table-striped mb-0">  
+                  <thead class="">
+                    <tr>
+                      <th valign="top" class="text-capitalize py-2 pl-2 tabla-sticky tabla-sticky-first">Acciones</th>
+                      <th valign="top" class="text-capitalize py-2 pl-2">Nombre <br>Estudiante</th>
+                      <th valign="top" class="text-capitalize py-2 pl-2">Correo <br> Estudiante</th>
+                      <th valign="top" class="text-capitalize py-2 pl-2">&#37; de <br> Asistencia</th>
+                      <th valign="top" class="text-capitalize py-2 pl-2">Promedio <br> Curso</th>
+                      <th valign="top" class="text-capitalize py-2 pl-2">Promedio <br> Semestre</th>
+                      <th valign="top" class="text-capitalize py-2 pl-2">Cursos <br> Semestre</th>
+                      <th valign="top" class="text-capitalize py-2 pl-2">Tipo <br>Estudiante</th>
+                      <th valign="top" class="text-capitalize py-2 pl-2">Fichas Pendientes <br>por Revisar</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                     <tr *ngFor="let item of listestudiante">
+                      <td class="text-nowrap p-3 tabla-sticky tabla-sticky-first">
+                        <div class="d-flex justify-content-start">
+                          <button type="button" class="btn-ver-relacionamiento mr-0 d-flex align-items-center float-left" (click)="verDetalleEstudiante(item.PERS_NCORR, item.SECC_CCOD)">
+                            <i class="material-icons mr-1 icon-lg grey-text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Ver Fichas del estudiante">description</i>
+                          </button>
+                        </div>
+                      </td>
+                      <td class="text-nowrap p-3">{{item.TNOMBREESTUDIANTE}}</td>
+                      <td class="text-nowrap p-3">{{item.PERS_TEMAIL_INACAP}}</td>
+                      <td class="text-nowrap p-3">{{item.PROC_ASISTENCIA}}</td>
+                      <td class="text-nowrap p-3">{{item.PROMEDIO_CURSO}}</td>
+                      <td class="text-nowrap p-3">{{item.NOTA_SEMESTRE}}</td>
+                      <td class="text-nowrap p-3">{{item.CURSO_SEMESTRE}}</td>
+                      <td class="text-nowrap p-3">{{item.ALUM_TRABAJADOR}}</td>
+                      <td class="text-nowrap p-3">{{item.FICHAPENDIENTES}}</td>
+                    </tr>
+               
+
+                    
+                    
+
+                  </tbody>
+                  
+                  
+                </table>
+              </div>
+            </div>
+            <!-- / Tabla New -->
+
+
+
+            <div class="card-footer">
+              <div class="row">
+                <div class="col-12 d-flex justify-content-between">
+                  <div class="md-form">
+                    <a href="#" onclick="volverDetlle();" class="btn btn-outline waves-effect waves-light">
+                      <span>Volver a inicio</span>
+                    </a>
+                  </div>
+
+                  <div class="md-form">
+                    <!-- <a href="#" (click)="asignarNuevaFicha()" class="btn btn-default waves-effect waves-light">
+                      <span>Asignar nueva Ficha</span>
+                    </a> -->
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="detalleEstudiante" class="" *ngIf="mostrarDetalleEstudiante">
+          <div class="card" id="detalleEstudiante">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h4 class="float-left heading h4-responsive mb-0">Fichas del Estudiante <span class="px-2">&#124;</span> <span id="nombreEstudiante">Nombre del Estudiante</span></h4>
+              <div class="d-flex align-items-center">
+                <div class="badge badge-warning font-weight-normal">2 Fichas Pendientes de Revisar</div>
+              </div>
+            </div>
+
+            <div class="row justify-content-between">
+              <div class="col-md-4 mt-3">
+                <p class="mb-3">
+                  <span class="mr-2 font-weight-bold">Sede: </span>
+                  <span> {{sedeDesc}}</span>
+                </p>
+              </div>
+              <div class="col-md-4 mt-3">
+                <p class="mb-3">
+                  <span class="mr-2 font-weight-bold">Secci&oacute;n:  </span>
+                  <span>{{planDesc}}</span>
+                </p>
+              </div>
+              <div class="col-md-4 mt-3">
+                <p class="mb-3">
+                  <span class="mr-2 font-weight-bold">Cantidad Estudiantes: </span>
+                  <span> {{cantidadAlumnos}}</span>
+                </p>
+              </div>
+            </div>
+
+            <!-- Tabla New -->
+            <div class="row mb-4">
+              <div class="col-12">
+                <table appDataTable [data]="listestudianteDetalle" id="TablaFichasEstudiante" class="datatables tabla-reporte-fixed-column table-bordered table-striped mb-0">
+                          
+                  <thead class="">
+                    <tr>
+                      <th valign="top" class="text-capitalize py-2 pl-2 tabla-sticky tabla-sticky-first">Acciones</th>
+                      <th valign="top" class="text-capitalize py-2 pl-2 ">Estado</th>
+                      <th valign="top" class="text-capitalize py-2 pl-2">Nombre Paciente</th>
+                      <th valign="top" class="text-capitalize py-2 pl-2">RUT</th>
+                      <th valign="top" class="text-capitalize py-2 pl-2">Fecha de la Ficha</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                     <tr *ngFor="let item of listestudianteDetalle">
+                      <td class="text-nowrap p-3 tabla-sticky tabla-sticky-first">
+                        <div class="d-flex justify-content-start">
+                          <button (click)="verFichaNo(item.FISA_NCORR,item.PERS_NCORR, item.SECC_CCOD);" type="button" class="btn-ver-ficha mr-0 d-flex align-items-center float-left">
+                            <i class="material-icons mr-1 icon-lg grey-text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Ver Detalle Ficha">visibility</i>
+                          </button>
+                        </div>
+                      </td>
+                      <td class="text-nowrap p-3"><span class="warning-text">{{item.EFIS_TDESC}}</span></td>
+                      <td class="text-nowrap p-3">{{item.NOMPACIENTE}}</td>
+                      <td class="text-nowrap p-3">{{item.FSPA_RUT}}</td>
+                      <td class="text-nowrap p-3">{{item.FFICHA}}</td>
+                    </tr>                   
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- / Tabla New -->
+
+            <div class="card-footer">
+              <div class="row">
+                <div class="col-12 d-flex justify-content-between">
+                  <div class="md-form">
+                    <a href="#" onclick="volverDetalleComentarios();" class="btn btn-outline waves-effect waves-light">
+                      <span>Volver a Detalle de Curso</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>

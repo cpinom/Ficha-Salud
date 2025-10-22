@@ -2,12 +2,53 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>InacapFichasSalud</title>
+  <title>Inacap Fichas de Salud</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="shortcut icon" href="https://www.inacap.cl/web/template-aplicaciones/img/favicon.ico" />
+  <link rel="stylesheet" href="https://www.inacap.cl/web/template-aplicaciones/css/mdb.min.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<body>
-  <app-root></app-root>
+<body id="appBody" class="d-flex flex-column">
+  <app-root class="d-flex flex-column"></app-root>
+    <script>
+    var config = {
+      id: 2527464,
+      nombreUsuario: 'Carles 1',
+      preferencias: { "oscuro": false, "fontSize": "" },
+      baseUrl: '',
+      rolUsuario: 'docente',
+      sedes: [
+        { "sedeCcod": 18, "sedeTdesc": "ARICA" },
+        { "sedeCcod": 7, "sedeTdesc": "APOQUINDO" },
+        { "sedeCcod": 5, "sedeTdesc": "MAIPÚ" },
+        { "sedeCcod": 30, "sedeTdesc": "LOS ÁNGELES" }
+      ]
+    }
+  </script>
+  <!-- SCRIPTS -->
+<script src="https://digital.inacap.cl/template-aplicaciones/js/jquery-3.3.1.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://digital.inacap.cl/template-aplicaciones/js/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://digital.inacap.cl/template-aplicaciones/js/bootstrap.min.js"></script>
+
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://digital.inacap.cl/template-aplicaciones/js/mdb.min.js"></script>
+
+<script src="https://digital.inacap.cl/template-aplicaciones/js/chosen.jquery.js"></script>
+
+<script src="https://digital.inacap.cl/template-aplicaciones/js/datatables.min.js"></script>
+
+<!--- SCRIPT PARA VALIDACIONES-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.13.4/jquery.mask.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+
+<script src="https://digital.inacap.cl/template-aplicaciones/js/campos-requeridos.js"></script>
+<!-- SCRIPT PARA VALIDACIONES -->
+<script src="https://digital.inacap.cl/template-aplicaciones/js/datepicker.js"></script>
 </body>
 </html>

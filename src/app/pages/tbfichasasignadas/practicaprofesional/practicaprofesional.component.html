@@ -1,0 +1,1946 @@
+<main id="main" class="container">
+        <section class="row breadcrumb">
+          <span class="breadcrumb-item"><a href="index.html">Inico</a></span>
+          <span class="breadcrumb-item"><a href="detalle-curso.html">Detalle Curso</a></span>
+          <span class="breadcrumb-item active">Asignar Ficha</span>
+        </section>
+       <form [formGroup]="fichaForm" class="needs-validation" id="form-enfermeria-basica" autocomplete="off">    
+        <section id="detSinRevisar">
+          <div class="card" id="detalle">
+            <div class="card-header d-flex justify-content-between">
+              <h4 class="float-left heading h4-responsive mb-0">Asignar Ficha <span class="mx-2">&#124;</span> Práctica Profesional</h4>
+            </div>
+
+            <div class="row mb-1 mt-4" *ngIf="infoseccion && infoseccion.length > 0">
+              <div class="col-md-4 mt-3">
+                <p class="mb-3">
+                  <span class="mr-2 font-weight-bold">Sede: </span>
+                  <span>{{infoseccion[0].SEDE_TDESC}} </span>
+                </p>
+              </div>
+              <div class="col-md-4 mt-3">
+                <p class="mb-3">
+                  <span class="mr-2 font-weight-bold">Secci&oacute;n: </span>
+                  <span>{{infoseccion[0].SECC_CCOD}}</span>
+                </p>
+              </div>
+              <div class="col-md-4 mt-3">
+                <p class="mb-3">
+                  <span class="mr-2 font-weight-bold">Cantidad Estudiantes: </span>
+                  <span>{{infoseccion[0].NUMALUM}}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mt-4">
+            <div class="card-header d-flex justify-content-between">
+              <h4 class="float-left heading h4-responsive mb-0">Perfil Paciente</h4>
+            </div>
+
+            <div class="accordion md-accordion mt-4" id="accordion2" role="tablist" aria-multiselectable="true">
+              <div class="accordion-item">
+                <div class="accordion-header grey lighten-3" role="tab" id="heading1">
+                  <a data-toggle="collapse" data-parent="#accordion2" href="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                    <h5 class="mb-0 pl-3 pr-3">
+                      <span class="d-inline-flex align-items-center">Datos Personales</span>
+                      <span class="accordion-arrow"><i class="material-icons rotate-icon float-right">keyboard_arrow_down</i></span>
+                    </h5>
+                  </a>
+                </div>
+              
+                <div id="collapse1" class="collapse show" role="tabpanel" aria-labelledby="heading1" data-parent="#accordion2">
+                  <div class="accordion-body py-3 px-2 pb-2">
+                    <div class="row justify-content-between mt-2">
+                      <div class="col-md-3 mb-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrRut" type="text" name="campo_rut" id="campo_rut" class="form-control mb-0" placeholder="Ingrese RUT del usuario" />
+                          <label for="campo_rut" class="active">RUT</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mb-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrNombre" type="text" name="nombreUsuario" id="nombreUsuario" class="form-control mb-0" placeholder="Ingrese nombre del usuario" />
+                          <label for="nombreUsuario" class="active">Nombre</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mb-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrRzoSocial" type="text" name="nombreSocial" id="nombreSocial" class="form-control mb-0" placeholder="Ingrese nombre social del usuario" />
+                          <label for="nombreSocial" class="active">Nombre Social</label>
+                        </div>
+                      </div>
+                      <div class="w-100"></div>
+                      <div class="col-md-3 mb-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrPaterno" type="text" name="apellidoPaterno" id="apellidoPaterno" class="form-control mb-0" placeholder="Ingrese apellido paterno" />
+                          <label for="apellidoPaterno" class="active">Apellido Paterno</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mb-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrMaterno" type="text" name="apellidoMaterno" id="apellidoMaterno" class="form-control mb-0" placeholder="Ingrese apellido materno" />
+                          <label for="apellidoMaterno" class="active">Apellido Materno</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mb-3">
+                        <div class="md-form">
+                          <mat-select formControlName="CtrSexo" class="mdb-select" name="sexo" id="sexo">
+                            <mat-option value="" disabled selected>Seleccione Sexo</mat-option>
+                            <mat-option value="1">Masculino</mat-option>
+                            <mat-option value="2">Femenino</mat-option>
+                            <mat-option value="3">Otro</mat-option>
+                            <mat-option value="4">Prefiero no responder</mat-option>
+                          </mat-select>
+                          <label for="sexo" class="active">Sexo</label>
+                        </div>
+                      </div>
+                      <div class="w-100"></div>
+                      <div class="col-md-3 mb-3">
+                        <div class="md-form">
+                          <input formControlName="CtrFecha" name="campo_fecha" id="campo_fecha" type="text" class="datepicker-input form-control" placeholder="DD/MM/AAAA" data-position="bottom center" autocomplete="off" />
+                          <label for="campo_fecha" class="active">Seleccionar fecha</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mb-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrNacionalidad" type="text" name="nacionalidad" id="nacionalidad" class="form-control mb-0" placeholder="Ingrese Nacionalidad" />
+                          <label for="nacionalidad" class="active">Nacionalidad</label>
+                        </div>
+                      </div>
+                      <div class="w-25"></div>
+                    </div>
+              
+                    <div class="row">
+                      <div class="col-12 d-flex justify-content-end mt-4 align-items-center">
+                        <button data-toggle="collapse" data-parent="#accordion2" data-target="#collapse2" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold collapsed waves-effect waves-light px-1">
+                          Siguiente &gt;&gt;
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="accordion-item">
+                <div class="accordion-header grey lighten-3" role="tab" id="heading2">
+                  <a data-toggle="collapse" data-parent="#accordion2" href="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                    <h5 class="mb-0 pl-3 pr-3">
+                      <span class="d-inline-flex align-items-center">Contacto Paciente</span>
+              
+                      <span class="accordion-arrow"><i class="material-icons rotate-icon float-right">keyboard_arrow_down</i></span>
+                    </h5>
+                  </a>
+                </div>
+                <div id="collapse2" class="collapse show" role="tabpanel" aria-labelledby="heading2" data-parent="#accordion2">
+                  <div class="accordion-body py-3 px-2 pb-2">
+                    <div class="row align-items-center justify-content-between mt-2">
+                      <div class="col-4">
+                        <div class="row">
+                          <div class="col-sm-1 mr-2">
+                            <div class="md-form">
+                              <label>+56</label>
+                              <label class="active text-nowrap">Celular</label>
+                            </div>
+                          </div>
+                          <div class="md-form mb-3 col">
+                            <input formControlName="CtrCelular" type="text" name="campo_telefono" id="campo_telefono" class="form-control mb-0" placeholder="Ej: 9 8621 7148" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrDireccion" type="text" name="direccion" id="direccion" class="form-control mb-0" placeholder="Ingrese direcci&oacute;n del usuario" />
+                          <label for="direccion" class="active">Direcci&oacute;n</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mb-4">
+                      <div class="col-12 d-flex justify-content-between mt-4 align-items-center px-0">
+                        <button data-toggle="collapse" data-parent="#accordion2" data-target="#collapse1" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold waves-effect waves-light collapsed px-1">
+                          &lt;&lt; Anterior
+                        </button>
+                        <button data-toggle="collapse" data-parent="#accordion2" data-target="#collapse3" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold collapsed waves-effect waves-light px-1">
+                          Siguiente &gt;&gt;
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="accordion-item">
+                <div class="accordion-header grey lighten-3" role="tab" id="heading3">
+                  <a data-toggle="collapse" data-parent="#accordion2" href="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                    <h5 class="mb-0 pl-3 pr-3">
+                      <span class="d-inline-flex align-items-center">Previsi&oacute;n</span>
+              
+                      <span class="accordion-arrow"><i class="material-icons rotate-icon float-right">keyboard_arrow_down</i></span>
+                    </h5>
+                  </a>
+                </div>
+                <div id="collapse3" class="collapse show" role="tabpanel" aria-labelledby="heading3" data-parent="#accordion2">
+                  <div class="accordion-body py-3 px-2 pb-2">
+                    <div class="row mt-2">
+                      <div class="col-md-4 mb-4">
+                        <div class="md-form">
+                       <mat-select formControlName="CtrPrevision" class="mdb-select" name="sexo" id="sexo">
+                             <mat-option value="" disabled selected>Seleccione previsi&oacute;n</mat-option>
+                             <mat-option *ngFor="let itempre of prevision" [value]="itempre.FIRE_NTIPO">
+                                {{ itempre.INSTITUCION }}
+                              </mat-option>
+                          </mat-select>
+                          <label for="prevision" class="active">Seleccionar</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mb-4">
+                      <div class="col-12 d-flex justify-content-between align-items-center px-0">
+                        <button data-toggle="collapse" data-parent="#accordion2" data-target="#collapse2" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold waves-effect waves-light collapsed px-0">
+                          &lt;&lt; Anterior
+                        </button>
+                        <button data-toggle="collapse" data-parent="#accordion2" data-target="#collapse4" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold collapsed waves-effect waves-light px-0">
+                          Siguiente &gt;&gt;
+                        </button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>              
+
+            </div>
+
+            <div class="card-header d-flex mt-4 justify-content-between">
+              <h4 class="float-left heading h4-responsive mb-0">Ficha Cl&iacute;nica</h4>
+            </div>
+
+            <div class="accordion md-accordion mt-4" id="accordion1" role="tablist" aria-multiselectable="true">
+              <div class="accordion-item">
+                <div class="accordion-header grey lighten-3" role="tab" id="heading4">
+                  <a data-toggle="collapse" data-parent="#accordion1" href="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                    <h5 class="mb-0 pl-3 pr-3">
+                      <span class="d-inline-flex align-items-center">Caso Cl&iacute;nico</span>
+
+                      <span class="accordion-arrow"><i class="material-icons rotate-icon float-right">keyboard_arrow_down</i></span>
+                    </h5>
+                  </a>
+                </div>
+                <div id="collapse4" class="collapse show" role="tabpanel" aria-labelledby="heading4" data-parent="#accordion1">
+                  <div class="accordion-body py-3 px-2 pb-2">
+                    <div class="row">
+                      <div class="col-md-6 mb-4 mt-3 mb-2">
+                        <div class="md-form" id="textareaMQ">
+                          <textarea formControlName="CtrCasoClinico" id="campo_mensajeMQ" name="campo_mensajeMQ" rows="4" class="form-control md-textarea" placeholder="Ingrese caso cl&iacute;nico" maxlength="3000"></textarea>
+                          <label class="count"></label>
+                          <label for="campo_mensajeMQ" class="active">Caso Cl&iacute;nico</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mb-4">
+                      <div class="col-12 d-flex justify-content-between align-items-center px-0">
+                        <button data-toggle="collapse" data-parent="#accordion1" data-target="#collapse3" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold waves-effect waves-light collapsed px-1">
+                          &lt;&lt; Anterior
+                        </button>
+                        <button data-toggle="collapse" data-parent="#accordion1" data-target="#collapse5" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold collapsed waves-effect waves-light px-1">
+                          Siguiente &gt;&gt;
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-header grey lighten-3" role="tab" id="heading5">
+                  <a data-toggle="collapse" data-parent="#accordion1" href="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                    <h5 class="mb-0 pl-3 pr-3">
+                      <span class="d-inline-flex align-items-center">Diagn&oacute;stico M&eacute;dico</span>
+
+                      <span class="accordion-arrow"><i class="material-icons rotate-icon float-right">keyboard_arrow_down</i></span>
+                    </h5>
+                  </a>
+                </div>
+                <div id="collapse5" class="collapse show" role="tabpanel" aria-labelledby="heading5" data-parent="#accordion1">
+                  <div class="accordion-body py-3 px-2 pb-2">
+                    <div class="row align-items-end justify-content-between">
+                        <div class="col-5">
+                        <div class="col-12 mb-4 mt-5 mb-5">
+                          <div class="md-form" id="textareaDM_eb">
+                            <textarea formControlName="CtrDiagnosticoMedico" id="campo_mensajeDM_eb" name="campo_mensajeDM_eb" rows="4" class="form-control md-textarea" placeholder="Ingrese diagn&oacute;stico m&eacute;dico" maxlength="80"></textarea>
+                            <label class="count"></label>
+                            <label for="campo_mensajeDM_eb" class="active">Diagn&oacute;stico M&eacute;dico</label>
+                          </div>
+                        </div>
+                        <div class="col-12 mb-4 mt-5 mb-5">
+                          <div class="md-form" id="textareaAR_eb">
+                            <textarea formControlName="CtrAnamnesisRemota" id="campo_mensajeAR_eb" name="campo_mensajeAR_eb" rows="4" class="form-control md-textarea" placeholder="Ingrese Anamnesis Remota" maxlength="500"></textarea>
+                            <label class="count"></label>
+                            <label for="campo_mensajeAR_eb" class="active">Anamnesis Remota</label>
+                          </div>
+                        </div>
+                        <div class="col-12 mb-4 mt-5 mb-5">
+                          <div class="md-form" id="textareaEF_eb">
+                            <textarea formControlName="CtrExamenFisico" id="campo_mensajeEF_eb" name="campo_mensajeEF_eb" rows="4" class="form-control md-textarea" placeholder="Ingrese examen f&iacute;sico" maxlength="300"></textarea>
+                            <label class="count"></label>
+                            <label for="campo_mensajeEF_eb" class="active">Examen F&iacute;sico General y Segmentario</label>
+                          </div>
+                        </div>
+                      </div>
+                        <div class="col-6">
+                        <div class="col-12 mb-4 mt-5 mb-5">
+                          <div class="md-form" id="textareaAP_eb">
+                            <textarea formControlName="CtrAnamnesisProxima" id="campo_mensajeAP" name="campo_mensajeAP" rows="4" class="form-control md-textarea" placeholder="Ingrese anamnesis pr&oacute;xima" maxlength="500"></textarea>
+                            <label class="count"></label>
+                            <label for="campo_mensajeAP" class="active">Anamnesis Pr&oacute;xima</label>
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <div class="md-form">
+                            <p class="mb-3">
+                              <strong>Cargar archivos como ejemplo: Rx, ex&aacute;menes u otros.</strong> <br />
+                              (Debe cargar m&iacute;nimo 1 archivo y m&aacute;ximo 4 en formato .pdf o .jpg)
+                            </p>
+                            <div class="file-field d-flex align-items-center pb-5">
+                              <div class="btn d-flex align-items center float-left">
+                                <span class="material-icons d-md-none attach-icon">
+                                  attach_file
+                                </span>
+                                <span class="d-none d-md-block">Adjuntar Archivo</span>
+
+                                <input formControlName="CtrAdjunto" type="file" name="campo_upload" required />
+                              </div>
+
+                              <div class="file-path-wrapper">
+                                <input formControlName="CtrArchivoAdjunto" class="file-path" type="text" placeholder="No hay archivos adjuntos" />
+
+                                <button id="btnResetForm" class="btn btn-link d-none pr-1">
+                                  <i class="material-icons icon-lg">clear</i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      </div>
+                      
+                    <div class="row mb-4">
+                      <div class="col-12 d-flex justify-content-between align-items-center px-0">
+                        <button data-toggle="collapse" data-parent="#accordion1" data-target="#collapse4" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold waves-effect waves-light collapsed px-1">
+                          &lt;&lt; Anterior
+                        </button>
+                        <button data-toggle="collapse" data-parent="#accordion1" data-target="#collapse6" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold collapsed waves-effect waves-light px-1">
+                          Siguiente &gt;&gt;
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-header grey lighten-3" role="tab" id="heading6">
+                  <a data-toggle="collapse" data-parent="#accordion1" href="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                    <h5 class="mb-0 pl-3 pr-3">
+                      <span class="d-inline-flex align-items-center">Indicaciones M&eacute;dicas</span>
+
+                      <span class="accordion-arrow"><i class="material-icons rotate-icon float-right">keyboard_arrow_down</i></span>
+                    </h5>
+                  </a>
+                </div>
+                <div id="collapse6" class="collapse show" role="tabpanel" aria-labelledby="heading6" data-parent="#accordion1">
+                  <div class="accordion-body py-3 px-2 pb-2">
+                    
+                    <div class="row mt-2">
+                        <div class="col-md-5 mb-4 mb-5">
+                          <div class="md-form" id="textareaIM-mq1">
+                            <textarea formControlName="CtrIndicacionesMedica" id="campo_mensajeIM-mq1" name="campo_mensajeIM-mq1" rows="4" class="form-control md-textarea" placeholder="Ingrese indicaciones" maxlength="300"></textarea>
+                            <label class="count active"></label>
+                            <label for="campo_mensajeIM-mq1" class="active">Indicaciones M&eacute;dicas</label>
+                          </div>
+                        </div>
+                      </div>
+                      
+                    
+
+                    <div class="row mb-4">
+                      <div class="col-12 d-flex justify-content-between align-items-center px-0">
+                        <button data-toggle="collapse" data-parent="#accordion1" data-target="#collapse5" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold waves-effect waves-light collapsed px-1">
+                          &lt;&lt; Anterior
+                        </button>
+                        <button data-toggle="collapse" data-parent="#accordion1" data-target="#collapse7" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold collapsed waves-effect waves-light px-1">
+                          Siguiente &gt;&gt;
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-header grey lighten-3" role="tab" id="heading7">
+                  <a data-toggle="collapse" data-parent="#accordion1" href="#collapse7" aria-expanded="false" aria-controls="collapse7">
+                    <h5 class="mb-0 pl-3 pr-3">
+                      <span class="d-inline-flex align-items-center">Medicamentos</span>
+
+                      <span class="accordion-arrow"><i class="material-icons rotate-icon float-right">keyboard_arrow_down</i></span>
+                    </h5>
+                  </a>
+                </div>
+                <div id="collapse7" class="collapse show" role="tabpanel" aria-labelledby="heading7" data-parent="#accordion1">
+                  <div class="accordion-body p-3 pt-3 pb-2">
+                    <div class="row mt-3">
+                        <div class="col-12">
+                          <table class="table table-striped table-bordered">
+                            <thead class="thead-light">
+                              <tr>
+                                <th>Medicamentos / Dosis / Horario</th>
+                                <th>
+                                  Acci&oacute;n <br />
+                                  Farmacol&oacute;gica
+                                </th>
+                                <th>
+                                  Reacci&oacute;n Adversa <br />
+                                  M&aacute;s Importante
+                                </th>
+                                <th>
+                                  Cuidados de Administraci&oacute;n <br />
+                                  Relevantes
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrMediDosis" type="text" name="mediDosis" id="mediDosis" class="form-control mb-0 py-0 my-0" placeholder="Ingrese medicamentos" />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrAccionFarma" type="text" name="accionFarma" id="accionFarma" class="form-control mb-0 py-0 my-0" placeholder="Ingrese acci&oacute;n farmacol&oacute;gica" />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrReaccAdversas" type="text" name="reaccAdversa" id="reaccAdversa" class="form-control mb-0 py-0 my-0" placeholder="Ingrese plan" />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrCiudadosAdmRelevantes" type="text" name="reaccAdversa" id="reaccAdversa" class="form-control mb-0 py-0 my-0" placeholder="Ingrese plan" />
+                                  </div>
+                                </td>
+                              </tr>
+                                <tr>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrMediDosis1" type="text" name="mediDosis" id="mediDosis" class="form-control mb-0 py-0 my-0" placeholder="Ingrese medicamentos" />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrAccionFarma1" type="text" name="accionFarma" id="accionFarma" class="form-control mb-0 py-0 my-0" placeholder="Ingrese acci&oacute;n farmacol&oacute;gica" />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrReaccAdversas1" type="text" name="reaccAdversa" id="reaccAdversa" class="form-control mb-0 py-0 my-0" placeholder="Ingrese plan" />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrCiudadosAdmRelevantes1" type="text" name="reaccAdversa" id="reaccAdversa" class="form-control mb-0 py-0 my-0" placeholder="Ingrese plan" />
+                                  </div>
+                                </td>
+                              </tr>
+                                <tr>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrMediDosis2" type="text" name="mediDosis" id="mediDosis" class="form-control mb-0 py-0 my-0" placeholder="Ingrese medicamentos" />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrAccionFarma2" type="text" name="accionFarma" id="accionFarma" class="form-control mb-0 py-0 my-0" placeholder="Ingrese acci&oacute;n farmacol&oacute;gica" />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrReaccAdversas2" type="text" name="reaccAdversa" id="reaccAdversa" class="form-control mb-0 py-0 my-0" placeholder="Ingrese plan" />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrCiudadosAdmRelevantes2" type="text" name="reaccAdversa" id="reaccAdversa" class="form-control mb-0 py-0 my-0" placeholder="Ingrese plan" />
+                                  </div>
+                                </td>
+                              </tr>
+                                <tr>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrMediDosis3" type="text" name="mediDosis" id="mediDosis" class="form-control mb-0 py-0 my-0" placeholder="Ingrese medicamentos" />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrAccionFarma3" type="text" name="accionFarma" id="accionFarma" class="form-control mb-0 py-0 my-0" placeholder="Ingrese acci&oacute;n farmacol&oacute;gica" />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrReaccAdversas3" type="text" name="reaccAdversa" id="reaccAdversa" class="form-control mb-0 py-0 my-0" placeholder="Ingrese plan" />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrCiudadosAdmRelevantes3" type="text" name="reaccAdversa" id="reaccAdversa" class="form-control mb-0 py-0 my-0" placeholder="Ingrese plan" />
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      
+                    
+
+                    <div class="row mb-4">
+                      <div class="col-12 d-flex justify-content-between align-items-center px-0">
+                        <button data-toggle="collapse" data-parent="#accordion1" data-target="#collapse6" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold waves-effect waves-light collapsed px-1">
+                          &lt;&lt; Anterior
+                        </button>
+                        <button data-toggle="collapse" data-parent="#accordion1" data-target="#collapse8" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold collapsed waves-effect waves-light px-1">
+                          Siguiente &gt;&gt;
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-header grey lighten-3" role="tab" id="heading7">
+                  <a data-toggle="collapse" data-parent="#accordion1" href="#collapse7" aria-expanded="false" aria-controls="collapse7">
+                    <h5 class="mb-0 pl-3 pr-3">
+                      <span class="d-inline-flex align-items-center">Registro de Atenci&oacute;n de Enfermer&iacute;a</span>
+
+                      <span class="accordion-arrow"><i class="material-icons rotate-icon float-right">keyboard_arrow_down</i></span>
+                    </h5>
+                  </a>
+                </div>
+                <div id="collapse7" class="collapse show" role="tabpanel" aria-labelledby="heading7" data-parent="#accordion1">
+                  <div class="accordion-body p-3 pt-3 pb-2">
+                    <div class="row justify-content-between mt-2">
+                      <div class="col-12">
+                        <h6 class="font-weight-bold mb-2 border-bottom py-1" style="max-width: 200px;">Antropometr&iacute;a</h6>
+                      </div>
+                      <div class="col-md-3 mt-2">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrPeso" type="text" name="peso" id="peso" class="form-control mb-0" placeholder="Ingrese Peso" />
+                          <label for="peso" class="active">Peso (kg)</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mt-2">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrTalla" type="text" name="talla" id="talla" class="form-control mb-0" placeholder="Ingrese Talla" />
+                          <label for="talla" class="active">Talla (cm)</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mt-2">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrImc" type="text" name="imc" id="imc" class="form-control mb-0" placeholder="Ingrese IMC" />
+                          <label for="imc" class="active">IMC</label>
+                        </div>
+                      </div>
+                      <div class="w-100"></div>
+                      <div class="col-md-3 mt-2">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrCintura" type="text" name="circunferenciaCintura" id="circunferenciaCintura" class="form-control mb-0" placeholder="Ingrese Circunferencia Cintura" />
+                          <label for="circunferenciaCintura" class="active">Circunferencia Cintura</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mt-2">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrClasificacionImc" type="text" name="clasificacionIMC" id="clasificacionIMC" class="form-control mb-0" placeholder="Ingrese Clasificaci&oacute;n IMC" />
+                          <label for="clasificacionIMC" class="active">Clasificaci&oacute;n de IMC</label>
+                        </div>
+                      </div>
+                      <div class="w-25"></div>
+                      <div class="w-100 mb-4"></div>
+                      <div class="col-12">
+                        <h6 class="font-weight-bold mb-2 py-1 border-bottom" style="max-width: 200px;">Presi&oacute;n Arterial</h6>
+                      </div>
+                      <div class="col-md-3 mt-2">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrPresionSistolica" type="text" name="presionSistolica" id="presionSistolica" class="form-control mb-0" placeholder="Ingrese Presi&oacute;n Sist&oacute;lica" />
+                          <label for="presionSistolica" class="active">Presi&oacute;n Sist&oacute;lica</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mt-2">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrPresionDistolica" type="text" name="presionDistolica" id="presionDistolica" class="form-control mb-0" placeholder="Ingrese Presi&oacute;n Dist&oacute;lica" />
+                          <label for="presionDistolica" class="active">Presi&oacute;n Dist&oacute;lica</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mt-2">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrPresionMedia" type="text" name="presionMedia" id="presionMedia" class="form-control mb-0" placeholder="Ingrese Presi&oacute;n Media" />
+                          <label for="presionMedia" class="active">Presi&oacute;n Media</label>
+                        </div>
+                      </div>
+                      <div class="w-100"></div>
+                      <!-- <div class="col-md-3 mt-2">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrCircunferenciaCintura" type="text" name="cinturaPa" id="cinturaPa" class="form-control mb-0" placeholder="Ingrese Circunferencia Cintura" />
+                          <label for="cinturaPa" class="active">Circunferencia Cintura</label>
+                        </div>
+                      </div> -->
+                      <div class="col-md-3 mt-2">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrClasificacionPA" type="text" name="clasificacionPA" id="clasificacionPA" class="form-control mb-0" placeholder="Ingrese Clasificaci&oacute;n de PA" />
+                          <label for="clasificacionPA" class="active">Clasificaci&oacute;n de Presi&oacute;n Arterial</label>
+                        </div>
+                      </div>
+                      <div class="w-25"></div>
+
+                      <!-- Pulso / Frecuencia Cardiaca -->
+                      <div class="w-100 mb-4"></div>
+                      <div class="col-12">
+                        <h6 class="font-weight-bold mb-2 py-1 border-bottom" style="max-width: 250px;">Pulso / Frecuencia Cardiaca</h6>
+                      </div>
+                      <div class="col-md-3 mt-2">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrPulsoFC" type="text" name="pulsoFC" id="pulsoFC" class="form-control mb-0" placeholder="Ingrese Pulso y/o FC" />
+                          <label for="pulsoFC" class="active">Pulso y/o FC</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mt-2">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrClasificacionFC" type="text" name="clasificacionFC" id="clasificacionFC" class="form-control mb-0" placeholder="Ingrese Clasificaci&oacute;n FC" />
+                          <label for="clasificacionFC" class="active">Clasificaci&oacute;n de Frecuencia Cardiaca</label>
+                        </div>
+                      </div>
+                      <div class="w-25"></div>
+
+                      <!-- Control Respiratorio -->
+                      <div class="w-100 mb-4"></div>
+                      <div class="col-12">
+                        <h6 class="font-weight-bold mb-2 py-1 border-bottom" style="max-width: 250px;">Control Respiratorio</h6>
+                      </div>
+                      <div class="col-md-3 mt-2">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrFrecueciaRespiratoria" type="text" name="frecuenciaRespiratoria" id="frecuenciaRespiratoria" class="form-control mb-0" placeholder="Ingrese Frecuencia Respiratoria" />
+                          <label for="frecuenciaRespiratoria" class="active">Frecuencia Respiratoria</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mt-2">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrTipoRespiracion" type="text" name="tipoRespiracion" id="tipoRespiracion" class="form-control mb-0" placeholder="Ingrese Tipo de Respiraci&oacute;n" />
+                          <label for="tipoRespiracion" class="active">Tipo de Respiraci&oacute;n</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mt-2">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrSaturacionO2" type="text" name="saturacionO2" id="saturacionO2" class="form-control mb-0" placeholder="Ingrese Saturaci&oacute;n O2" />
+                          <label for="saturacionO2" class="active">Saturaci&oacute;n O2</label>
+                        </div>
+                      </div>
+                      <div class="w-100"></div>
+                      <div class="col-md-3 mt-2">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrFiO2" type="text" name="fio2" id="fio2" class="form-control mb-0" placeholder="Ingrese FIO2" />
+                          <label for="fio2" class="active">FIO2</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mt-2">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrLenguajeTecnico" type="text" name="lenguajeTecnico" id="lenguajeTecnico" class="form-control mb-0" placeholder="Ingrese Clasificaci&oacute;n/Lenguaje T&eacute;cnico" />
+                          <label for="lenguajeTecnico" class="active">Clasificaci&oacute;n / Lenguaje T&eacute;cnico</label>
+                        </div>
+                      </div>
+                      <div class="w-25"></div>
+
+                      <!-- Temperatura y Otros -->
+                      <div class="w-100 mb-4"></div>
+                      <div class="col-12">
+                        <h6 class="font-weight-bold mb-2 py-1 border-bottom" style="max-width: 250px;">Temperatura y Otros</h6>
+                      </div>
+                      <div class="col-md-3 mt-2">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrTemperaturaAxilar" type="text" name="temperaturaAxilar" id="temperaturaAxilar" class="form-control mb-0" placeholder="Ingrese Temperatura Axilar" />
+                          <label for="temperaturaAxilar" class="active">Temperatura Axilar</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mt-2">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrTemperaturaRectal" type="text" name="temperaturaRectal" id="temperaturaRectal" class="form-control mb-0" placeholder="Ingrese Temperatura Rectal" />
+                          <label for="temperaturaRectal" class="active">Temperatura Rectal</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mt-2">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrHgt" type="text" name="hgt" id="hgt" class="form-control mb-0" placeholder="Ingrese HGT" />
+                          <label for="hgt" class="active">HGT</label>
+                        </div>
+                      </div>
+                      <div class="w-100"></div>
+                      <div class="col-md-3 mt-2">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrEvaEna" type="text" name="evaEna" id="evaEna" class="form-control mb-0" placeholder="Ingrese EVA/ENA" />
+                          <label for="evaEna" class="active">EVA / ENA</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mt-2">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrClasificacionTemHgt" type="text" name="clasificacionTempHgt" id="clasificacionTempHgt" class="form-control mb-0" placeholder="Ingrese Clasificaci&oacute;n" />
+                          <label for="clasificacionTempHgt" class="active">Clasificaci&oacute;n de Temperatura, HGT</label>
+                        </div>
+                      </div>
+                      <div class="w-25"></div>
+
+                      <div class="col-12 col-md-5 mb-2 mt-4">
+                        <div class="md-form" id="textareaRAE1">
+                          <textarea formControlName="CtrIndicacionesMedicas" id="campo_mensajeRAE1" name="campo_mensaje" rows="4" class="form-control md-textarea" placeholder="Ingrese indicaciones" maxlength="300"></textarea>
+                          <label class="count"></label>
+                          <label for="campo_mensajeRAE1" class="active">Indicaciones M&eacute;dicas</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row mb-4">
+                      <div class="col-12 d-flex justify-content-between align-items-center px-0">
+                        <button data-toggle="collapse" data-parent="#accordion1" data-target="#collapse6" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold waves-effect waves-light collapsed px-1">
+                          &lt;&lt; Anterior
+                        </button>
+                        <button data-toggle="collapse" data-parent="#accordion1" data-target="#collapse8" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold collapsed waves-effect waves-light px-1">
+                          Siguiente &gt;&gt;
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+
+              <div class="accordion-item">
+                <div class="accordion-header grey lighten-3" role="tab" id="heading8">
+                  <a data-toggle="collapse" data-parent="#accordion1" href="#collapse8" aria-expanded="false" aria-controls="collapse8">
+                    <h5 class="mb-0 pl-3 pr-3">
+                      <span class="d-inline-flex align-items-center">Plan de Atenci&oacute;n de Enfermer&iacute;a B&aacute;sico</span>
+
+                      <span class="accordion-arrow"><i class="material-icons rotate-icon float-right">keyboard_arrow_down</i></span>
+                    </h5>
+                  </a>
+                </div>
+                <div id="collapse8" class="collapse show" role="tabpanel" aria-labelledby="heading8" data-parent="#accordion1">
+                  <div class="accordion-body p-3 pt-3 pb-2">
+                    <div class="row justify-content-between">
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrTipoReposo" type="text" name="tipoReposo" id="tipoReposo" class="form-control mb-0" placeholder="Ingrese Comentario" />
+                          <label for="tipoReposo" class="active">Tipo de Reposo</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrObservaciones" type="text" name="observaciones" id="observaciones" class="form-control mb-0" placeholder="Ingrese Comentario" />
+                          <label for="observaciones" class="active">Observaciones</label>
+                        </div>
+                      </div>
+                      <div class="w-25"></div>
+                      <div class="w-100"></div>
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrSignosVitales" type="text" name="signoVitales" id="signoVitales" class="form-control mb-0" placeholder="c/ x Hrs." />
+                          <label for="signoVitales" class="active">Control de Signos Vitales</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrObservaciones1" type="text" name="observaciones1" id="observaciones1" class="form-control mb-0" placeholder="Ingrese Comentario" />
+                          <label for="observaciones1" class="active">Observaciones</label>
+                        </div>
+                      </div>
+                      <div class="w-25"></div>
+                      <div class="w-100"></div>
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrAseoGenital" type="text" name="aseoGenital" id="aseoGenital" class="form-control mb-0" placeholder="c/ x Hrs." />
+                          <label for="aseoGenital" class="active">Ba&ntilde;o Diario y Aseo Genital</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrObservaciones2" type="text" name="observaciones2" id="observaciones2" class="form-control mb-0" placeholder="Ingrese Comentario" />
+                          <label for="observaciones2" class="active">Observaciones</label>
+                        </div>
+                      </div>
+                      <div class="w-25"></div>
+                      <div class="w-100"></div>
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrCiudadoIntra" type="text" name="cuidadoIntra" id="cuidadoIntra" class="form-control mb-0" placeholder="c/ x Hrs." />
+                          <label for="cuidadoIntra" class="active">Cuidado Intravenosa</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrObservaciones3" type="text" name="observaciones3" id="observaciones3" class="form-control mb-0" placeholder="Ingrese Comentario" />
+                          <label for="observaciones3" class="active">Observaciones</label>
+                        </div>
+                      </div>
+                      <div class="w-25"></div>
+                      <div class="w-100"></div>
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrPautaRiesgoAR" type="text" name="pautaRiesgoAR" id="pautaRiesgoAR" class="form-control mb-0" placeholder="Horario/descripci&oacute;n" />
+                          <label for="pautaRiesgoAR" class="active">Pauta Riesgo AR</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrPautaRiesgoBR" type="text" name="pautaRiesgoBR" id="pautaRiesgoBR" class="form-control mb-0" placeholder="Horario/descripci&oacute;n" />
+                          <label for="pautaRiesgoBR" class="active">Pauta Riesgo BR</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrPautaRiesgoCaidas" type="text" name="pautaRiesgoBR" id="pautaRiesgoBR" class="form-control mb-0" placeholder="Ingresar comentario" />
+                          <label for="pautaRiesgoBR" class="active">Pauta Riesgo Ca&iacute;das</label>
+                        </div>
+                      </div>
+                      <div class="w-100"></div>
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form">
+                           <mat-select formControlName="CtrBarandasAlto" name="BarandasAlto" id="BarandasAlto">                            
+                            <mat-option value="Si">Si</mat-option>
+                            <mat-option value="No">No</mat-option>
+                          </mat-select>
+                          <label for="BarandasAlto" class="active">Barandas en Alto</label>
+                        </div>
+                      </div>
+
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form">
+                          <select formControlName="CtrCartelNivelRiesgo" class="mdb-select" name="cartelNivel" id="cartelNivel">
+                            <option value="" disabled selected>Seleccione una opci&oacute;n</option>
+                            <option value="1">Opci&oacute;n 1</option>
+                            <option value="2">Opci&oacute;n 2</option>
+                            <option value="3">Opci&oacute;n 3</option>
+                            <option value="3">Opci&oacute;n 4</option>
+                            <option value="3">Opci&oacute;n 5</option>
+                          </select>
+                          <label for="cartelNivel">Cartel Nivel de Riesgo</label>
+                        </div>
+                      </div>
+                      <div class="w-25"></div>
+                      <div class="w-100"></div>
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form">
+                           <mat-select formControlName="CtrSujecionesSuav" name="sujeciones" id="sujeciones">                            
+                            <mat-option value="Si">Si</mat-option>
+                            <mat-option value="No">No</mat-option>
+                          </mat-select>
+                          <label for="sujeciones" class="active">Sujeciones Suaves</label>
+                          <!-- <select formControlName="CtrSujecionesSuav" class="mdb-select" name="sujeciones" id="sujeciones">
+                            <option value="" disabled selected>Seleccione una opci&oacute;n</option>
+                            <option value="1">Opci&oacute;n 1</option>
+                            <option value="2">Opci&oacute;n 2</option>
+                            <option value="3">Opci&oacute;n 3</option>
+                            <option value="3">Opci&oacute;n 4</option>
+                            <option value="3">Opci&oacute;n 5</option>
+                          </select>
+                          <label for="sujeciones">Sujeciones Suaves</label> -->
+                        </div>
+                      </div>
+
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrSitio" type="text" name="sitio" id="sitio" class="form-control mb-0" placeholder="Ingresar comentario" />
+                          <label for="sitio" class="active">Sitio</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrVisitaSeguridad" type="text" name="visitaSeguridad" id="visitaSeguridad" class="form-control mb-0" placeholder="c/ x Hrs." />
+                          <label for="visitaSeguridad" class="active">Visitas de Seguridad</label>
+                        </div>
+                      </div>
+                      <div class="w-100"></div>
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form">
+                           <mat-select formControlName="CtrLpp" class="mdb-select" name="lpp" id="lpp">
+                            <mat-option value="Si">Si</mat-option>
+                            <mat-option value="No">No</mat-option>
+                          </mat-select>
+                          <label for="lpp" class="active">LPP</label>
+                          <!-- <select formControlName="CtrLpp" class="mdb-select" name="lpp" id="lpp">
+                            <option value="" disabled selected>Seleccione una opci&oacute;n</option>
+                            <option value="1">Opci&oacute;n 1</option>
+                            <option value="2">Opci&oacute;n 2</option>
+                            <option value="3">Opci&oacute;n 3</option>
+                            <option value="3">Opci&oacute;n 4</option>
+                            <option value="3">Opci&oacute;n 5</option>
+                          </select>
+                          <label for="lpp">LPP</label> -->
+                        </div>
+                      </div>
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrObservaciones4" type="text" name="observaciones4" id="observaciones4" class="form-control mb-0" placeholder="Ingrese Comentario" />
+                          <label for="observaciones4" class="active">Observaciones</label>
+                        </div>
+                      </div>
+                      <div class="w-25"></div>
+                      <div class="w-100"></div>
+                      <div class="col-md-3 mt-3">
+                        <p class="mb-1"></p>
+                        <div class="md-form">
+                          <mat-select formControlName="CtrCae" class="mdb-select" name="cae" id="cae">
+                             <mat-option value="Si">Si</mat-option>
+                              <mat-option value="No">No</mat-option>
+                          </mat-select>
+                          <label for="cae" class="active">CAE</label>
+                          <!-- <select formControlName="CtrCae" class="mdb-select" name="cae" id="cae">
+                            <option value="" disabled selected>Seleccione una opci&oacute;n</option>
+                            <option value="1">Opci&oacute;n 1</option>
+                            <option value="2">Opci&oacute;n 2</option>
+                            <option value="3">Opci&oacute;n 3</option>
+                            <option value="3">Opci&oacute;n 4</option>
+                            <option value="3">Opci&oacute;n 5</option>
+                          </select>
+                          <label for="cae">CAE</label> -->
+                        </div>
+                      </div>
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrObservaciones5" type="text" name="observaciones5" id="observaciones5" class="form-control mb-0" placeholder="Ingrese Comentario" />
+                          <label for="observaciones5" class="active">Observaciones</label>
+                        </div>
+                      </div>
+                      <div class="w-25"></div>
+                      <div class="w-100"></div>
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrCambiosPosicion" type="text" name="cambiosPosicion" id="cambiosPosicion" class="form-control mb-0" placeholder="c/ x Hrs." />
+                          <label for="cambiosPosicion" class="active">Cambios de Posici&oacute;n</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrObservaciones6" type="text" name="observaciones6" id="observacione6s" class="form-control mb-0" placeholder="Ingrese Comentario" />
+                          <label for="observaciones6" class="active">Observaciones</label>
+                        </div>
+                      </div>
+                      <div class="w-25"></div>
+                      <div class="w-100"></div>
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrLubricacionPiel" type="text" name="lubricacionPiel" id="lubricacionPiel" class="form-control mb-0" placeholder="c/ x Hrs." />
+                          <label for="lubricacionPiel" class="active">Lubricaci&oacute;n de Piel</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrLubPielCon" type="text" name="lubPielCon" id="lubPielCon" class="form-control mb-0" placeholder="Ingrese Comentario" />
+                          <label for="lubPielCon" class="active">Lubricaci&oacute;n de Piel con</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrObservaciones7" type="text" name="observaciones7" id="observaciones7" class="form-control mb-0" placeholder="Ingrese Comentario" />
+                          <label for="observaciones7" class="active">Observaciones</label>
+                        </div>
+                      </div>
+                      
+                      <div class="w-100"></div>
+
+                      <div class="w-100"></div>
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrApoyoEmocional30" type="text" name="apoyoEmocional30" id="apoyoEmocional30" class="form-control mb-0" placeholder="c/ x Hrs." />
+                          <label for="apoyoEmocional30" class="active">Apoyo Emocional 30 min</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrObservaciones8" type="text" name="observaciones9" id="observaciones9" class="form-control mb-0" placeholder="Ingrese Comentario" />
+                          <label for="observaciones9" class="active">Observaciones</label>
+                        </div>
+                      </div>
+                      <div class="w-25"></div>
+                      <div class="w-100"></div>
+                      <div class="col-md-3 mt-3">
+                        <p class="mb-1"></p>
+                        <div class="md-form">
+                          <select formControlName="CtrPautaContencion" class="mdb-select" name="pautaContencion" id="pautaContencion">
+                            <option value="" disabled selected>Seleccione una opci&oacute;n</option>
+                            <option value="1">Opci&oacute;n 1</option>
+                            <option value="2">Opci&oacute;n 2</option>
+                            <option value="3">Opci&oacute;n 3</option>
+                            <option value="3">Opci&oacute;n 4</option>
+                            <option value="3">Opci&oacute;n 5</option>
+                          </select>
+                          <label for="pautaContencion">Pauta Contenci&oacute;n</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrObservaciones9" type="text" name="observaciones10" id="observaciones10" class="form-control mb-0" placeholder="Ingrese Comentario" />
+                          <label for="observaciones10" class="active">Observaciones</label>
+                        </div>
+                      </div>
+                      <div class="w-25"></div>
+                      <div class="w-100"></div>
+                      <div class="col-md-3 mt-3">
+                        <p class="mb-1"></p>
+                        <div class="md-form">
+                          <select formControlName="CtrBrazalete" class="mdb-select" name="brazalete" id="brazalete">
+                            <option value="" disabled selected>Seleccione una opci&oacute;n</option>
+                            <option value="1">Opci&oacute;n 1</option>
+                            <option value="2">Opci&oacute;n 2</option>
+                            <option value="3">Opci&oacute;n 3</option>
+                            <option value="3">Opci&oacute;n 4</option>
+                            <option value="3">Opci&oacute;n 5</option>
+                          </select>
+                          <label for="brazalete">Brazalete de Identificaci&oacute;n</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrObservaciones10" type="text" name="observaciones11" id="observaciones11" class="form-control mb-0" placeholder="Ingrese Comentario" />
+                          <label for="observaciones11" class="active">Observaciones</label>
+                        </div>
+                      </div>
+                      <div class="w-25"></div>
+                      <div class="w-100"></div>
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrEscalaEva" type="text" name="eva" id="eva" class="form-control mb-0" placeholder="Ingrese Comentario" />
+                          <label for="eva" class="active">Escala de Dolor EVA</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3 mt-3">
+                        <div class="md-form mb-3">
+                          <input formControlName="CtrObservaciones11" type="text" name="observaciones12" id="observaciones12" class="form-control mb-0" placeholder="Ingrese Comentario" />
+                          <label for="observaciones12" class="active">Observaciones</label>
+                        </div>
+                      </div>
+                      <div class="w-25"></div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-12 d-flex justify-content-between align-items-center px-0">
+                          <button data-toggle="collapse" data-parent="#accordion1" data-target="#collapse7" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold waves-effect waves-light collapsed px-1">
+                            &lt;&lt; Anterior
+                          </button>
+                          <button data-toggle="collapse" data-parent="#accordion1" data-target="#collapse9" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold collapsed waves-effect waves-light px-1">
+                            Siguiente &gt;&gt;
+                          </button>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-header grey lighten-3" role="tab" id="heading10">
+                  <a data-toggle="collapse" data-parent="#accordion1" href="#collapse10" aria-expanded="false" aria-controls="collapse10">
+                    <h5 class="mb-0 pl-3 pr-3">
+                      <span class="d-inline-flex align-items-center">Plan de Cuidados</span>
+
+                      <span class="accordion-arrow"><i class="material-icons rotate-icon float-right">keyboard_arrow_down</i></span>
+                    </h5>
+                  </a>
+                </div>
+                <div id="collapse10" class="collapse show" role="tabpanel" aria-labelledby="heading10" data-parent="#accordion1">
+                  <div class="accordion-body p-3 pt-3 pb-2">
+                    <div class="row mt-3">
+                        <div class="col-12">
+                          <table class="table table-striped table-bordered">
+                            <thead class="thead-light">
+                              <tr>
+                                <th class="w-25">Actividades Plan de Cuidados</th>
+                                <th>Descripci&oacute;n</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Ba&ntilde;o Diario</td>
+                                <td>
+                                    <div class="md-form py-0">
+                                    <input formControlName="CtrDescripcionAPC" type="text" name="descripcionAPC" id="descripcionAPC" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Aseo de Cavidades</td>
+                                <td><div class="md-form py-0">
+                                    <input formControlName="CtrDescripcionAPC1" type="text" name="descripcionAPC1" id="descripcionAPC1" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                  </div></td>
+                              </tr>
+                              <tr>
+                                <td>Aseo Matinal</td>
+                                <td><div class="md-form py-0">
+                                    <input formControlName="CtrDescripcionAPC2" type="text" name="descripcionAPC2" id="descripcionAPC2" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                  </div></td>
+                              </tr>
+                              <tr>
+                                <td>Aseo Genital</td>
+                                <td><div class="md-form py-0">
+                                    <input formControlName="CtrDescripcionAPC3" type="text" name="descripcionAPC3" id="descripcionAPC3" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                  </div></td>
+                              </tr>
+                              <tr>
+                                <td>Muda</td>
+                                <td><div class="md-form py-0">
+                                    <input formControlName="CtrDescripcionAPC4" type="text" name="descripcionAPC4" id="descripcionAPC4" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                  </div></td>
+                              </tr>
+                              <tr>
+                                <td>Corte U&ntilde;as</td>
+                                <td><div class="md-form py-0">
+                                    <input formControlName="CtrDescripcionAPC5" type="text" name="descripcionAPC5" id="descripcionAPC5" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                  </div></td>
+                              </tr>
+                              <tr>
+                                <td>Lavado Cabello</td>
+                                <td><div class="md-form py-0">
+                                    <input formControlName="CtrDescripcionAPC6" type="text" name="descripcionAPC5" id="descripcionAPC5" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                  </div></td>
+                              </tr>
+                              <tr>
+                                <td>Cambio Sb&aacute;anas</td>
+                                <td><div class="md-form py-0">
+                                    <input formControlName="CtrDescripcionAPC7" type="text" name="descripcionAPC6" id="descripcionAPC6" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                  </div></td>
+                              </tr>
+                              <tr>
+                                <td>Prevenci&oacute;n LPP</td>
+                                <td><div class="md-form py-0">
+                                    <input formControlName="CtrDescripcionAPC8" type="text" name="descripcionAPC7" id="descripcionAPC7" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                  </div></td>
+                              </tr>
+                              <tr>
+                                <td>Lubricaci&oacute;n de Piel</td>
+                                <td><div class="md-form py-0">
+                                    <input formControlName="CtrDescripcionAPC9" type="text" name="descripcionAPC8" id="descripcionAPC8" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                  </div></td>
+                              </tr>
+                              <tr>
+                                <td>Otros</td>
+                                <td><div class="md-form py-0">
+                                    <input formControlName="CtrDescripcionAPC10" type="text" name="descripcionAPC9" id="descripcionAPC9" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                  </div></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      
+                    
+                    <div class="row mb-4">
+                        <div class="col-12 d-flex justify-content-between align-items-center px-0">
+                          <button data-toggle="collapse" data-parent="#accordion1" data-target="#collapse9" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold waves-effect waves-light collapsed px-1">
+                            &lt;&lt; Anterior
+                          </button>
+                          <button data-toggle="collapse" data-parent="#accordion1" data-target="#collapse11" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold collapsed waves-effect waves-light px-1">
+                            Siguiente &gt;&gt;
+                          </button>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-header grey lighten-3" role="tab" id="heading11">
+                  <a data-toggle="collapse" data-parent="#accordion1" href="#collapse11" aria-expanded="false" aria-controls="collapse11">
+                    <h5 class="mb-0 pl-3 pr-3">
+                      <span class="d-inline-flex align-items-center">Dispositivos</span>
+
+                      <span class="accordion-arrow"><i class="material-icons rotate-icon float-right">keyboard_arrow_down</i></span>
+                    </h5>
+                  </a>
+                </div>
+                <div id="collapse11" class="collapse show" role="tabpanel" aria-labelledby="heading11" data-parent="#accordion1">
+                  <div class="accordion-body p-3 pt-3 pb-2">
+                    <div class="row mt-3">
+                      <div class="col-12 mt-3">
+                        <table class="table table-striped table-bordered">
+                          <thead class="thead-light">
+                            <tr>
+                              <th>Dispositivos</th>
+                              <th>Descripci&oacute;n (Docente)</th>
+                              <th>Cuidados Generales</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>VVP</td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrDescripcionDocenteVVP" type="text" name="vvp" id='vvp"' class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrDescripcionGeneralVVP" type="text" name="vvp2" id="vvp2" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>CVC</td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrDescripcionDocenteCVC" type="text" name="cvc" id="cvc" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrDescripcionGeneralCVC" type="text" name="cvc2" id="cvc2" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>SNG</td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrDescripcionDocenteSNG" type="text" name="sng" id="sng" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrDescripcionGeneralSNG" type="text" name="sng2" id="sng2" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>CUP</td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrDescripcionDocenteCUP" type="text" name="cup" id="cup" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrDescripcionGeneralCUP" type="text" name="cup2" id="cup2" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Drenajes</td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrDescripcionDocenteDrenaje" type="text" name="drenaje" id="drenaje" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrDescripcionGeneralDrenaje" type="text" name="denaje2" id="denaje2" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Otros</td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrDescripcionDocenteOtro" type="text" name="otros" id="otros" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrDescripcionGeneralOtro" type="text" name="otros2" id="otros2" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-12 d-flex justify-content-between align-items-center px-0">
+                          <button data-toggle="collapse" data-parent="#accordion1" data-target="#collapse10" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold waves-effect waves-light collapsed px-1">
+                            &lt;&lt; Anterior
+                          </button>
+                          <button data-toggle="collapse" data-parent="#accordion1" data-target="#collapse12" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold collapsed waves-effect waves-light px-1">
+                            Siguiente &gt;&gt;
+                          </button>
+                                 </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-header grey lighten-3" role="tab" id="heading12">
+                  <a data-toggle="collapse" data-parent="#accordion1" href="#collapse12" aria-expanded="false" aria-controls="collapse12">
+                    <h5 class="mb-0 pl-3 pr-3">
+                      <span class="d-inline-flex align-items-center">Otras indicaciones</span>
+
+                      <span class="accordion-arrow"><i class="material-icons rotate-icon float-right">keyboard_arrow_down</i></span>
+                    </h5>
+                  </a>
+                </div>
+                <div id="collapse12" class="collapse show" role="tabpanel" aria-labelledby="heading12" data-parent="#accordion1">
+                  <div class="accordion-body p-3 pt-3 pb-2">
+                    <div class="row mb-3">
+                      <div class="col-12 mt-3">
+                        <table class="table table-striped table-bordered">
+                          <thead class="thead-light">
+                            <tr>
+                              <th>Oxigenoterapia</th>
+                              <th>Descripci&oacute;n (Docente)</th>
+                              <th>Cuidados Generales</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>C&aacute;nula Nasal</td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrCanulaNasalDocente" type="text" name="canulaNasal" id="canulaNasal" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrCanulaNasalGeneral" type="text" name="canulaNasal2" id="canulaNasal2" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Venturi</td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrVenturiDocente" type="text" name="venturi" id="venturi" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrVenturiGeneral" type="text" name="venturi2" id="venturi2" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Otros</td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrOtroOxigenoDocente" type="text" name="otrosOxigeno" id="otrosOxigeno" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrOtroOxigenoGeneral" type="text" name="otrosOxigeno2" id="otrosOxigeno2" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Nebulizaci&oacute;n</td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrNebulizacionDocente" type="text" name="nebulizacion" id="nebulizacion" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrNebulizacionGeneral" type="text" name="nebulizacion2" id="nebulizacion2" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Aspiraci&oacute;n de Secreciones</td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrAspiracionesSecrecionesDocente" type="text" name="aspiracionSecreciones" id="aspiracionSecreciones" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrAspiracionesSecrecionesGeneral" type="text" name="aspiracionSecreciones2" id="aspiracionSecreciones2" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      
+                      <div class="col-12 mt-3">
+                        <table class="table table-striped table-bordered">
+                          <thead class="thead-light">
+                            <tr>
+                              <th>Monitorizaci&oacute;n</th>
+                              <th>Descripci&oacute;n (Docente)</th>
+                              <th>Cuidados Generales</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Monitor Cardiaco no invasivo</td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrMonitorCardiacoDocente" type="text" name="monitorCardiaco" id="monitorCardiaco" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrMonitorCardiacoGeneral" type="text" name="monitorCardiaco2" id="monitorCardiaco2" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Electrocardiograma</td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrElectrocardiogramaDocente" type="text" name="electrocardiograma" id="electrocardiograma" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrElectrocardiogramaGeneral" type="text" name="electrocardiograma2" id="electrocardiograma2" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Otros</td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrOtrosMDocente" type="text" name="electrocardiograma3" id="electrocardiograma3" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrOtrosMGeneral1" type="text" name="electrocardiograma4" id="electrocardiograma4" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      
+
+                      <div class="col-12 mt-3">
+                        <table class="table table-striped table-bordered">
+                          <thead class="thead-light">
+                            <tr>
+                              <th>Curaciones</th>
+                              <th>Cuidados Generales</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrCuracionesDocente" type="text" name="curaciones" id="curaciones" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrCuracionesGeneral" type="text" name="cuidadosGenerales" id="cuidadosGenerales" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                            </tr>
+                           
+                          </tbody>
+                        </table>
+                      </div>
+
+                      <div class="col-12 mt-3">
+                        <table class="table table-striped table-bordered">
+                          <thead class="thead-light">
+                            <tr>
+                              <th>Toma de Muestras</th>
+                              <th>Descripci&oacute;n (Docente)</th>
+                              <th>Cuidados Generales</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Sangre</td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrSangreTDocente" type="text" name="sangreT" id="sangreT" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrCuidadosGSangre" type="text" name="cuidadosGSangre" id="cuidadosGSangre" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Orina</td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrorinaDDocente" type="text" name="orinaD" id="orinaD" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrOrinaCG" type="text" name="orinaCG" id="orinaCG" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Otros</td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrOtrosDD" type="text" name="otrosDD" id="otrosDD" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrOtrosCG" type="text" name="otrosCG" id="otrosCG" class="form-control mb-0 py-0 my-0" placeholder="Ingrese Descripci&oacute;n" />
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+
+                      </div>
+
+                    <div class="row mb-4">
+                      <div class="col-12 d-flex justify-content-between align-items-center px-0">
+                        <button data-toggle="collapse" data-parent="#accordion1" data-target="#collapse11" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold waves-effect waves-light collapsed px-1">
+                          &lt;&lt; Anterior
+                        </button>
+                        <button data-toggle="collapse" data-parent="#accordion1" data-target="#collapse13" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold collapsed waves-effect waves-light px-1">
+                          Siguiente &gt;&gt;
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-header grey lighten-3" role="tab" id="heading13">
+                  <a data-toggle="collapse" data-parent="#accordion1" href="#collapse13" aria-expanded="false" aria-controls="collapse13">
+                    <h5 class="mb-0 pl-3 pr-3">
+                      <span class="d-inline-flex align-items-center">Riesgos Asociados a Hospitalizaci&oacute;n</span>
+
+                      <span class="accordion-arrow"><i class="material-icons rotate-icon float-right">keyboard_arrow_down</i></span>
+                    </h5>
+                  </a>
+                </div>
+                <div id="collapse13" class="collapse show" role="tabpanel" aria-labelledby="heading13" data-parent="#accordion1">
+                  <div class="accordion-body p-3 pt-3 pb-2">
+                    <div class="row mt-3">
+                        <div class="col-12 mb-3">
+                       <table class="table table-striped table-bordered">
+                          <thead class="thead-light">
+                            <tr>
+                              <th>Riesgo Ca&iacute;das</th>
+                              <th>Actividades Preventivas</th>
+                      
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrRiesgoCaidasAH" type="text" name="riesgoCaidas" id="riesgoCaidas" class="form-control mb-0 py-0 my-0" placeholder="S&iacute; o no" />
+                                </div>
+                              </td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrActPreventivaAH" type="text" name="actPreventivas" id="actPreventivas" class="form-control mb-0 py-0 my-0" placeholder="Ingrese actividades preventivas" />
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        </div>
+                        <div class="col-12">
+                          <table class="table table-striped table-bordered">
+                          <thead class="thead-light">
+                            <tr>
+                              <th>Precauciones Espec&iacute;ficas</th>
+                              <th>EPP</th>
+                              <th>Caracter&iacute;sticas Habitaci&oacute;n</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrPrecaucionesEspeAH"  type="text" name="preEsp" id="preEsp" class="form-control mb-0 py-0 my-0" placeholder="Ingrese precauciones espec&iacute;ficas" />
+                                </div>
+                              </td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrEppAH" type="text" name="epp" id="epp" class="form-control mb-0 py-0 my-0" placeholder="Ingrese EPP" />
+                                </div>
+                              </td>
+                              <td>
+                                <div class="md-form py-0">
+                                  <input formControlName="CtrCaractHabAH" type="text" name="caractHab" id="caractHab" class="form-control mb-0 py-0 my-0" placeholder="Ingrese actividades preventivas" />
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        </div>
+                      </div>
+                      
+
+                    <div class="row mb-4">
+                        <div class="col-12 d-flex justify-content-between align-items-center px-0">
+                          <button data-toggle="collapse" data-parent="#accordion1" data-target="#collapse12" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold waves-effect waves-light collapsed px-1">
+                            &lt;&lt; Anterior
+                          </button>
+                          <button data-toggle="collapse" data-parent="#accordion1" data-target="#collapse14" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold collapsed waves-effect waves-light px-1">
+                            Siguiente &gt;&gt;
+                          </button>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-header grey lighten-3" role="tab" id="heading14">
+                  <a data-toggle="collapse" data-parent="#accordion1" href="#collapse14" aria-expanded="false" aria-controls="collapse14">
+                    <h5 class="mb-0 pl-3 pr-3">
+                      <span class="d-inline-flex align-items-center">Balance H&iacute;drico</span>
+
+                      <span class="accordion-arrow"><i class="material-icons rotate-icon float-right">keyboard_arrow_down</i></span>
+                    </h5>
+                  </a>
+                </div>
+                <div id="collapse14" class="collapse show" role="tabpanel" aria-labelledby="heading14" data-parent="#accordion1">
+                  <div class="accordion-body p-3 pt-3 pb-2">
+                    <div class="row mt-3">
+                        <div class="col-12 mb-3">
+                          <h6 class="font-weight-bold mb-2 border-bottom py-1" style="max-width: 200px;">Ingresos</h6>
+                        </div>
+                        <div class="col-12">
+                          <table class="table table-striped table-bordered">
+                            <thead class="thead-light">
+                              <tr>
+                                <th>Ingresos</th>
+                                <th>Valores</th>
+                                <th>Caracter&iacute;sticas / Nombre T&eacute;cnico</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>
+                                  Ingesta Oral
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrIngOralValor" type="text" name="pe1" id="pe1" class="form-control mb-0 py-0 my-0" placeholder="Ingrese precauciones espec&iacute;ficas" />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrIngOralCT" type="text" name="mq_ingOral2" id="mq_ingOral2" class="form-control mb-0 py-0 my-0" placeholder="Ingrese precauciones espec&iacute;&iacute;ficas" />
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>L&iacute;quidos V&iacute;a Parenteral</td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrLiqV" type="text" name="mq_liq" id="mq_liq" class="form-control mb-0 py-0 my-0" placeholder="Ingrese precauciones espec&iacute;ficas" />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrLiqVPC" type="text" name="mq_liq_1" id="mq_liq_1" class="form-control mb-0 py-0 my-0" placeholder="Ingrese precauciones espec&iacute;ficas" />
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Nutrici&oacute;n Parenteral</td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrNutriParentalV" type="text" name="mqnutriP" id="mqnutriP" class="form-control mb-0 py-0 my-0" placeholder="Ingrese precauciones espec&iacute;ficas" />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrNutriParentalC" type="text" name="mqnutriP_1" id="mqnutriP_1" class="form-control mb-0 py-0 my-0" placeholder="Ingrese precauciones espec&iacute;ficas" />
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Tratamiento EV</td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrTratamientoEV" type="text" name="mq_tratEv" id="mq_tratEv" class="form-control mb-0 py-0 my-0" placeholder="Ingrese precauciones espec&iacute;ficas" />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrTratamientoEVC" type="text" name="mq_tratEv_1" id="mq_tratEv_1" class="form-control mb-0 py-0 my-0" placeholder="Ingrese precauciones espec&iacute;ficas" />
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Medicamentos en bolo</td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrMedicamentosBolo" type="text" name="mq_medBolo" id="mq_medBolo" class="form-control mb-0 py-0 my-0" placeholder="Ingrese precauciones espec&iacute;ficas" />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrMedicamentosBoloC" type="text" name="mq_medBolo_1" id="mq_medBolo_1" class="form-control mb-0 py-0 my-0" placeholder="Ingrese precauciones espec&iacute;ficas" />
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Otros</td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrOtrosBHV" type="text" name="mq_Otros" id="mq_Otros" class="form-control mb-0 py-0 my-0" placeholder="Ingrese precauciones espec&iacute;ficas" />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrOtrosBHC" type="text" name="mq_Otros_1" id="mq_Otros_1" class="form-control mb-0 py-0 my-0" placeholder="Ingrese precauciones espec&iacute;ficas" />
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      
+                        <div class="col-12">
+                          <h6 class="font-weight-bold mb-2 border-bottom py-1" style="max-width: 200px;">Egresos</h6>
+                        </div>
+                        <div class="col-12 mt-3">
+                          <table class="table table-striped table-bordered">
+                            <thead class="thead-light">
+                              <tr>
+                                <th>Egresos</th>
+                                <th>Valores</th>
+                                <th>Caracter&iacute;sticas / Nombre T&eacute;cnico</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Diuresis</td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrDiuresisEV" type="text" name="peEg1" id='peEg1"' class="form-control mb-0 py-0 my-0" placeholder="Ingrese precauciones espec&iacute;ficas" />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrDiuresisEVC" type="text" name="peEg2" id="peEg2" class="form-control mb-0 py-0 my-0" placeholder="Ingrese precauciones espec&iacute;ficas" />
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Deposiciones</td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrDeposicionesEV" type="text" name="peEg3" id="peEg3" class="form-control mb-0 py-0 my-0" placeholder="Ingrese precauciones espec&iacute;ficas" />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrDeposicionesEVC" type="text" name="peEg4" id="peEg4" class="form-control mb-0 py-0 my-0" placeholder="Ingrese precauciones espec&iacute;ficas" />
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>V&oacute;mitos</td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrVomitosEV" type="text" name="peEg5" id="peEg5" class="form-control mb-0 py-0 my-0" placeholder="Ingrese precauciones espec&iacute;ficas" />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrVomitosEVC" type="text" name="peEg6" id="peEg6" class="form-control mb-0 py-0 my-0" placeholder="Ingrese precauciones espec&iacute;ficas" />
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>OTROS</td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrOtrosEV" type="text" name="peEg7" id="peEg7" class="form-control mb-0 py-0 my-0" placeholder="Ingrese precauciones espec&iacute;ficas" />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrOtrosEC" type="text" name="peEg8" id="peEg8" class="form-control mb-0 py-0 my-0" placeholder="Ingrese precauciones espec&iacute;ficas" />
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      
+
+                    <div class="row mb-4">
+                      <div class="col-12 d-flex justify-content-between align-items-center px-0">
+                        <button data-toggle="collapse" data-parent="#accordion1" data-target="#collapse13" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold waves-effect waves-light collapsed px-1">
+                          &lt;&lt; Anterior
+                        </button>
+                        <button data-toggle="collapse" data-parent="#accordion1" data-target="#collapse15" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold collapsed waves-effect waves-light px-1">
+                          Siguiente &gt;&gt;
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-header grey lighten-3" role="tab" id="heading15">
+                  <a data-toggle="collapse" data-parent="#accordion1" href="#collapse15" aria-expanded="false" aria-controls="collapse15">
+                    <h5 class="mb-0 pl-3 pr-3">
+                      <span class="d-inline-flex align-items-center">Necesidades Priorizadas
+                      </span>
+
+                      <span class="accordion-arrow"><i class="material-icons rotate-icon float-right">keyboard_arrow_down</i></span>
+                    </h5>
+                  </a>
+                </div>
+                <div id="collapse15" class="collapse show" role="tabpanel" aria-labelledby="heading15" data-parent="#accordion1">
+                  <div class="accordion-body p-3 pt-3 pb-2">
+                    <div class="row mb-3">
+                        <div class="col-12 mt-3">
+                          <table class="table table-striped table-bordered">
+                            <thead class="thead-light">
+                              <tr>
+                                <th>Necesidades Priorizadas</th>
+                                <th>Justificaci&oacute;n</th>
+                                <th>Plan de Cuidados seg&uacute;n rol (asistencial, administrativo y educativo)</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrNecPriorizadas" type="text" name="np1" id='np1"' class="form-control mb-0 py-0 my-0" placeholder="Ingrese necesidades" />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrJustficacionNP" type="text" name="np2" id='np2"' class="form-control mb-0 py-0 my-0" placeholder="Ingrese justificaci&oacute;n" />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrPlanCuidadosNP" type="text" name="np3" id='np3"' class="form-control mb-0 py-0 my-0" placeholder="Ingrese plan" />
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrNecPriorizadas1" type="text" name="np1" id='np1"' class="form-control mb-0 py-0 my-0" placeholder="Ingrese necesidades" />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrJustficacionNP1" type="text" name="np2" id='np2"' class="form-control mb-0 py-0 my-0" placeholder="Ingrese justificaci&oacute;n" />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrPlanCuidadosNP1" type="text" name="np3" id='np3"' class="form-control mb-0 py-0 my-0" placeholder="Ingrese plan" />
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrNecPriorizadas2" type="text" name="np1" id='np1"' class="form-control mb-0 py-0 my-0" placeholder="Ingrese necesidades" />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrJustficacionNP2" type="text" name="np2" id='np2"' class="form-control mb-0 py-0 my-0" placeholder="Ingrese justificaci&oacute;n" />
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="md-form py-0">
+                                    <input formControlName="CtrPlanCuidadosNP2" type="text" name="np3" id='np3"' class="form-control mb-0 py-0 my-0" placeholder="Ingrese plan" />
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      
+
+                    <div class="row mb-4">
+                      <div class="col-12 d-flex justify-content-between align-items-center px-0">
+                        <button data-toggle="collapse" data-parent="#accordion1" data-target="#collapse14" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold waves-effect waves-light collapsed px-1">
+                          &lt;&lt; Anterior
+                        </button>
+                        <button data-toggle="collapse" data-parent="#accordion1" data-target="#collapse16" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold collapsed waves-effect waves-light px-1">
+                          Siguiente &gt;&gt;
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-header grey lighten-3" role="tab" id="heading16">
+                  <a data-toggle="collapse" data-parent="#accordion1" href="#collapse16" aria-expanded="false" aria-controls="collapse16">
+                    <h5 class="mb-0 pl-3 pr-3">
+                      <span class="d-inline-flex align-items-center">Evoluci&oacute;n y Entrega de Turno</span>
+
+                      <span class="accordion-arrow"><i class="material-icons rotate-icon float-right">keyboard_arrow_down</i></span>
+                    </h5>
+                  </a>
+                </div>
+                <div id="collapse16" class="collapse show" role="tabpanel" aria-labelledby="heading16" data-parent="#accordion1">
+                  <div class="accordion-body p-3 pt-3 pb-2">
+                    <div class="row mt-3">
+                        <div class="col-12 col-md-6 mb-2">
+                          <div class="md-form" id="textarea_mq_Evolucion">
+                            <textarea formControlName="CtrEvolucionEntregaTurno" id="mq_campo_evolucion" name="mq_campo_evolucion" rows="6" class="form-control md-textarea" placeholder="Ingrese evoluci&oacute;n y entrega de turno" maxlength="300"></textarea>
+                            <label class="count active"></label>
+                            <label for="mq_campo_evolucion" class="active">Evoluci&oacute;n y Entrega de Turno</label>
+                          </div>
+                        </div>
+                      </div>
+
+                    <div class="row mb-4">
+                      <div class="col-12 d-flex justify-content-between align-items-center px-0">
+                        <button data-toggle="collapse" data-parent="#accordion1" data-target="#collapse15" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold waves-effect waves-light collapsed px-1">
+                          &lt;&lt; Anterior
+                        </button>
+                        <button data-toggle="collapse" data-parent="#accordion1" data-target="#collapse17" aria-expanded="false" aria-controls="adminstrar-curso" class="btn btn-sgte font-weight-bold collapsed waves-effect waves-light px-1">
+                          Siguiente &gt;&gt;
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <div class="row">
+                <div class="col-12 d-flex justify-content-between">
+                  <div class="md-form">
+                    <button onclick="volverFichaAsignada();" class="btn btn-outline waves-effect waves-light">
+                      <span>Volver a Inicio</span>
+                    </button>
+                  </div>
+                  <div class="md-form d-flex">
+                    <button (click)="asignanuevaficha()" type="button" class="btn btn-default d-flex align-items-center waves-effect waves-light py-2">Asignar Nueva Ficha</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        </form>
+      </main>

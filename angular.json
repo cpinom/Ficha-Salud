@@ -24,7 +24,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/inacap_fichas_salud",
+            "outputPath": "C:/Proyectos/.NET/Inacap.FichasdeSalud/Inacap.FichasdeSalud/App",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -61,6 +61,18 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+              "proxy": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/app/environments/environments.ts",
+                  "with": "src/app/environments/environments.proxy.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -73,6 +85,10 @@
             },
             "development": {
               "buildTarget": "inacap_fichas_salud:build:development"
+            },
+              "proxy": {
+              "buildTarget": "inacap_fichas_salud:build:proxy",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
@@ -104,5 +120,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

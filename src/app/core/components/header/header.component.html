@@ -1,0 +1,142 @@
+<div class="header-container">
+
+    <!--Logo-->
+    <div class="header-logo">
+      <a href="https://www.inacap.cl" (click)="logoClick($event)">
+          <img src="https://digital.inacap.cl/template-aplicaciones/img/isotipo.png" alt="INACAP" class="logo-mobile" />
+          <img src="https://digital.inacap.cl/template-aplicaciones/img/logo-inacap.png" alt="INACAP" class="logo" />
+      </a>
+    </div>
+  
+    <!--Titulo-->
+    <div class="header-title">
+      <h1 id="title">
+        <a (click)="titleClick($event)">{{title}}</a>
+      </h1>
+    </div>
+  
+    <!--Datos del Usuario-->
+    <div class="user-info">
+  
+      <!-- Nombre -->
+      <div class="user-name mr-4">
+        <p>{{nombreUsuario}}</p>
+      </div>
+  
+      <!-- Notificaciones -->
+      <div class="user-notifications user-button" role="button" *ngIf="mostrarNotificaciones"
+        (click)="notificationsClick($event)">
+        <span class="notification-point z-depth-1" *ngIf="mostrarAlertaNotificaciones"></span>
+        <i class="material-icons">notifications</i>
+      </div>
+     
+  
+      <!-- Iconos encabezado - Escritorio-->
+      <div class="user-desktop-icons">
+        <div class="user-accesibility user-button dropdown dropdown-toggle" [matMenuTriggerFor]="menuDesktop">
+          <i class="material-icons">accessibility</i>
+          <mat-menu #menuDesktop="matMenu">
+            <div class="dropdown-menu dropdown-menu-right">
+              <p class="dropdown-title">Accesibilidad</p>
+              <!-- <button mat-menu-item>
+                <div class="d-flex align-items-center justify-content-between">
+                  <span>Modo Oscuro</span>
+                  <i class="material-icons"> brightness_medium</i>
+                </div>
+              </button> -->
+              <ul class="accesibility-menu">
+                <li class="accesibility-menu__item">
+                  <div id="modo-oscuro" class="d-flex align-items-center justify-content-between" (click)="toggleDarkMode()">
+                    <span class="tipo-de-modo">Modo Oscuro</span>
+                    <div class="d-flex justify-content-center">
+                      <a role="button">
+                        <i class="material-icons"> brightness_medium</i>
+                      </a>
+                    </div>
+                  </div>
+                </li>
+                <li class="accesibility-menu__item">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <span>Tama&ntilde;o de letra</span>
+                    <div class="d-flex justify-content-center">
+                      <button matTooltip="Disminuir tamaño" (click)="onChangeSize(false, $event)" class="btnDecrease btn btn-round btn-fonts btn-secondary d-flex align-items-center justify-content-center waves-effect waves-light">
+                        <i class="material-icons">remove</i>
+                      </button>
+                      <button matTooltip="Aumentar tamaño" (click)="onChangeSize(true, $event)" class="btnEnlarge btn btn-round btn-fonts btn-default d-flex align-items-center justify-content-center ml-2 mr-0 waves-effect waves-light">
+                        <i class="material-icons">add</i>
+                      </button>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </mat-menu>
+  
+        </div>
+        <div class="user-logout user-button" matTooltip="Salir">
+          <a (click)="closeClick($event)"><i class="material-icons">exit_to_app</i></a>
+        </div>
+      </div>
+  
+      <!-- Iconos encabezado - Mobile -->
+      <div class="user-mobile-menu user-button dropdown">
+  
+        <button class="btn btn-link px-1" [matMenuTriggerFor]="menuMobile">
+          <i class="material-icons">more_vert</i>
+        </button>
+  
+        <mat-menu #menuMobile="matMenu">
+          <div class="dropdown-menu dropdown-menu-right">
+  
+            <p class="dropdown-user-name">{{nombreUsuario}}</p>
+  
+            <p class="dropdown-title dropdown-title--border">Accesibilidad</p>
+            <ul class="accesibility-menu">
+              <li class="accesibility-menu__item">
+                <div id="modo-oscuro" class="d-flex align-items-center justify-content-between" onClick="darkMode();">
+                  <span class="tipo-de-modo">Modo Oscuro</span>
+                  <div class="d-flex justify-content-center">
+                    <a role="button">
+                      <i class="material-icons"> brightness_medium</i>
+                    </a>
+                  </div>
+                </div>
+              </li>
+              <li class="accesibility-menu__item">
+                <div class="d-flex align-items-center justify-content-between">
+                  <span>Tama&ntilde;o de letra</span>
+                  <div class="d-flex justify-content-center">
+                    <button
+                      class="btnDecrease btn btn-round btn-fonts btn-secondary d-flex align-items-center justify-content-center waves-effect waves-light"><i
+                        class="material-icons">remove</i></button>
+                    <button
+                      class="btnEnlarge btn btn-round btn-fonts btn-default d-flex align-items-center justify-content-center ml-2 mr-0 waves-effect waves-light"><i
+                        class="material-icons">add</i></button>
+                  </div>
+                </div>
+              </li>
+            </ul>
+  
+            <!--- Cerrar Sesi&oacute;n-->
+            <p class="dropdown-title dropdown-title--border">Cuenta</p>
+            <ul class="accesibility-menu">
+              <li class="accesibility-menu__item">
+                <div class="d-flex align-items-center justify-content-between" (click)="closeClick($event)">
+                  <span id="tipo-de-modo">Cerrar Sesi&oacute;n</span>
+                  <div class="d-flex justify-content-center">
+                    <a role="button">
+                      <i class="material-icons">exit_to_app</i>
+                    </a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+  
+          </div>
+        </mat-menu>
+  
+      </div>
+  
+    </div>
+  
+  </div>

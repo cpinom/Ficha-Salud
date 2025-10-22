@@ -1,0 +1,1233 @@
+<main id="main" class="container">
+        <section class="row breadcrumb">
+          <span class="breadcrumb-item"><a href="index.html">Inico</a></span>
+          <span class="breadcrumb-item"><a href="detalle-curso.html">Detalle Curso</a></span>
+          <span class="breadcrumb-item active">Asignar Ficha</span>
+        </section>
+
+        <section id="detSinRevisar" *ngFor="let ficha of fichaRespuesta">
+          <div class="card" id="detalle">
+            <div class="card-header d-flex justify-content-between">
+              <h4 id="titleEB" class="float-left heading h4-responsive mb-0">Asignar Ficha <span class="mx-2">&#124;</span> Enfermer&iacute;a B&aacute;sica</h4>              
+              <div class="d-flex align-items-center">
+                <div class="badge badge-warning font-weight-normal">Sin Revisar</div>
+              </div>
+            </div>
+
+            <div class="row mb-1 mt-4" >
+              <div class="col-md-4 mt-3">
+                <p class="mb-3">
+                  <span class="mr-2 font-weight-bold">Sede: </span>
+                  <span>{{ ficha.SEDE }}</span>
+                </p>
+              </div>
+              <div class="col-md-4 mt-3">
+                <p class="mb-3">
+                  <span class="mr-2 font-weight-bold">Secci&oacute;n: </span>
+                  <span>{{ ficha.SECC_CCOD }}</span>
+                </p>
+              </div>
+              <div class="col-md-4 mt-3">
+                <p class="mb-3">
+                  <span class="mr-2 font-weight-bold">Cantidad Estudiantes: </span>
+                  <span>{{ ficha.TOTALESTUD }}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mt-4">
+            <div class="card-header d-flex justify-content-between">
+              <h4 class="float-left heading h4-responsive mb-0">Perfil Paciente</h4>
+            </div>
+            <div class="row mb-1 mt-4">
+              <div class="col-md-4 mt-3">
+                <p class="mb-3">
+                  <span class="mr-2 font-weight-bold">RUT: </span>
+                  <span>{{ ficha.FSPA_RUT }}</span>
+                </p>
+                <p class="mb-3">
+                  <span class="mr-2 font-weight-bold">Nombre Social: </span>
+                  <span>{{ ficha.FSPA_NOMBRE_SOCIAL }}</span>
+                </p>
+                <p class="mb-3">
+                  <span class="mr-2 font-weight-bold">Edad: </span>
+                  <span>{{ ficha.FSPA_EDAD }}</span>
+                </p>
+                <p class="mb-3">
+                  <span class="mr-2 font-weight-bold">Direcci&oacute;n: </span>
+                  <span>{{ ficha.FSPA_DIRECCION }}</span>
+                </p>
+              </div>
+
+              <div class="col-md-4 mt-3">
+                <p class="mb-3">
+                  <span class="mr-2 font-weight-bold">Nombre: </span>
+                  <span>{{ ficha.FSPA_NOMBRE }}</span>
+                </p>
+                <p class="mb-3">
+                  <span class="mr-2 font-weight-bold">Sexo: </span>
+                  <span>{{ ficha.SEXO }}</span>
+                </p>
+                <p class="mb-3">
+                  <span class="mr-2 font-weight-bold">Nacionalidad: </span>
+                  <span>{{ ficha.FSPA_NACIONALIDAD }}</span>
+                </p>
+                <p class="mb-3">
+                  <span class="mr-2 font-weight-bold">Previsi&oacute;n: </span>
+                  <span>{{ ficha.FIRE_INSTITUCION }}</span>
+                </p>
+              </div>
+
+              <div class="col-md-4 mt-3">
+                <p class="mb-3">
+                  <span class="mr-2 font-weight-bold">Apellidos: </span>
+                  <span>{{ ficha.FSPA_APELLIDO }}</span>
+                </p>
+                <p class="mb-3">
+                  <span class="mr-2 font-weight-bold">Nacimiento: </span>
+                  <span>{{ ficha.FSPA_FECHA_NAC | date: 'dd/MM/yyyy' }}</span>
+                </p>
+                <p class="mb-3">
+                  <span class="mr-2 font-weight-bold">Tel&eacute;fono: </span>
+                  <span>{{ ficha.FSPA_TCELULAR }}</span>
+                </p>
+              </div>
+
+
+              <div class="col-12 mt-4">
+                <div class="card-header d-flex justify-content-between">
+                  <h4 class="float-left heading h4-responsive mb-0">Ficha Cl&iacute;nica</h4>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion md-accordion mt-4" id="accordion1" role="tablist" aria-multiselectable="true">
+              <div class="accordion-item">
+                <div class="accordion-header grey lighten-3" role="tab" id="heading1">
+                  <a data-toggle="collapse" data-parent="#accordion1" href="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                    <h5 class="mb-0 pl-3 pr-3">
+                      <span class="d-inline-flex align-items-center">Caso Cl&iacute;nico</span>
+                      <span class="accordion-arrow"><i class="material-icons rotate-icon float-right">keyboard_arrow_down</i></span>
+                    </h5>
+                  </a>
+                </div>
+
+                <div id="collapse1" class="collapse show" role="tabpanel" aria-labelledby="heading1" data-parent="#accordion1">
+                  <div class="accordion-body p-3 pt-3 pb-2">
+                    <div class="row mt-3">
+                      <div class="col-md-12">
+                        <p class="mb-3">
+                          <span class="font-weight-bold">{{ficha.FSCL_CASO_CLINICO}}</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-header grey lighten-3" role="tab" id="heading2">
+                  <a data-toggle="collapse" data-parent="#accordion1" href="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                    <h5 class="mb-0 pl-3 pr-3">
+                      <span class="d-inline-flex align-items-center"> Diagn&oacute;stico M&eacute;dico</span>
+
+                      <span class="accordion-arrow"><i class="material-icons rotate-icon float-right">keyboard_arrow_down</i></span>
+                    </h5>
+                  </a>
+                </div>
+                <div id="collapse2" class="collapse show" role="tabpanel" aria-labelledby="heading2" data-parent="#accordion1">
+                  <div class="accordion-body p-3 pt-3 pb-2">
+                    <div class="row align-items-center">
+                      <div class="col-md-5 mt-3 mr-5">
+                        <p class="mb-3">
+                          <span class="mr-2 font-weight-bold">Diagn&oacute;stico M&eacute;dico: </span>
+                          <span>
+                           {{ficha.FSCL_DIAGNOSTICO_MEDICO}}
+                          </span>
+                        </p>
+                        <p class="mb-3">
+                          <span class="mr-2 font-weight-bold">Anamnesis Remota: </span>
+                          <span>
+                            {{ficha.FSCL_ANAMNESIS_REMOTA}}
+                          </span>
+                        </p>
+                        <p class="mb-3">
+                          <span class="mr-2 font-weight-bold">Examen F&iacute;sico General y Segmentado : </span>
+                          <span>
+                            {{ficha.FSCLEXAMEN_FISICO}}
+                          </span>
+                        </p>
+                      </div>
+                      <div class="col-md-5 mt-3 ml-5">
+                        <p class="mb-3">
+                          <span class="mr-2 font-weight-bold">Anamnesis Pr&oacute;xima: </span>
+                          <span>
+                            {{ficha.FSCL_ANAMNESIS_PROXIMA}}
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <p class="mb-3">
+                          <a href="#">
+                          <span class="d-inline-flex align-items-center font-weight-bold"><i class="material-icons icon-lg mr-2 d-inline-flex align-items-center">attach_file</i> Examenes.pdf</span>
+                        </a>
+                        </p>
+                        <p class="mb-3">
+                          <a href="#">
+                          <span class="d-inline-flex align-items-center font-weight-bold"><i class="material-icons icon-lg mr-2 d-inline-flex align-items-center">attach_file</i> RX.pdf</span>
+                        </a>
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <div class="col-12">
+                        <button type="button"  class="btn-i pb-1 d-flex align-items-center justify-content-end flex-row btn-icon float-right comment-toggle-btn"
+                                (click)="mostrarComentario['dm'] = !mostrarComentario['dm']">
+                        <i class="material-icons icon-lg mr-2" style="cursor: pointer;">add_comment</i>
+                        <span class="comment-label">Dejar Comentario</span>
+                        </button>
+
+                        <div class="mt-3 comment flex-row" *ngIf="mostrarComentario['dm']">
+                          <div class="col-md-6 mb-4">
+                            <div class="md-form">
+                              <textarea #comentarioTextarea id="campo_mensaje7" data-seccion="dm" name="campo_mensaje7" rows="4" class="form-control md-textarea info-text" placeholder="Ingrese comentarios"></textarea>
+                              <label class="count active">0/100</label>
+                              <label for="campo_mensaje7" class="active">Comentarios</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-header grey lighten-3" role="tab" id="heading3">
+                  <a data-toggle="collapse" data-parent="#accordion1" href="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                    <h5 class="mb-0 pl-3 pr-3">
+                      <span class="d-inline-flex align-items-center">Indicaciones M&eacute;dicas</span>
+
+                      <span class="accordion-arrow"><i class="material-icons rotate-icon float-right">keyboard_arrow_down</i></span>
+                    </h5>
+                  </a>
+                </div>
+                <div id="collapse3" class="collapse show" role="tabpanel" aria-labelledby="heading3" data-parent="#accordion1">
+                  <div class="accordion-body p-3 pt-3 pb-2">
+                    <div class="row">
+                      <div class="col-12 col-md-5 mb-4">
+                        <p class="">
+                          <span class="font-weight-bold">{{ficha.FSCL_INDICACIONES_MEDICAS}}</span>
+                        </p>
+                      </div>
+
+                      <div class="col-12 mb-3">
+                        <button type="button" class="btn-i pb-1 d-flex align-items-center justify-content-end flex-row btn-icon float-right comment-toggle-btn"
+                        (click)="mostrarComentario['im'] = !mostrarComentario['im']">
+                          <i class="material-icons icon-lg mr-2" style="cursor: pointer;">add_comment</i>
+                          <span class="comment-label">Dejar Comentario</span>
+                        </button>
+
+                        <div class="mt-3 comment flex-row" *ngIf="mostrarComentario['im']">
+                          <div class="col-md-6 mb-4">
+                            <div class="md-form">
+                              <textarea #comentarioTextarea id="campo_mensaje8" data-seccion="im" name="campo_mensaje8" rows="4" class="form-control md-textarea info-text" placeholder="Ingrese comentarios"></textarea>
+
+                              <label class="count active">0/100</label>
+                              <label for="campo_mensaje8" class="active">Comentarios</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-header grey lighten-3" role="tab" id="heading4">
+                  <a data-toggle="collapse" data-parent="#accordion1" href="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                    <h5 class="mb-0 pl-3 pr-3">
+                      <span class="d-inline-flex align-items-center">Registro de Atenci&oacute;n de Enfermer&iacute;a</span>
+
+                      <span class="accordion-arrow"><i class="material-icons rotate-icon float-right">keyboard_arrow_down</i></span>
+                    </h5>
+                  </a>
+                </div>
+                <div id="collapse4" class="collapse show" role="tabpanel" aria-labelledby="heading4" data-parent="#accordion1">
+                  <div class="accordion-body p-3 pt-3 pb-2">
+                    <div class="row mt-2">
+                      <div class="col-12">
+                        <h6 class="font-weight-bold mb-2 border-bottom py-1" style="max-width: 200px;">Antropometr&iacute;a</h6>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Peso: </span>
+                          <span>{{ficha.FSCL_PESO}}</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Talla: </span>
+                          <span>{{ficha.FSCL_TALLA}}</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">IMC:  </span>
+                          <span> {{ficha.FSCL_IMC}}</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Circunferencia Cintura:   </span>
+                          <span> xxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Clasificaci&oacute;n de IMC: </span>
+                          <span> xxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="w-100 mb-4"></div>
+                      <div class="col-12">
+                        <h6 class="font-weight-bold mb-2 py-1 border-bottom" style="max-width: 200px;">Presi&oacute;n Arterial</h6>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Presi&oacute;n Sist&oacute;lica:  </span>
+                          <span> xxxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Presi&oacute;n Dist&oacute;lica: </span>
+                          <span> xxxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Presi&oacute;n Media: </span>
+                          <span> xxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Circunferencia Cintura:   </span>
+                          <span> xxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Clasificaci&oacute;n de Presi&oacute;n Arterial: </span>
+                          <span> xxxxxxxx</span>
+                        </p>
+                      </div>
+
+                      <!-- Pulso -->
+                      <div class="w-100 mb-4"></div>
+                      <div class="col-12">
+                        <h6 class="font-weight-bold mb-2 py-1 border-bottom" style="max-width: 250px;">Pulso / Frecuencia Cardiaca</h6>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Pulso y / o FC:   </span>
+                          <span> xxxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Clasificaci&oacute;n de Frecuencia Cardiaca: </span>
+                          <span>xxxxxxxx</span>
+                        </p>
+                      </div>
+
+                       <!-- Control Respiratorio -->
+                       <div class="w-100 mb-4"></div>
+                       <div class="col-12">
+                         <h6 class="font-weight-bold mb-2 py-1 border-bottom" style="max-width: 250px;">Control Respiratorio</h6>
+                       </div>
+                       <div class="col-md-4 mt-2">
+                         <p class="mb-1">
+                           <span class="mr-2 font-weight-bold">Frecuencia Respiratoria:  </span>
+                           <span> xxxxx</span>
+                         </p>
+                       </div>
+                       <div class="col-md-4 mt-2">
+                         <p class="mb-1">
+                           <span class="mr-2 font-weight-bold">Tipo de Respiraci&oacute;n:  </span>
+                           <span>xxxxxxxx</span>
+                         </p>
+                       </div>
+                       <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Saturaci&oacute;n O2:</span>
+                          <span>xxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">FIO2: </span>
+                          <span>xxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Calificaci&oacute;n / Lenguaje T&eacute;cnico:</span>
+                          <span>xxxxxxxx</span>
+                        </p>
+                      </div>
+                      
+                      <!-- Temperatura -->
+                      <div class="w-100 mb-4"></div>
+                      <div class="col-12">
+                        <h6 class="font-weight-bold mb-2 py-1 border-bottom" style="max-width: 250px;">Temperatura y Otros</h6>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Temperatura Axilar:</span>
+                          <span> xxxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Temperatura Rectal:</span>
+                          <span>xxxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                       <p class="mb-1">
+                         <span class="mr-2 font-weight-bold">HGT:</span>
+                         <span>xxxx</span>
+                       </p>
+                     </div>
+                     <div class="col-md-4 mt-2">
+                       <p class="mb-1">
+                         <span class="mr-2 font-weight-bold">EVA / ENA:  </span>
+                         <span>xxxx</span>
+                       </p>
+                     </div>
+                     <div class="col-md-4 mt-2">
+                       <p class="mb-1">
+                         <span class="mr-2 font-weight-bold">Clasificaci&oacute;n de Temperatura, HGT: </span>
+                         <span>xxxxx</span>
+                       </p>
+                     </div>
+
+                     <div class="col-12 col-md-5 mb-2 mt-4">
+                      <p class="">
+                        <span class="font-weight-bold">Comentarios: </span>  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      </p>
+                    </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-12 mt-3">
+                        <button type="button" class="btn-i pb-1 d-flex align-items-center justify-content-end flex-row btn-icon float-right comment-toggle-btn"
+                        (click)="mostrarComentario['rae'] = !mostrarComentario['rae']">
+                          <i class="material-icons icon-lg mr-2" style="cursor: pointer;">add_comment</i>
+                          <span class="comment-label">Dejar Comentario</span>
+                        </button>
+
+                        <div class="mt-3 comment flex-row" *ngIf="mostrarComentario['rae']">
+                          <div class="col-md-6 mb-4">
+                            <div class="md-form">
+                              <textarea #comentarioTextarea id="campo_mensaje5" data-seccion="rae" name="campo_mensaje5" rows="4" class="form-control md-textarea info-text" placeholder="Ingrese comentarios"></textarea>
+                              <label class="count active">0/100</label>
+                              <label for="campo_mensaje5" class="active">Comentarios</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-header grey lighten-3" role="tab" id="heading5">
+                  <a data-toggle="collapse" data-parent="#accordion1" href="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                    <h5 class="mb-0 pl-3 pr-3">
+                      <span class="d-inline-flex align-items-center">Plan de Atenci&oacute;n de Enfermer&iacute;a B&aacute;sico</span>
+
+                      <span class="accordion-arrow"><i class="material-icons rotate-icon float-right">keyboard_arrow_down</i></span>
+                    </h5>
+                  </a>
+                </div>
+                <div id="collapse5" class="collapse show" role="tabpanel" aria-labelledby="heading5" data-parent="#accordion1">
+                  <div class="accordion-body p-3 pt-3 pb-2">
+                    <div class="row">
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Tipo de Reposo:  </span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                      <p class="mb-1">
+                        <span class="mr-2 font-weight-bold">Observaciones: </span>
+                        <span>xxxxxxxxx</span>
+                      </p>
+                      </div>
+                      <div class="w-100"></div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Control de Signos Vitales: </span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                      <p class="mb-1">
+                        <span class="mr-2 font-weight-bold">Observaciones: </span>
+                        <span>xxxxxxxxx</span>
+                      </p>
+                      </div>
+                      <div class="w-100"></div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Ba&ntilde;o Diario y Aseo Genital: </span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                      <p class="mb-1">
+                        <span class="mr-2 font-weight-bold">Observaciones:  </span>
+                        <span>xxxxxxxxx</span>
+                      </p>
+                      </div>
+                      <div class="w-100"></div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Cuidado Intravenosa: </span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Observaciones: </span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="w-100"></div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Pauta Riesgo AR: </span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Pauta Riesgo BR:</span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Pauta Riesgo Ca&iacute;das:  </span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Barandas en Alto:</span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Cartel Nivel de Riesgo:</span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="w-100"></div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Sujeciones Suaves: x</span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Sitio:</span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Visitas de Seguridad:</span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">LPP:</span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Observaciones:</span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="w-100"></div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">CAE:</span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Observaciones:</span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="w-100"></div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Cambios de Posici&oacute;n:</span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Observaciones:</span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="w-100"></div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Cambios de Posici&oacute;n:</span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Observaciones:</span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="w-100"></div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Lubricaci&oacute;n de Piel: </span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Lubricaci&oacute;n de Piel con:</span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Observaciones:</span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="w-100"></div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Apoyo Emocional 30 min:</span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Observaciones:</span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="w-100"></div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Pauta Contenci&oacute;n:</span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Observaciones:</span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="w-100"></div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Brazalete de Identificaci&oacute;n:</span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Observaciones:</span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="w-100"></div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Escala de Dolor EVA:</span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                      <div class="col-md-4 mt-2">
+                        <p class="mb-1">
+                          <span class="mr-2 font-weight-bold">Observaciones:</span>
+                          <span>xxxxxxxxx</span>
+                        </p>
+                      </div>
+                   </div>
+                    <div class="row mb-4 mt-4">
+                      <div class="col-12">
+                        <button type="button" class="btn-i pb-1 d-flex align-items-center justify-content-end flex-row btn-icon float-right comment-toggle-btn"
+                        (click)="mostrarComentario['paeb'] = !mostrarComentario['paeb']">
+                          <i class="material-icons icon-lg mr-2" style="cursor: pointer;">add_comment</i>
+                          <span class="comment-label">Dejar Comentario</span>
+                        </button>
+                        <div class="mt-3 comment flex-row" *ngIf="mostrarComentario['paeb']">
+                          <div class="col-md-6 mb-4">
+                            <div class="md-form">
+                              <textarea #comentarioTextarea id="campo_mensaje4" data-seccion="paeb" name="campo_mensaje4" rows="4" class="form-control md-textarea info-text" placeholder="Ingrese comentarios"></textarea>
+                              <label class="count active">0/100</label>
+                              <label for="campo_mensaje4" class="active">Comentarios</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-header grey lighten-3" role="tab" id="heading6">
+                  <a data-toggle="collapse" data-parent="#accordion1" href="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                    <h5 class="mb-0 pl-3 pr-3">
+                      <span class="d-inline-flex align-items-center">Actividades Plan de Cuidados</span>
+
+                      <span class="accordion-arrow"><i class="material-icons rotate-icon float-right">keyboard_arrow_down</i></span>
+                    </h5>
+                  </a>
+                </div>
+                <div id="collapse6" class="collapse show" role="tabpanel" aria-labelledby="heading6" data-parent="#accordion1">
+                  <div class="accordion-body p-3 pt-3 pb-2">
+                    <div class="row mt-3">
+                      <div class="col-12">
+                        <table class="table table-striped table-bordered">
+                          <thead class="thead-light">
+                            <tr>
+                              <th>Actividades Plan de Cuidados</th>
+                              <th>Descripci&oacute;n</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Ba&ntilde;o Diario</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
+                            </tr>
+                            <tr>
+                              <td>Aseo de Cavidades</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
+                            </tr>
+                            <tr>
+                              <td>Aseo Matinal</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
+                            </tr>
+                            <tr>
+                              <td>Aseo Genital</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
+                            </tr>
+                            <tr>
+                              <td>Muda</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
+                            </tr>
+                            <tr>
+                              <td>Corte U&ntilde;as</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
+                            </tr>
+                            <tr>
+                              <td>Lavado Cabello</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
+                            </tr>
+                            <tr>
+                              <td>Cambio S&aacute;banas</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
+                            </tr>
+                            <tr>
+                              <td>Prevenci&oacute;n LPP</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
+                            </tr>
+                            <tr>
+                              <td>Lubricaci&oacute;n de Piel</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
+                            </tr>
+                            <tr>
+                              <td>Otros</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="col-12 mt-4">
+                        <button type="button" class="btn-i pb-1 d-flex align-items-center justify-content-end flex-row btn-icon float-right comment-toggle-btn"
+                        (click)="mostrarComentario['apc'] = !mostrarComentario['apc']">
+                          <i class="material-icons icon-lg mr-2" style="cursor: pointer;">add_comment</i>
+                          <span class="comment-label">Dejar Comentario</span>
+                        </button>
+
+                        <div class="mt-3 comment flex-row" *ngIf="mostrarComentario['apc']">
+                          <div class="col-md-6 mb-4">
+                            <div class="md-form">
+                              <textarea #comentarioTextarea id="campo_mensaje6" name="campo_mensaje6" data-seccion="apc" rows="4" class="form-control md-textarea info-text" placeholder="Ingrese comentarios"></textarea>
+                              <label class="count active">0/100</label>
+                              <label for="campo_mensaje6" class="active">Comentarios</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-header grey lighten-3" role="tab" id="heading7">
+                  <a data-toggle="collapse" data-parent="#accordion1" href="#collapse7" aria-expanded="false" aria-controls="collapse7">
+                    <h5 class="mb-0 pl-3 pr-3">
+                      <span class="d-inline-flex align-items-center">Riesgos Asociados a Hospitalizaci&oacute;n</span>
+
+                      <span class="accordion-arrow"><i class="material-icons rotate-icon float-right">keyboard_arrow_down</i></span>
+                    </h5>
+                  </a>
+                </div>
+                <div id="collapse7" class="collapse show" role="tabpanel" aria-labelledby="heading7" data-parent="#accordion1">
+                  <div class="accordion-body p-3 pt-3 pb-2">
+
+                    <div class="row mt-3">
+                      <div class="col-12">
+                        <table class="table table-striped table-bordered">
+                          <thead class="thead-light">
+                            <tr>
+                              <th>Riesgo Ca&iacute;das</th>
+                              <th>Actividades Preventivas</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+
+                      <div class="col-12 mt-3">
+                        <table class="table table-striped table-bordered">
+                          <thead class="thead-light">
+                            <tr>
+                              <th>Precauciones Espec&iacute;ficas</th>
+                              <th>EPP</th>
+                              <th>Caracter&iacute;sticas Habitaci&oacute;n</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+
+                      <div class="col-12 mt-4">
+                        <button type="button" class="btn-i pb-1 d-flex align-items-center justify-content-end flex-row btn-icon float-right comment-toggle-btn"
+                        (click)="mostrarComentario['rah'] = !mostrarComentario['rah']">
+                          <i class="material-icons icon-lg mr-2" style="cursor: pointer;">add_comment</i>
+                          <span class="comment-label">Dejar Comentario</span>
+                        </button>
+
+                        <div class="mt-3 comment flex-row" *ngIf="mostrarComentario['rah']">
+                          <div class="col-md-6 mb-4">
+                            <div class="md-form">
+                              <textarea #comentarioTextarea id="campo_mensaje6a" data-seccion="rah" name="campo_mensaje6a" rows="4" class="form-control md-textarea info-text" placeholder="Ingrese comentarios"></textarea>
+                              <label class="count active">0/100</label>
+                              <label for="campo_mensaje6a" class="active">Comentarios</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-header grey lighten-3" role="tab" id="heading8">
+                  <a data-toggle="collapse" data-parent="#accordion1" href="#collapse8" aria-expanded="false" aria-controls="collapse8">
+                    <h5 class="mb-0 pl-3 pr-3">
+                      <span class="d-inline-flex align-items-center">Balance H&iacute;drico</span>
+
+                      <span class="accordion-arrow"><i class="material-icons rotate-icon float-right">keyboard_arrow_down</i></span>
+                    </h5>
+                  </a>
+                </div>
+                <div id="collapse8" class="collapse show" role="tabpanel" aria-labelledby="heading8" data-parent="#accordion1">
+                  <div class="accordion-body p-3 pt-3 pb-2">
+                    <div class="row mt-3">
+                      <div class="col-12">
+                        <h6 class="font-weight-bold mb-2 border-bottom py-1" style="max-width: 200px;">Ingresos</h6>
+                      </div>
+                      <div class="col-12 mt-3 mb-4">
+                        <table class="table table-striped table-bordered">
+                          <thead class="thead-light">
+                            <tr>
+                              <th>Ingresos</th>
+                              <th>Valores</th>
+                              <th>Caracter&iacute;sticas / Nombre T&eacute;cnico</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Ingesta Oral</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                            </tr>
+                            <tr>
+                              <td>Otros</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="col-12">
+                        <h6 class="font-weight-bold mb-2 border-bottom py-1" style="max-width: 200px;">Egresos</h6>
+                      </div>
+                      <div class="col-12 mt-3">
+                        <table class="table table-striped table-bordered">
+                          <thead class="thead-light">
+                            <tr>
+                              <th>Egresos</th>
+                              <th>Valores</th>
+                              <th>Caracter&iacute;sticas / Nombre T&eacute;cnico</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Diuresis</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                            </tr>
+                            <tr>
+                              <td>Deposiciones</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                            </tr>
+                            <tr>
+                              <td>V&oacute;mitos</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                            </tr>
+                            <tr>
+                              <td>OTROS</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                            </tr>
+
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="col-12 mt-4 mb-2">
+                        <button type="button" class="btn-i pb-1 d-flex align-items-center justify-content-end flex-row btn-icon float-right comment-toggle-btn"
+                        (click)="mostrarComentario['bh'] = !mostrarComentario['bh']">
+                          <i class="material-icons icon-lg mr-2" style="cursor: pointer;">add_comment</i>
+                          <span class="comment-label">Dejar Comentario</span>
+                        </button>
+
+                        <div class="mt-3 comment flex-row" *ngIf="mostrarComentario['bh']">
+                          <div class="col-md-6 mb-4">
+                            <div class="md-form">
+                              <textarea id="campo_mensaje13" name="campo_mensaje13" data-seccion="bh" rows="4" class="form-control md-textarea info-text" placeholder="Ingrese comentarios"></textarea>
+                              <label #comentarioTextarea class="count active">0/100</label>
+                              <label for="campo_mensaje13" class="active">Comentarios</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-header grey lighten-3" role="tab" id="heading9">
+                  <a data-toggle="collapse" data-parent="#accordion1" href="#collapse9" aria-expanded="false" aria-controls="collapse9">
+                    <h5 class="mb-0 pl-3 pr-3">
+                      <span class="d-inline-flex align-items-center">Necesidades Priorizadas</span>
+
+                      <span class="accordion-arrow"><i class="material-icons rotate-icon float-right">keyboard_arrow_down</i></span>
+                    </h5>
+                  </a>
+                </div>
+                <div id="collapse9" class="collapse show" role="tabpanel" aria-labelledby="heading9" data-parent="#accordion1">
+                  <div class="accordion-body p-3 pt-3 pb-2">
+                    <div class="row mb-3">
+                      <div class="col-12 mt-3">
+                        <table class="table table-striped table-bordered">
+                          <thead class="thead-light">
+                            <tr>
+                              <th>Necesidades Priorizadas</th>
+                              <th>Justificaci&oacute;n</th>
+                              <th>Plan de Cuidados seg&uacute;n rol (asistencial, administrativo
+                                y educativo)</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                            </tr>
+                            <tr>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                            </tr>
+                            <tr>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                            </tr>
+                            <tr>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+                            </tr>
+  
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="col-12 mt-4 mb-2">
+                        <button type="button" class="btn-i pb-1 d-flex align-items-center justify-content-end flex-row btn-icon float-right comment-toggle-btn"
+                        (click)="mostrarComentario['np'] = !mostrarComentario['np']">
+                          <i class="material-icons icon-lg mr-2" style="cursor: pointer;">add_comment</i>
+                          <span class="comment-label">Dejar Comentario</span>
+                        </button>
+
+                        <div class="mt-3 comment flex-row" *ngIf="mostrarComentario['np']">
+                          <div class="col-md-6 mb-4">
+                            <div class="md-form">
+                              <textarea #comentarioTextarea id="campo_mensaje12" data-seccion="np" name="campo_mensaje12" rows="4" class="form-control md-textarea info-text" placeholder="Ingrese comentarios"></textarea>
+                              <label class="count active">0/100</label>
+                              <label for="campo_mensaje12" class="active">Comentarios</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-header grey lighten-3" role="tab" id="heading10">
+                  <a data-toggle="collapse" data-parent="#accordion1" href="#collapse10" aria-expanded="false" aria-controls="collapse10">
+                    <h5 class="mb-0 pl-3 pr-3">
+                      <span class="d-inline-flex align-items-center">Evoluci&oacute;n y Entrega de Turno</span>
+
+                      <span class="accordion-arrow"><i class="material-icons rotate-icon float-right">keyboard_arrow_down</i></span>
+                    </h5>
+                  </a>
+                </div>
+                <div id="collapse10" class="collapse show" role="tabpanel" aria-labelledby="heading10" data-parent="#accordion1">
+                  <div class="accordion-body p-3 pt-3 pb-2">
+                    <div class="row mt-3">
+                      <div class="col-md-12">
+                        <p class="mb-3">
+                          <span class="font-weight-bold">Evoluci&oacute;n y Entrega de Turno: </span> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </p>
+                      </div>
+                      <div class="col-12 mt-4 mb-2">
+                        <button type="button" class="btn-i pb-1 d-flex align-items-center justify-content-end flex-row btn-icon float-right comment-toggle-btn"
+                        (click)="mostrarComentario['eet'] = !mostrarComentario['eet']">
+                          <i class="material-icons icon-lg mr-2" style="cursor: pointer;">add_comment</i>
+                          <span class="comment-label">Dejar Comentario</span>
+                        </button>
+
+                        <div class="mt-3 comment flex-row" *ngIf="mostrarComentario['eet']">
+                          <div class="col-md-6 mb-4">
+                            <div class="md-form">
+                              <textarea #comentarioTextarea id="campo_mensaje11" data-seccion="eet" name="campo_mensaje11" rows="4" class="form-control md-textarea info-text" placeholder="Ingrese comentarios"></textarea>
+                              <label class="count active">0/100</label>
+                              <label for="campo_mensaje11" class="active">Comentarios</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <div class="row">
+                <div class="col-12 d-flex justify-content-between">
+                  <div class="md-form">
+                    <a href="detalle-curso.html" class="btn btn-outline waves-effect waves-light">
+                      <span>Volver a Inicio</span>
+                    </a>
+                  </div>
+                  <div class="md-form d-flex">
+                    <!-- <button type="button" onclick="guardarAnalisis();" class="btn btn-secondary d-flex align-items-center waves-effect waves-light py-2">Guardar Borrador</button> -->
+
+                    <button type="button" data-toggle="modal" data-target="#ModalTerminarRevision" class="btn btn-default d-flex align-items-center waves-effect waves-light py-2">Terminar Revisi&oacute;n</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="detalleEstudiante" class="" style="display: none;">
+          <div class="card" id="cardDetalleEstudiante">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h4 class="float-left heading h4-responsive mb-0">Fichas del Estudiante <span class="px-2">&#124;</span> <span id="nombreEstudiante">Nombre del Estudiante</span></h4>
+              <div class="d-flex align-items-center">
+                <div class="badge badge-warning font-weight-normal">2 Fichas Pendientes de Revisar</div>
+              </div>
+            </div>
+
+            <div class="row justify-content-between">
+              <div class="col-md-4 mt-3">
+                <p class="mb-3">
+                  <span class="mr-2 font-weight-bold">Sede: </span>
+                  <span> Apoquindo</span>
+                </p>
+              </div>
+              <div class="col-md-4 mt-3">
+                <p class="mb-3">
+                  <span class="mr-2 font-weight-bold">Secci&oacute;n:  </span>
+                  <span> IP&#8211;IME&#8211;4D1</span>
+                </p>
+              </div>
+              <div class="col-md-4 mt-3">
+                <p class="mb-3">
+                  <span class="mr-2 font-weight-bold">Cantidad Estudiantes: </span>
+                  <span> 26</span>
+                </p>
+              </div>
+            </div>
+
+            <!-- Tabla New -->
+            <div class="row mb-4">
+              <div class="col-12">
+                <table id="TablaFichasEstudiante1" class="datatables tabla-reporte-fixed-column table-bordered table-striped mb-0">
+                          
+                  <thead class="">
+                    <tr>
+                      <th valign="top" class="text-capitalize py-2 pl-2 tabla-sticky tabla-sticky-first">Acciones</th>
+                      <th valign="top" class="text-capitalize py-2 pl-2 ">Estado</th>
+                      <th valign="top" class="text-capitalize py-2 pl-2">Nombre Paciente</th>
+                      <th valign="top" class="text-capitalize py-2 pl-2">RUT</th>
+                      <th valign="top" class="text-capitalize py-2 pl-2">Fecha de la Ficha</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td class="text-nowrap p-3 tabla-sticky tabla-sticky-first">
+                        <div class="d-flex justify-content-start">
+                          <button onclick="verFichaNo();" type="button" class="btn-ver-ficha mr-0 d-flex align-items-center float-left">
+                            <i class="material-icons mr-1 icon-lg grey-text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Ver Detalle Ficha">visibility</i>
+                          </button>
+                        </div>
+                      </td>
+                      <td class="text-nowrap p-3"><span class="warning-text">Sin Revisar</span></td>
+                      <td class="text-nowrap p-3">Juan Jos&eacute; Sotomayor</td>
+                      <td class="text-nowrap p-3">12.345.678 - 9</td>
+                      <td class="text-nowrap p-3">03/10/2024</td>
+                    </tr>
+                    <tr>
+                      <td class="text-nowrap p-3 tabla-sticky tabla-sticky-first">
+                        <div class="d-flex justify-content-start">
+                          <button onclick="verFichaRe();" type="button" class="btn-ver-ficha mr-0 d-flex align-items-center float-left">
+                            <i class="material-icons mr-1 icon-lg grey-text" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Ver Detalle Ficha">visibility</i>
+                          </button>
+                        </div>
+                      </td>
+                      <td class="text-nowrap p-3"><span class="info-text">Revisado</span></td>
+                      <td class="text-nowrap p-3">Juan Jos&eacute; Sotomayor</td>
+                      <td class="text-nowrap p-3">12.345.678 - 9</td>
+                      <td class="text-nowrap p-3">03/10/2024</td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- / Tabla New -->
+
+            <div class="card-footer">
+              <div class="row">
+                <div class="col-12 d-flex justify-content-between">
+                  <div class="md-form">
+                    <a href="detalle-curso.html"  class="btn btn-outline waves-effect waves-light">
+                      <span>Volver a Detalle del curso</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+         <!-- Modal Rechazar ajustes -->
+      <div class="modal fade" id="ModalTerminarRevision" tabindex="-1" role="dialog" aria-labelledby="Success" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-success" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <p class="heading lead">Terminar Revisi&oacute;n</p>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body px-0">
+              <div class="row justify-content-center px-3">
+                <div class="text-center">
+                  <i class="material-icons icon-3x mb-3 warning-text animated rotateIn">warning</i>
+                </div>
+                <div class="col-12 text-center">
+                  <p>
+                    &iquest;Desea terminar la revisi&oacute;n de esta ficha? Una vez terminada no se podr&aacute;n dejar m&aacute;s comentarios para el estudiante.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer px-0 d-flex justify-content-center flex-wrap mt-4" *ngFor="let ficha of fichaRespuesta">
+              <div class="d-flex flex-wrap">
+                <a class="btn btn-secondary waves-effect waves-light" data-dismiss="modal">No, volver</a>
+                <button id="confirmarRechazar" class="btn btn-default px-3 px-3" (click)="volverDetEstudiante(ficha.TIFI_CCOD, ficha.PERS_NCORR, ficha.SECC_CCOD, ficha.FSCL_NCORR);" data-dismiss="modal">
+                  S&iacute;, Terminar Revisi&oacute;n
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / -->
+
+      </main>
