@@ -9,10 +9,16 @@ import { AppGlobal } from '../../app.global';
 })
 export class BienvenidadocenteComponent {
 
-  constructor(private global: AppGlobal, private router: Router){}
+  constructor(private global: AppGlobal, private router: Router) { }
 
-  irtablerodocente(){
-     this.router.navigate(['/tablerodocente']);
+  irtablerodocente() {
+    //  this.router.navigate(['/tablerodocente']);
+    if (this.global.rolUsuario === 'docente') {
+      this.router.navigate(['/tablerodocente']);
+    }
+    else {
+      this.router.navigate(['/estudiantes']);
+    }
   }
 
 }

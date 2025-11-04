@@ -1,0 +1,48 @@
+<form [formGroup]="form">
+  <div #acc="ngbAccordion" ngbAccordion class="md-accordion mt-4 normal-size" [closeOthers]="true">
+    <ng-container *ngFor="let grupo of ficha?.grupos; let i = index">
+      <div [ngbAccordionItem]="'grupo_' + grupo?.id_grupo" [collapsed]="false" [destroyOnHide]="false"
+        (shown)="onGroupExpandedChange(grupo?.id_grupo)">
+        <h2 ngbAccordionHeader class="grey lighten-3">
+          <button ngbAccordionButton>
+            <h5 class="mb-0 pl-3 pr-3">
+              <span>{{ grupo?.nombre }}</span>
+              <span class="accordion-arrow">
+                <i class="material-icons rotate-icon float-right">keyboard_arrow_up</i>
+              </span>
+            </h5>
+          </button>
+        </h2>
+        <div ngbAccordionCollapse>
+          <div ngbAccordionBody class="p-3 pt-3 pb-2">
+            <ng-template>
+              
+              <div #contenedorGrupo [innerHTML]="grupo._safeHtml"></div>
+              
+              <div class="row mb-3" *ngIf="i > 0">
+                <div class="col-12">
+                  <button type="button" (click)="grupo.mostrarComentario = !grupo.mostrarComentario"
+                    class="btn-i pb-1 d-flex align-items-center justify-content-end flex-row btn-icon float-right comment-toggle-btn">
+                    <i class="material-icons icon-lg mr-2"
+                      style="cursor: pointer; color: rgb(119, 119, 119);">add_comment</i>
+                    <span class="comment-label" style="color: rgb(102, 102, 102);">Dejar Comentario</span>
+                  </button>
+
+                  <div class="mt-3 comment flex-row" [style.display]="grupo.mostrarComentario ? 'block' : 'none'">
+                    <div class="col-md-6 mb-4">
+                      <div class="md-form">
+                        <textarea id="observacion_{{ i }}" rows="4" class="form-control md-textarea info-text" formControlName="{{ 'grupo_' + grupo.id_grupo }}" placeholder="Ingrese Comentarios"></textarea>
+                        <label for="observacion_{{ i }}" class="active">Comentarios</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</form>

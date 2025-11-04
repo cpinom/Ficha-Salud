@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environments';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { AppGlobal } from '../../app.global';
 
 @Injectable({
@@ -12,6 +12,41 @@ export class GestionservicesService {
 
   private global = inject(AppGlobal);
   private prefix = 'api/v1';
+
+  get<T>(url: string) {
+    return firstValueFrom(this.http.get<T>(`${this.global.baseUrl}/${this.prefix}/${url}`));
+  }
+  post<T>(url: string, params: any) {
+    return firstValueFrom(this.http.post<T>(`${this.global.baseUrl}/${this.prefix}/${url}`, params));
+  }
+
+  getPeriodos<T>() {
+    return this.get<T>(`periodos`);
+  }
+  getTableroDocentes<T>(periCcod: any) {
+    return this.get<T>(`docentes/tablero?periCcod=${periCcod}`);
+  }
+  getEstudiantes<T>(seccCcod: any) {
+    return this.get<T>(`docentes/estudiantes?seccCcod=${seccCcod}`);
+  }
+  getFichasEstudiantes<T>(persNcorr: any, seccCcod: any) {
+    return this.get<T>(`docentes/fichas-estudiantes?persNcorr=${persNcorr}&seccCcod=${seccCcod}`);
+  }
+  getFichaAsignatura<T>(asigCcod: any) {
+    return this.get<T>(`docentes/ficha-asignatura?asigCcod=${asigCcod}`);
+  }
+  getDetalleFichaAsignatura<T>(asigCcod: any, persNcorr: any, fisaNcorr: any) {
+    return this.get<T>(`docentes/detalle-ficha-asignatura?asigCcod=${asigCcod}&persNcorr=${persNcorr}&fisaNcorr=${fisaNcorr}`);
+  }
+  asignarFicha<T>(data: any) {
+    return this.post<T>(`docentes/asignar-ficha`, data);
+  }
+  buscarPaciente<T>(rut: string) {
+    return this.get<T>(`docentes/buscar-paciente?rut=${rut}`);
+  }
+  terminarRevisionficha<T>(data: any) {
+    return this.post<T>(`docentes/terminar-revision-ficha`, data);
+  }
 
   getTableroDocente(periodo?: number): Observable<any> {
     return this.http.get(
@@ -57,9 +92,7 @@ export class GestionservicesService {
     );
   }
 
-  getPeriodos(): Observable<any> {
-    return this.http.get(`${this.global.baseUrl}/${this.prefix}/getperiodos`);
-  }
+  
 
   getprevision(): Observable<any> {
     return this.http.get(`${this.global.baseUrl}/${this.prefix}/getprevision`);
@@ -98,16 +131,20 @@ export class GestionservicesService {
 
   // SERVICE ESTUDIANTES
 
-  getListaCursoEstudiante(): Observable<any> {
-    return this.http.get(
-      `${this.global.baseUrl}/${this.prefix}/getlistacursoestudiante`
-    );
+  getListaCursoEstudiante<T>() {
+    return this.get<T>('getlistacursoestudiante');
   }
 
-  getTableroEstudiantes(seccion: number): Observable<any> {
-    return this.http.get(
-      `${this.global.baseUrl}/${this.prefix}/gettableroestudiantes/${seccion}`
-    );
+  getTableroEstudiantes<T>(seccion: any) {
+    return this.get<T>(`gettableroestudiantes?seccion=${seccion}`);
+  }
+
+  getFichasEstudiante<T>(seccion: any, inicio: any, limite: any, orden: any, direccion: any, filtro: any) {
+    return this.get<T>(`estudiantes/fichas?seccCcod=${seccion}&inicio=${inicio}&limite=${limite}&orden=${orden}&direccion=${direccion}&filtro=${filtro}`);
+  }
+
+  getDetalleFicha<T>(seccion: any) {
+    return this.get<T>(`estudiantes/detalle-ficha?seccCcod=${seccion}`);
   }
 
   getEditFichaEstudiante(persNcorr: number, seccCcod: number): Observable<any> {

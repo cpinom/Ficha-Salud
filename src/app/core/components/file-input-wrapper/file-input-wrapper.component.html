@@ -1,0 +1,10 @@
+<div class="file-field d-flex align-items-center">
+  <div class="btn btn-sm float-left ml-0">
+    <span class="text-nowrap">{{ label}}</span>
+    <input type="file" class="btn btn-sm float-left" [accept]="accept" (change)="onFileChange($event)" #fileInput>
+  </div>
+  <div class="file-path-wrapper">
+    <input type="text" [value]="fileName || 'Cargar archivo...'" [readonly]="true" (click)="fileInput.click()" class="file-path" />
+  </div>
+</div>
+<app-error-msg [control]="control"></app-error-msg>

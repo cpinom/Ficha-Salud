@@ -1,20 +1,3 @@
-:root {
-  --bg-color: white;
-  --text-color: black;
-}
-
-.dark {
-  --bg-color: #121212;
-  --text-color: #ffffff;
-}
-
-body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-body.dark {
-    color: #070707 !important;
-    background-color: #121212 !important;
+::ng-deep app-header {
+  display: block;
 }

@@ -7,4 +7,5 @@ export class AppGlobal {
     public preferencias: any;
     public baseUrl!: string; 
     public sedes!: any[];
+    public environment!: string;
   }

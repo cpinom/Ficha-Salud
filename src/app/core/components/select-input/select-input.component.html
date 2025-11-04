@@ -1,0 +1,10 @@
+<div class="md-form">
+  <select [chosen] id="sedes" class="chosen-select" [formControl]="control" [id]="uid">
+    <option value="" disabled selected>Seleccione...</option>
+    @for (item of campo.lista; track $index) {
+    <option [value]="item.valor">{{ item.texto }}</option>
+    }
+  </select>
+  <label [for]="uid" class="active" *ngIf="!hiddenLabel">{{ campo?.nombre }}</label>
+<app-error-msg [control]="control"></app-error-msg>
+</div>

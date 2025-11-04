@@ -27,24 +27,25 @@ export class TableroestudianteComponent {
   ) { }
 
   ngOnInit(): void {
+    debugger
     this.getListaCursoEstudiante();
   }
 
   getListaCursoEstudiante(): void {
-    this.service.getListaCursoEstudiante().subscribe({
-      next: (data) => {
-        console.log('Cursos o Fichas recibidos:', data);
-        this.listacursos = data;
+    // this.service.getListaCursoEstudiante().subscribe({
+    //   next: (data) => {
+    //     console.log('Cursos o Fichas recibidos:', data);
+    //     this.listacursos = data;
 
-        if (this.listacursos.length > 0) {
-          this.selectedCursoId = this.listacursos[0].SECC_CCOD;
-          this.getTableroEstudiantes(this.selectedCursoId);
-        }
-      },
-      error: (err) => {
-        console.error('Error cargando Lista de cursos estudiantes', err);
-      },
-    });
+    //     if (this.listacursos.length > 0) {
+    //       this.selectedCursoId = this.listacursos[0].SECC_CCOD;
+    //       this.getTableroEstudiantes(this.selectedCursoId);
+    //     }
+    //   },
+    //   error: (err) => {
+    //     console.error('Error cargando Lista de cursos estudiantes', err);
+    //   },
+    // });
   }
 
   onCursosChange(cursoId: number): void {
@@ -55,23 +56,23 @@ export class TableroestudianteComponent {
 
 
   getTableroEstudiantes(seccion: number): void {
-    this.service.getTableroEstudiantes(seccion).subscribe({
-      next: (data) => {
-        console.log('Table Estudiantes recibido:', data);
-        this.tableroestudiante = data;
+    // this.service.getTableroEstudiantes(seccion).subscribe({
+    //   next: (data) => {
+    //     console.log('Table Estudiantes recibido:', data);
+    //     this.tableroestudiante = data;
 
-        if (data.length > 0) {
-          const infotablero = data[0];
-          this.sedeDesc = infotablero.SEDE_TDESC;
-          this.nombredocente = infotablero.DOCENTE;
-          this.cantidadfichascompletadas = 0;
-          this.seccion = infotablero.SECC_CCOD;
-        }
-      },
-      error: (err) => {
-        console.error('Error cargando Tablero docente', err);
-      },
-    });
+    //     if (data.length > 0) {
+    //       const infotablero = data[0];
+    //       this.sedeDesc = infotablero.SEDE_TDESC;
+    //       this.nombredocente = infotablero.DOCENTE;
+    //       this.cantidadfichascompletadas = 0;
+    //       this.seccion = infotablero.SECC_CCOD;
+    //     }
+    //   },
+    //   error: (err) => {
+    //     console.error('Error cargando Tablero docente', err);
+    //   },
+    // });
   }
 
   verDetalleEstudiante(persNcorr: number, seccCcod: number): void {

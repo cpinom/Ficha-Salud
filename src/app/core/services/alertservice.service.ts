@@ -12,12 +12,12 @@ interface Notificacion {
 })
 export class AlertserviceService {
 
-   constructor(private toastr: ToastrService) { }
+  constructor(private toastr: ToastrService) { }
 
   mostrar(tipo: string, mensaje: string, titulo: string = '') {
-      const opciones = {
-        toastClass: 'ngx-toastr no-icon-toast'
-      };
+    const opciones = {
+      toastClass: 'ngx-toastr no-icon-toast'
+    };
     switch (tipo) {
       case 'success':
         this.toastr.success(mensaje, titulo, opciones);

@@ -1,9 +1,15 @@
 <div class="page-content">
 
-  <header #header class="header" (onLogoClick)="onLogoClick($event)" (onTitleClick)="onTitleClick($event)"
-    (onNotificationsClick)="onNotificationsClick($event)" (onChangePreferences)="onChangePreferences($event)"></header>
+  <!-- <header #header class="header" (onCloseClick)="onCloseClick($event)" (onTitleClick)="onTitleClick($event)"
+    (onNotificationsClick)="onNotificationsClick($event)" (onChangePreferences)="onChangePreferences($event)"></header> -->
+
+  <app-header #header class="header" (clicked)="onHeaderClicked()" (logout)="onLogout()"
+    (onPreferencesChanged)="onPreferencesChanged($event)"></app-header>
+
   <router-outlet></router-outlet>
 
 </div>
 
-<footer class="page-footer"></footer>
+<footer class="page-footer pt-0 mt-0"></footer>
+
+<app-spinner-overlay></app-spinner-overlay>

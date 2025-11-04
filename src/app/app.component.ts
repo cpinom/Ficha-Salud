@@ -1,7 +1,8 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, inject, ViewChild } from '@angular/core';
 import { AppGlobal } from './app.global';
 import { Router } from '@angular/router';
 import { HeaderComponent } from './core/components/header/header.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,10 @@ import { HeaderComponent } from './core/components/header/header.component';
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements AfterViewInit {
+
+  private toastr = inject(ToastrService);
+  private global = inject(AppGlobal);
+
   @ViewChild('header') headerComponent!: HeaderComponent;
 
   title = 'Ficha Electrónica de Salud';
@@ -18,29 +23,28 @@ export class AppComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.headerComponent.title = this.title;
-      this.headerComponent.nombreUsuario = this.global.nombreUsuario;
-
-      if (this.global.rolUsuario === 'docente') {
-        this.router.navigate(['/tablerodocente']);
-      }
-      else {
-        this.router.navigate(['/tableroestudiante']);
-      }
+      this.headerComponent.userName = this.global.nombreUsuario;
+      this.headerComponent.initPreferences(this.global.preferencias);
     });
   }
 
-  constructor(private global: AppGlobal, private router: Router) { }
-  onLogoClick(e: any) {
-    debugger
+  constructor() { }
+
+  onHeaderClicked() { }
+  onLogout() {
+    window.close();
   }
-  onTitleClick(e: any) {
+  async onPreferencesChanged(preferences: any) {
     debugger
-  }
-  onNotificationsClick(e: any) {
-    debugger
-  }
-  onChangePreferences(data: any) {
-    debugger
+    const params = {
+      data: { ...this.global.preferencias, ...preferences }
+    };
+    try {
+      // await this.api.guardarPreferencias(params);
+    }
+    catch (error) {
+      this.toastr.error('Error al guardar preferencias');
+    }
   }
 
 

@@ -18,8 +18,8 @@
                   class="filtr d-flex"
                   [(ngModel)]="selectedPeriodoId"
                   (ngModelChange)="onPeriodoChange($event)">
-                  <option *ngFor="let periodo of periodos" [value]="periodo.PERI_CCOD">
-                    {{ periodo.PERI_TDESC }}
+                  <option *ngFor="let periodo of periodos" [value]="periodo.periCcod">
+                    {{ periodo.periTdesc }}
                   </option>
               </select>
               </div>

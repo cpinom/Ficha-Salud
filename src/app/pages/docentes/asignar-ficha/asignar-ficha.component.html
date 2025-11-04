@@ -1,0 +1,285 @@
+<main class="container">
+  <section class="row breadcrumb py-2">
+    <a class="breadcrumb-item" routerLink="/docentes">Inicio</a>
+    <span class="breadcrumb-item active">Asignar Ficha</span>
+  </section>
+  <section class="mb-5">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h4 class="float-left heading h4-responsive mb-0">
+          Asignar Ficha <span class="px-2">|</span> {{ data?.asigTdesc}}
+        </h4>
+      </div>
+      <div class="row justify-content-between">
+        <div class="col-md-4 mt-3">
+          <p class="mb-3">
+            <span class="mr-2 font-weight-bold">Sede: </span>
+            <span> {{ data?.sedeTdesc }}</span>
+          </p>
+        </div>
+        <div class="col-md-4 mt-3">
+          <p class="mb-3">
+            <span class="mr-2 font-weight-bold">Sección: </span>
+            <span> {{ data?.seccTdesc }}</span>
+          </p>
+        </div>
+        <div class="col-md-4 mt-3">
+          <p class="mb-3">
+            <span class="mr-2 font-weight-bold">Cantidad Estudiantes: </span>
+            <span> {{ data?.contador }}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="card mt-4">
+      <div class="card-header d-flex justify-content-between">
+        <h4 class="float-left heading h4-responsive mb-0">Perfil Paciente</h4>
+      </div>
+      <form [formGroup]="pacienteForm" (ngSubmit)="asignarFicha()">
+        <div #accordion="ngbAccordion" ngbAccordion class="md-accordion mt-4" [closeOthers]="true">
+          <div ngbAccordionItem="a1" [collapsed]="false" [destroyOnHide]="false">
+            <h2 ngbAccordionHeader class="grey lighten-3">
+              <button ngbAccordionButton>
+                <h5 class="mb-0 pl-3 pr-3">
+                  <span>Datos Personales</span>
+                  <span class="accordion-arrow"><i
+                      class="material-icons rotate-icon float-right">keyboard_arrow_up</i></span>
+                </h5>
+              </button>
+            </h2>
+            <div ngbAccordionCollapse>
+              <div ngbAccordionBody class="p-3">
+                <ng-template>
+                  <div class="row justify-content-between mt-2">
+                    <div class="col-md-3 mb-3">
+                      <div class="md-form mb-3">
+                        <input formControlName="rut" type="text" id="campo_rut" placeholder="Ingrese RUT del usuario"
+                          class="form-control mb-0" />
+                        <label for="campo_rut" class="active">RUT</label>
+                        <app-error-msg [control]="pacienteForm.get('rut')"></app-error-msg>
+                      </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                      <div class="md-form mb-3">
+                        <input formControlName="nombre" type="text" name="nombreUsuario" id="nombreUsuario"
+                          placeholder="Ingrese nombre del usuario" class="form-control mb-0" />
+                        <label for="nombreUsuario" class="active">Nombre</label>
+                        <app-error-msg [control]="pacienteForm.get('nombre')"></app-error-msg>
+                      </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                      <div class="md-form mb-3">
+                        <input formControlName="nombreSocial" type="text" name="nombreSocial" id="nombreSocial"
+                          placeholder="Ingrese nombre social del usuario" class="form-control mb-0">
+                        <label for="nombreSocial" class="active">Nombre Social</label>
+                        <app-error-msg [control]="pacienteForm.get('nombreSocial')"></app-error-msg>
+                      </div>
+                    </div>
+                    <div class="w-100"></div>
+                    <div class="col-md-3 mb-3">
+                      <div class="md-form mb-3">
+                        <input formControlName="apellidoPaterno" type="text" name="apellidoPaterno" id="apellidoPaterno"
+                          placeholder="Ingrese apellido paterno" class="form-control mb-0">
+                        <label for="apellidoPaterno" class="active">Apellido Paterno</label>
+                        <app-error-msg [control]="pacienteForm.get('apellidoPaterno')"></app-error-msg>
+                      </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                      <div class="md-form mb-3">
+                        <input formControlName="apellidoMaterno" type="text" name="apellidoMaterno" id="apellidoMaterno"
+                          placeholder="Ingrese apellido materno" class="form-control mb-0">
+                        <label for="apellidoMaterno" class="active">Apellido Materno</label>
+                        <app-error-msg [control]="pacienteForm.get('apellidoMaterno')"></app-error-msg>
+                      </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                      <div class="md-form">
+                        <div class="md-form">
+                          <select formControlName="sexo" class="form-control" chosen>
+                            <option value="" disabled selected>Seleccione Sexo</option>
+                            <option value="1">Masculino</option>
+                            <option value="2">Femenino</option>
+                            <option value="3">Otro</option>
+                            <option value="4">Prefiero no responder</option>
+                          </select>
+                          <label class="active">Sexo</label>
+                          <app-error-msg [control]="pacienteForm.get('sexo')"></app-error-msg>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="w-100"></div>
+                    <div class="col-md-3 mb-3">
+                      <div class="md-form">
+                        <input formControlName="fechaNacimiento" name="campo_fecha" id="campo_fecha" type="text"
+                          placeholder="DD/MM/AAAA" class="form-control" Datepicker>
+                        <label for="campo_fecha" class="active">Seleccionar fecha</label>
+                        <app-error-msg [control]="pacienteForm.get('fechaNacimiento')"></app-error-msg>
+                      </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                      <div class="md-form mb-3">
+                        <input formControlName="nacionalidad" type="text" name="nacionalidad" id="nacionalidad"
+                          placeholder="Ingrese Nacionalidad" class="form-control mb-0 " />
+                        <label for="nacionalidad" class="active">Nacionalidad</label>
+                        <app-error-msg [control]="pacienteForm.get('nacionalidad')"></app-error-msg>
+                      </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                      <div class="md-form mb-3">
+                        <input formControlName="edad" type="text" name="edad" id="edad" placeholder="Ingrese Edad"
+                          class="form-control mb-0" />
+                        <label for="edad" class="active">Edad</label>
+                        <app-error-msg [control]="pacienteForm.get('edad')"></app-error-msg>
+                      </div>
+                    </div>
+                    <div class="w-100"></div>
+                  </div>
+                  <div class="row mb-4">
+                    <div class="col-12 d-flex justify-content-end align-items-center px-0">
+                      <button type="button" (click)="accordion?.expand('a2')"
+                        class="btn btn-sgte font-weight-bold collapsed px-1">
+                        Siguiente &gt;&gt;
+                      </button>
+                    </div>
+                  </div>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+          <div ngbAccordionItem="a2" [collapsed]="false" [destroyOnHide]="false">
+            <h2 ngbAccordionHeader class="grey lighten-3">
+              <button ngbAccordionButton>
+                <h5 class="mb-0 pl-3 pr-3">
+                  <span>Contacto Paciente</span>
+                  <span class="accordion-arrow"><i
+                      class="material-icons rotate-icon float-right">keyboard_arrow_up</i></span>
+                </h5>
+              </button>
+            </h2>
+            <div ngbAccordionCollapse>
+              <div ngbAccordionBody class="p-3">
+                <ng-template>
+                  <div class="row align-items-center1 justify-content-between mt-2">
+                    <div class="col-md-4">
+                      <div class="md-form mb-3">
+                        <input formControlName="telefono" type="text" name="telefono" id="telefono"
+                          placeholder="Ingrese teléfono del usuario" class="form-control mb-0">
+                        <label for="telefono" class="active">Teléfono</label>
+                        <app-error-msg [control]="pacienteForm.get('telefono')"></app-error-msg>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <div class="md-form mb-3">
+                        <input formControlName="direccion" type="text" name="direccion" id="direccion"
+                          placeholder="Ingrese dirección del usuario" class="form-control mb-0">
+                        <label for="direccion" class="active">Dirección</label>
+                        <app-error-msg [control]="pacienteForm.get('direccion')"></app-error-msg>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-4">
+                    <div class="col-12 d-flex justify-content-between align-items-center px-0">
+                      <button type="button" (click)="accordion?.expand('a1')"
+                        class="btn btn-sgte font-weight-bold collapsed px-1">
+                        &lt;&lt; Anterior
+                      </button>
+                      <button type="button" (click)="accordion?.expand('a3')"
+                        class="btn btn-sgte font-weight-bold collapsed px-1">
+                        Siguiente &gt;&gt;
+                      </button>
+                    </div>
+                  </div>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+          <div ngbAccordionItem="a3" [collapsed]="false" [destroyOnHide]="false">
+            <h2 ngbAccordionHeader class="grey lighten-3">
+              <button ngbAccordionButton>
+                <h5 class="mb-0 pl-3 pr-3">
+                  <span>Previsión</span>
+                  <span class="accordion-arrow"><i
+                      class="material-icons rotate-icon float-right">keyboard_arrow_up</i></span>
+                </h5>
+              </button>
+            </h2>
+            <div ngbAccordionCollapse>
+              <div ngbAccordionBody class="p-3">
+                <ng-template>
+                  <div class="row mt-2">
+                    <div class="col-md-4 mb-4">
+                      <div class="md-form">
+                        <select [chosen] formControlName="prevision" name="prevision" id="prevision">
+                          <option value="" disabled="" selected="">Seleccione previsión</option>
+                          <option [value]="item.fireNtipo" *ngFor="let item of previsiones">{{ item.institucion }}
+                          </option>
+                        </select>
+                        <label for="prevision" class="active">Seleccionar</label>
+                        <app-error-msg [control]="pacienteForm.get('prevision')"></app-error-msg>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-4">
+                    <div class="col-12 d-flex justify-content-between align-items-center px-0">
+                      <button type="button" (click)="accordion?.expand('a2')"
+                        class="btn btn-sgte font-weight-bold collapsed px-1">
+                        &lt;&lt; Anterior
+                      </button>
+                      <button type="button" (click)="mostrarFicha()"
+                        class="btn btn-sgte font-weight-bold collapsed px-1">
+                        Siguiente &gt;&gt;
+                      </button>
+                    </div>
+                  </div>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <app-ficha-dinamica #fichaDinamica [ficha]="ficha"></app-ficha-dinamica>
+
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-12 d-flex justify-content-between">
+            <div class="md-form">
+              <button routerLink="/docentes" class="btn btn-outline waves-effect waves-light">
+                <span>Volver a Inicio</span>
+              </button>
+            </div>
+            <div class="md-form d-flex">
+              <button type="button" (click)="asignarFicha()"
+                class="btn btn-default d-flex align-items-center waves-effect waves-light py-2">Asignar Nueva
+                Ficha</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="card-header d-flex mt-4 justify-content-between">
+        <h4 class="float-left heading h4-responsive mb-0">{{ficha?.descripcion || 'Ficha Clínica'}}</h4>
+      </div>
+      <div #accordion_ficha="ngbAccordion" ngbAccordion class="md-accordion mt-4" [closeOthers]="true">
+        <ng-container *ngFor="let item of ficha?.grupos">
+          <div [ngbAccordionItem]="item?.id_grupo" [collapsed]="false" [destroyOnHide]="false">
+            <h2 ngbAccordionHeader class="grey lighten-3">
+              <button ngbAccordionButton>
+                <h5 class="mb-0 pl-3 pr-3">
+                  <span>{{ item?.nombre }}</span>
+                  <span class="accordion-arrow">
+                    <i class="material-icons rotate-icon float-right">keyboard_arrow_up</i>
+                  </span>
+                </h5>
+              </button>
+            </h2>
+            <div ngbAccordionCollapse>
+              <div ngbAccordionBody class="p-3">
+                <ng-template></ng-template>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div> -->
+    </div>
+  </section>
+</main>

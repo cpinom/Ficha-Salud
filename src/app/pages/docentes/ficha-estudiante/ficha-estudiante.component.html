@@ -1,0 +1,83 @@
+<main class="container">
+  <section class="row breadcrumb py-2">
+    <a class="breadcrumb-item" routerLink="/docentes">Inicio</a>
+    <a class="breadcrumb-item" href="#" (click)="volverTap($event)">Detalle Curso</a>
+    <span class="breadcrumb-item active">Fichas por Estudiante</span>
+  </section>
+  <section>
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h4 class="float-left heading h4-responsive mb-0">
+          Fichas del Estudiante <span class="px-2">|</span> {{ estudiante?.tnombreestudiante | titleCase }}
+        </h4>
+        <div class="d-flex align-items-center">
+          <div class="badge badge-warning font-weight-normal">{{ estudiante?.fichapendientes}} Fichas Pendientes de Revisar
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-between">
+        <div class="col-md-4 mt-4">
+          <p class="mb-4">
+            <span class="mr-2 font-weight-bold">Sede: </span>
+            <span> {{ data?.sedeTdesc }}</span>
+          </p>
+        </div>
+        <div class="col-md-4 mt-4">
+          <p class="mb-4">
+            <span class="mr-2 font-weight-bold">Sección: </span>
+            <span> {{ data?.seccTdesc }}</span>
+          </p>
+        </div>
+        <div class="col-md-4 mt-4">
+          <p class="mb-4">
+            <span class="mr-2 font-weight-bold">Cantidad Estudiantes: </span>
+            <span> {{ data?.contador }}</span>
+          </p>
+        </div>
+      </div>
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped">
+              <thead>
+                <tr>
+                  <th style="width: 75px;" class="text-center">Acciones</th>
+                  <th>Estado</th>
+                  <th>Nombre Paciente</th>
+                  <th>RUT</th>
+                  <th>Fecha de la Ficha</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of fichas">
+                  <td>
+                    <div class="d-flex justify-content-center">
+                      <button (click)="detalleFicha(item)" type="button" class="btn-clear mr-0 d-flex align-items-center float-left" ngbTooltip="Ver Detalle Ficha">
+                        <i class="material-icons mr-1 icon-lg grey-text">visibility</i>
+                      </button>
+                    </div>
+                  </td>
+                  <td>{{ item.efisTdesc }}</td>
+                  <td>{{ item.nombrePaciente }}</td>
+                  <td>{{ item.rutPaciente }}</td>
+                  <td>{{ item.fechaFicha }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-12 d-flex justify-content-between">
+            <div class="md-form">
+              <a (click)="volverTap($event)" class="btn btn-outline waves-effect waves-light">
+                <span>Volver a Detalle de Curso</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

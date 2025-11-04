@@ -1,0 +1,121 @@
+<main id="main" class="py-0">
+  <section>
+    <div class="container">
+      <div class="container1 position-sticky-inicio">
+        <section class="row breadcrumb mt-3 py-2">
+          <span class="breadcrumb-item home active">Inicio</span>
+          <span class="breadcrumb-item r-busqueda" style="display: none;">Resultados de Búsqueda</span>
+        </section>
+        <div class="row">
+          <div class="col-12 mb-4">
+            <form [formGroup]="form">
+              <div id="filtros" class="d-flex justify-content-start">
+                <div class="filter-button px-4 p-2 d-flex flex-row mr-4">
+                  <label for="filtro-sede">Filtrar por Periodo:</label>
+                  <select name="filtro-sede" id="filtro-sede" class="filtr d-flex" formControlName="periodo">
+                    <option value="" selected="" disabled>Seleccione un periodo</option>
+                    <option *ngFor="let item of periodos" [value]="item.periCcod">{{ item.periTdesc }}</option>
+                  </select>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col mb-4">
+            <div class="card card-home">
+              <div class="d-flex align-items-center">
+                <div class="px-2">
+                  <i class="material-icons icon-lg iconSalud icon-4x">group</i>
+                </div>
+                <div class="px-2">
+                  <h4 class="font-weight-bold mb-0 titleNum">{{ data?.totales || '0' }}</h4>
+                  <span>Estudiantes totales</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col mb-4">
+            <div class="card card-home">
+              <div class="d-flex align-items-center">
+                <div class="px-2">
+                  <i class="material-icons icon-lg iconSalud icon-4x">person_add</i>
+                </div>
+                <div class="px-2">
+                  <h4 class="font-weight-bold mb-0 titleNum">{{ data?.atendidos || '0' }}</h4>
+                  <span>Personas atendidas</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col mb-4">
+            <div class="card card-home">
+              <div class="d-flex align-items-center">
+                <div class="px-2">
+                  <i class="material-icons icon-lg iconSalud icon-4x">task</i>
+                </div>
+                <div class="px-2">
+                  <h4 class="font-weight-bold mb-0 titleNum">{{ data?.pendientes || '0' }}</h4>
+                  <span>Tareas pendientes</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col mb-4">
+            <div class="card card-home">
+              <div class="d-flex align-items-center">
+                <div class="px-2">
+                  <i class="material-icons icon-lg iconSalud icon-4x">folder</i>
+                </div>
+                <div class="px-2">
+                  <h4 class="font-weight-bold mb-0 titleNum">{{ data?.asignaturasInscritas || '0' }}</h4>
+                  <span>Asignaturas inscritas</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <section>
+        <div class="row mt-5 py-4">
+          <div class="col-3 mb-4" *ngFor="let item of data?.asignaturas">
+            <div class="card card-home pb-0">
+              <div class="card-header">
+                <h4 class="h4-responsive font-weight-bold">{{ item.asigTdesc }}</h4>
+              </div>
+              <div class="card-body">
+                <p class="mb-2"><span class="font-weight-bold">Sede: </span>{{ item.sedeTdesc }}</p>
+                <p class="mb-2"><span class="font-weight-bold">Sección: </span>{{ item.seccCcod }}</p>
+                <p class="mb-2"><span class="font-weight-bold">Cantidad Estudiantes: </span>{{ item.contador }}</p>
+                <div class="w-100 border-bottom my-3"></div>
+                <p class="mb-2"><span class="font-weight-bold">Fichas Completadas: </span>{{ item.fichas?.completadas }}
+                </p>
+                <p class="mb-2"><span class="font-weight-bold">Fichas Revisadas: </span>{{ item.fichas?.revisadas }}</p>
+                <p></p>
+                <div class="badge badge-warning font-weight-normal">{{ item.fichas?.pendientes }} Fichas Pendientes de
+                  Revisar</div>
+                <p></p>
+              </div>
+              <div class="card-footer pt-2">
+                <div class="row align-items-center">
+                  <div class="col-12 border-bottom"></div>
+                </div>
+                <div class="d-flex justify-content-around align-items-center">
+                  <div class="w-50 px-2">
+                    <button (click)="detalleCurso(item);" class="btnEditListas btn-footer info-text text-center my-2"
+                      type="button">Ver Detalle del Curso</button>
+                  </div>
+                  <div class="border-right" style="height: 70px;"></div>
+                  <div class="w-50 px-4">
+                    <button (click)="asignarFicha(item)"
+                      class="btnEditListas btn-footer info-text text-center my-2 px-4" type="button">
+                      Asignar <br /> Ficha
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+</main>

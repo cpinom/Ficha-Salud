@@ -1,0 +1,140 @@
+import { AfterViewInit, ApplicationRef, Component, ElementRef, inject, InjectionToken, Injector, Input, OnInit, QueryList, Renderer2, ViewChildren } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
+import { ControlRendererComponent } from '../control-renderer/control-renderer.component';
+import { multiValidator } from '../../validators/multiValidator';
+
+export const CONTROL_TOKEN = new InjectionToken<FormControl>('CONTROL_TOKEN');
+export const UID_TOKEN = new InjectionToken<string>('UID_TOKEN');
+export const CAMPO_TOKEN = new InjectionToken<any>('CAMPO_TOKEN');
+export const PLACEHOLDER_TOKEN = new InjectionToken<string>('PLACEHOLDER_TOKEN');
+export const HIDDENLABEL_TOKEN = new InjectionToken<boolean>('HIDDENLABEL_TOKEN');
+
+@Component({
+  selector: 'app-ficha-dinamica',
+  templateUrl: './ficha-dinamica.component.html',
+  styleUrl: './ficha-dinamica.component.scss'
+})
+export class FichaDinamicaComponent implements OnInit, AfterViewInit {
+
+  private fb = inject(FormBuilder);
+  private renderer = inject(Renderer2);
+  private sanitizer = inject(DomSanitizer);
+  private injector = inject(Injector);
+  private appRef = inject(ApplicationRef);
+
+  @Input() ficha: any;
+  @ViewChildren('contenedorGrupo') contenedores!: QueryList<ElementRef>;
+  form!: FormGroup;
+  currentGroupId!: number;
+
+  async ngOnInit() {
+    this.construirFormulario();
+
+    // Preprocesa cada grupo: crea versión segura de la plantilla
+    this.ficha.grupos.forEach((g: any) => {
+      g._safeHtml = this.sanitizer.bypassSecurityTrustHtml(g.plantilla);
+    });
+  }
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.contenedores.forEach((ref, i) => {
+        const grupo = this.ficha.grupos[i];
+        this.processTemplate(ref.nativeElement, grupo);
+      });
+      this.currentGroupId = this.ficha.grupos[0].id_grupo;
+    });
+  }
+  private construirFormulario() {
+    const group: any = {};
+
+    this.ficha?.grupos?.forEach((grupo: any) => {
+      grupo.campos?.forEach((campo: any) => {
+        const campoObligatorio = campo.obligatorio === true;
+
+        let campoTipo: 'texto' | 'digitos' | 'decimal' | 'fecha' | undefined;
+
+        switch (campo.tipo) {
+          case 'TEXT':
+          case 'TEXTAREA':
+            campoTipo = 'texto';
+            break;
+          case 'NUMBER':
+            campoTipo = 'digitos';
+            break;
+          case 'DECIMAL':
+            campoTipo = 'decimal';
+            break;
+          case 'DATE':
+            campoTipo = 'fecha';
+            break;
+          default:
+            campoTipo = undefined;
+        }
+
+        group[campo.codigo] = new FormControl(campo.valor || null, multiValidator({
+          required: campoObligatorio,
+          type: campoTipo
+        }));
+      });
+    });
+
+    this.form = this.fb.group(group);
+  }
+  private processTemplate(container: HTMLElement, grupo: any) {
+
+    const controlSlots = container.querySelectorAll('control-slot[campo]');
+
+    controlSlots.forEach((slot: any) => {
+      const codigo = slot.getAttribute('campo');
+      const campo = grupo.campos.find((c: any) => c.codigo === codigo);
+
+      if (!campo) return;
+
+      // debugger
+      const uid = `ctrl_${grupo.id_grupo}_${campo.codigo}`;
+      const placeholder = slot.getAttribute('data-placeholder') || '';
+      const hiddenLabel = slot.getAttribute('data-hidden-label') === 'true';
+
+      const host = this.renderer.createElement('div');
+      this.renderer.addClass(host, 'md-form');
+      slot.replaceWith(host);
+
+      const injector = Injector.create({
+        providers: [
+          { provide: CAMPO_TOKEN, useValue: campo },
+          { provide: CONTROL_TOKEN, useValue: this.form.get(campo.codigo) },
+          { provide: PLACEHOLDER_TOKEN, useValue: placeholder },
+          { provide: HIDDENLABEL_TOKEN, useValue: hiddenLabel },
+          { provide: UID_TOKEN, useValue: uid }
+        ],
+        parent: this.injector
+      });
+
+      const cmp = new ControlRendererComponent(this.appRef, injector);
+      cmp.attachTo(host);
+    });
+
+  }
+  onGroupExpandedChange(groupId: number) {
+    // debugger
+    this.currentGroupId = groupId;
+  }
+  prevTap(acc: any) {
+    const currentIndex = this.ficha.grupos.findIndex((g: any) => g.id_grupo === this.currentGroupId);
+    
+    if (currentIndex > 0) {
+      this.currentGroupId = this.ficha.grupos[currentIndex - 1].id_grupo;
+      acc?.expand(`grupo_${this.currentGroupId}`);
+    }
+  }
+  nextTap(acc: any) {
+    const currentIndex = this.ficha.grupos.findIndex((g: any) => g.id_grupo === this.currentGroupId);
+    
+    if (currentIndex < this.ficha.grupos.length - 1) {
+      this.currentGroupId = this.ficha.grupos[currentIndex + 1].id_grupo;
+      acc?.expand(`grupo_${this.currentGroupId}`);
+    }
+  }
+
+}

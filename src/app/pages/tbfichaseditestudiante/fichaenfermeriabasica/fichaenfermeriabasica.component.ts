@@ -203,6 +203,7 @@ export class FichaenfermeriabasicaComponent {
   }
 
 guardarFichaEstudiante(): void {
+  debugger
   if (this.fichaForm.invalid) {
     this.fichaForm.markAllAsTouched();
     this.checkInvalidControls();
@@ -265,7 +266,7 @@ checkInvalidControls(): void {
 }
 
   volverTableroEstudiante(): void {
-    this.router.navigate(['/estudiante/tablero-estudiante']);
+    this.router.navigate(['/tableroestudiante']);
   }
 
   test(msg: string): void {

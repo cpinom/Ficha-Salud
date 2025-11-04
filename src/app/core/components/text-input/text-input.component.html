@@ -1,0 +1,3 @@
+<input type="text" class="form-control mb-0" [formControl]="control" [placeholder]="placeholder || ''" [id]="uid" />
+<label [for]="uid" class="active" *ngIf="!hiddenLabel">{{ campo?.nombre }}</label>
+<app-error-msg [control]="control"></app-error-msg>

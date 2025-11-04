@@ -1,0 +1,151 @@
+<section>
+  <form [formGroup]="filtroForm">
+    <div class="container">
+      <div class="container">
+        <section class="row breadcrumb pt-3">
+          <span class="breadcrumb-item"><a routerLink="/bienvenida">Inicio</a></span>
+          <span class="breadcrumb-item active">Detalle Curso</span>
+        </section>
+        <div class="row">
+          <div class="col-12 mb-4 px-0">
+            <div id="filtros" class="d-flex justify-content-start">
+              <div class="filter-button px-4 p-2 d-flex flex-row mr-4">
+                <label for="filtro-curso">Filtrar por Curso:</label>
+                <select id="filtro-curso" class="filtr d-flex" formControlName="curso">
+                  <option value="" disabled="">Seleccione</option>
+                  <option value="123">Curso XXX</option>
+                  <option *ngFor="let curso of cursos" [value]="curso.seccCcod">{{ curso.tifiTdesc }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-container *ngIf="data && data.length > 0">
+        <div class="card">
+
+          <div class="card-header d-flex justify-content-between">
+            <h4 id="titleEB" style="display: block;" class="float-left heading h4-responsive mb-0">
+              Asignar Ficha <span class="mx-2">|</span> {{seccion?.asignatura }}</h4>
+          </div>
+
+          <div class="row mb-1 mt-4">
+            <div class="col-md-4 mt-3">
+              <p class="mb-3">
+                <span class="mr-2 font-weight-bold">Sede: </span>
+                <span>{{ seccion?.sede }}</span>
+              </p>
+            </div>
+            <div class="col-md-4 mt-3">
+              <p class="mb-3">
+                <span class="mr-2 font-weight-bold">Sección: </span>
+                <span>{{ seccion?.seccion }}</span>
+              </p>
+            </div>
+            <div class="col-md-4 mt-3">
+              <p class="mb-3">
+                <span class="mr-2 font-weight-bold">Docente: </span>
+                <span>{{ seccion?.nombreDocente }}</span>
+              </p>
+            </div>
+            <div class="col-md-4 mt-3">
+              <p class="mb-3">
+                <span class="mr-2 font-weight-bold">Fichas Completadas: </span>
+                <span>{{ seccion?.cantidadfichascompletadas }}</span>
+              </p>
+            </div>
+          </div>
+
+        </div>
+        <section class="mt-4 mb-5">
+          <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h4 class="float-left heading h4-responsive mb-0">Fichas del Curso</h4>
+              <!-- <div class="d-flex align-items-center">
+        <div class="badge badge-warning font-weight-normal mr-3">3 Fichas Pendientes de Completar</div>
+        <div class="badge badge-info font-weight-normal">1 Ficha en Proceso de Completar</div>
+      </div> -->
+            </div>
+            <div class="row mb-4">
+              <div class="col-12">
+                <!-- <form [formGroup]="buscador"> -->
+                <div class="row py-3">
+                  <div class="col-md-3"></div>
+                  <div class="col-md-6"></div>
+                  <div class="col-md-3 d-flex align-items-center">
+                    <div class="w-100">
+                      <input type="text" class="form-control form-control-sm1" placeholder="Buscar..."
+                        formControlName="filtro" />
+                    </div>
+                  </div>
+                </div>
+                <!-- </form> -->
+                <div class="table-responsive">
+                  <table class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>Acciones</th>
+                        <th sortable="estado" (sort)="onSort($event)"
+                          [direction]="sortColumn === 'estado' ? sortDirection : ''">Estado</th>
+                        <th sortable>Nombre Paciente</th>
+                        <th sortable>RUT</th>
+                        <th sortable>Fecha Nacimiento</th>
+                        <th sortable>Fecha de la Ficha</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let ficha of data">
+                        <td>
+
+                          <div class="d-flex justify-content-start">
+                            <a (click)="editarFicha(ficha)" type="button"
+                              class="mr-0 d-flex align-items-center float-left" ngbTooltip="Editar Ficha">
+                              <i class="material-icons mr-1 icon-lg grey-text" data-toggle="tooltip"
+                                data-placement="bottom" title="" data-original-title="Editar Ficha">edit</i>
+                            </a>
+                          </div>
+
+                          <!-- <a [routerLink]="['/estudiantes/ficha', ficha.persNcorr, ficha.seccCcod]" class="btn btn-sm btn-primary" *ngIf="ficha.efisCcod == 1">
+                    <i class="fas fa-edit mr-1"></i> Editar Ficha
+                  </a> -->
+                        </td>
+                        <td>{{ ficha.estado }}</td>
+                        <td>{{ ficha.nombrePaciente }}</td>
+                        <td>{{ ficha.rutPaciente }}</td>
+                        <td>{{ ficha.fechaNacimiento | date: 'dd/MM/yyyy' }}</td>
+                        <td>{{ ficha.fechaFicha | date: 'dd/MM/yyyy' }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="row paginator">
+                  <div class="col-sm-6 col-md-5">
+                    <div class="md-form">
+                      Mostrando :
+                      <select class="form-control" formControlName="pageSize">
+                        <option [ngValue]="10">10</option>
+                        <option [ngValue]="50">50</option>
+                        <option [ngValue]="100">100</option>
+                      </select>
+                      registros por página
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-md-7 d-flex justify-content-end">
+                    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+                      [maxSize]="5" [rotate]="true" (pageChange)="cargar()">
+                      <ng-template ngbPaginationPrevious>Anterior</ng-template>
+                      <ng-template ngbPaginationNext>Siguiente</ng-template>
+                    </ngb-pagination>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </ng-container>
+      <div *ngIf="data && data.length === 0" class="alert alert-info mt-4" role="alert">
+        No se encontraron fichas para el curso seleccionado.
+      </div>
+    </div>
+  </form>
+</section>

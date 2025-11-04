@@ -9,9 +9,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentsModule } from './core/components/components.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatPaginatorIntl } from '@angular/material/paginator';
-import { HttpConfigInterceptor } from './core/services/http-config.interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SpinnerInterceptor } from './core/services/spinner.interceptor';
 
 @NgModule({
   declarations: [
@@ -25,10 +26,11 @@ import { ToastrModule } from 'ngx-toastr';
     ComponentsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    ToastrModule.forRoot(), 
+    ToastrModule.forRoot(),
+    NgbModule, 
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
+     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
     { provide: MatPaginatorIntl, useValue: getPaginatorIntl() },
     provideAnimationsAsync()
   ],

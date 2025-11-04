@@ -1,0 +1,12 @@
+<!-- <div class="error" *ngIf="control?.touched && control?.errors">
+  <span *ngIf="control?.errors?.['required']">Este campo es obligatorio.</span>
+  <span *ngIf="control?.errors?.['minLength']">Debe tener más caracteres.</span>
+  <span *ngIf="control?.errors?.['maxLength']">Supera el máximo permitido.</span>
+  <span *ngIf="control?.errors?.['rut']">{{ control?.errors?.['rut'] }}</span>
+  <span *ngIf="control?.errors?.['telefono']">{{ control?.errors?.['telefono'] }}</span>
+  <span *ngIf="control?.errors?.['pattern']">{{ control?.errors?.['pattern'] }}</span>
+  <span *ngIf="control?.errors?.['digitos']">{{ control?.errors?.['digitos'] }}</span>
+  <span *ngIf="control?.errors?.['decimal']">{{ control?.errors?.['decimal'] }}</span>
+  <span *ngIf="control?.errors?.['fecha']">{{ control?.errors?.['fecha'] }}</span>
+</div> -->
+<p class="error" *ngIf="firstErrorMessage">{{ firstErrorMessage }}</p>

@@ -63,29 +63,34 @@ export class TablerodocenteComponent implements OnInit {
   }
 
 getPeriodos(): void {
-  this.service.getPeriodos().subscribe({
-    next: (data) => {
-      console.log('Periodos recibidos:', data);
-      this.periodos = data;
 
-      const storedPeriodo = localStorage.getItem('periodoSeleccionado');
-      
-      if (storedPeriodo) {
-        this.selectedPeriodoId = parseInt(storedPeriodo, 10);
-        this.getTableroDocente(this.selectedPeriodoId); // carga inicial
-        return;
-      }
-
-      // Selecciona automáticamente el primer período si no hay uno seleccionado
-      if (this.periodos?.length) {
-        this.selectedPeriodoId = this.periodos[0].PERI_CCOD; // o el que quieras
-        this.getTableroDocente(this.selectedPeriodoId); // carga inicial
-      }
-    },
-    error: (err) => {
-      console.error('Error cargando periodos', err);
-    },
+  this.service.getPeriodos<any>().then((response)=> {
+    this.periodos = response.data;
   });
+
+  // this.service.getPeriodos().subscribe({
+  //   next: (data) => {
+  //     console.log('Periodos recibidos:', data);
+  //     this.periodos = data;
+
+  //     const storedPeriodo = localStorage.getItem('periodoSeleccionado');
+      
+  //     if (storedPeriodo) {
+  //       this.selectedPeriodoId = parseInt(storedPeriodo, 10);
+  //       this.getTableroDocente(this.selectedPeriodoId); // carga inicial
+  //       return;
+  //     }
+
+  //     // Selecciona automáticamente el primer período si no hay uno seleccionado
+  //     if (this.periodos?.length) {
+  //       this.selectedPeriodoId = this.periodos[0].PERI_CCOD; // o el que quieras
+  //       this.getTableroDocente(this.selectedPeriodoId); // carga inicial
+  //     }
+  //   },
+  //   error: (err) => {
+  //     console.error('Error cargando periodos', err);
+  //   },
+  // });
 }
 
  verfichaasignar(tdocente: any): void {
