@@ -4,10 +4,9 @@ import { Router } from '@angular/router';
 import { multiValidator } from '../../../core/validators/multiValidator';
 import moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
-import { AppGlobal } from '../../../app.global';
-import { GestionservicesService } from '../../../core/services/gestionservices.service';
 import { obtenerRutYDV, validarRut } from '../../../core/validators/rut-utils';
 import { debounceTime } from 'rxjs';
+import { DocenteService } from '../../../core/services/docente.service';
 
 @Component({
   selector: 'app-asignar-ficha',
@@ -21,8 +20,7 @@ export class AsignarFichaComponent implements OnInit {
   private router = inject(Router);
   private fb = inject(FormBuilder);
   private toastr = inject(ToastrService);
-  private global = inject(AppGlobal);
-  private api = inject(GestionservicesService);
+  private api = inject(DocenteService);
 
   data: any;
   ficha: any;

@@ -1,4 +1,4 @@
-<main class="container">
+<main class="container mb-4">
   <section class="row breadcrumb py-2">
     <a class="breadcrumb-item" routerLink="/docentes">Inicio</a>
     <a class="breadcrumb-item" href="#" (click)="volverTap($event)">Detalle Curso</a>
@@ -11,7 +11,8 @@
           Fichas del Estudiante <span class="px-2">|</span> {{ estudiante?.tnombreestudiante | titleCase }}
         </h4>
         <div class="d-flex align-items-center">
-          <div class="badge badge-warning font-weight-normal">{{ estudiante?.fichapendientes}} Fichas Pendientes de Revisar
+          <div class="badge badge-warning font-weight-normal">{{ estudiante?.fichapendientes}} Fichas Pendientes de
+            Revisar
           </div>
         </div>
       </div>
@@ -52,15 +53,19 @@
                 <tr *ngFor="let item of fichas">
                   <td>
                     <div class="d-flex justify-content-center">
-                      <button (click)="detalleFicha(item)" type="button" class="btn-clear mr-0 d-flex align-items-center float-left" ngbTooltip="Ver Detalle Ficha">
+                      <button (click)="detalleFicha(item)" type="button"
+                        class="btn-clear mr-0 d-flex align-items-center float-left" ngbTooltip="Ver Detalle Ficha">
                         <i class="material-icons mr-1 icon-lg grey-text">visibility</i>
                       </button>
                     </div>
                   </td>
-                  <td>{{ item.efisTdesc }}</td>
+                  <td [class.text-warning]="item.efisCcod == 1">{{ item.efisTdesc }}</td>
                   <td>{{ item.nombrePaciente }}</td>
                   <td>{{ item.rutPaciente }}</td>
                   <td>{{ item.fechaFicha }}</td>
+                </tr>
+                <tr *ngIf="fichas && fichas.length == 0">
+                  <td colspan="5" class="text-center">No hay fichas disponibles</td>
                 </tr>
               </tbody>
             </table>
@@ -70,11 +75,9 @@
       <div class="card-footer">
         <div class="row">
           <div class="col-12 d-flex justify-content-between">
-            <div class="md-form">
-              <a (click)="volverTap($event)" class="btn btn-outline waves-effect waves-light">
-                <span>Volver a Detalle de Curso</span>
-              </a>
-            </div>
+            <a (click)="volverTap($event)" class="btn btn-outline waves-effect waves-light">
+              <span>Volver a Detalle de Curso</span>
+            </a>
           </div>
         </div>
       </div>

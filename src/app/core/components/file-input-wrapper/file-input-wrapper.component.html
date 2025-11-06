@@ -1,10 +1,26 @@
-<div class="file-field d-flex align-items-center">
-  <div class="btn btn-sm float-left ml-0">
-    <span class="text-nowrap">{{ label}}</span>
-    <input type="file" class="btn btn-sm float-left" [accept]="accept" (change)="onFileChange($event)" #fileInput>
+<ng-container *ngIf="campo.lista.length == 0">
+  <div class="file-field d-flex align-items-center">
+    <div class="btn btn-sm float-left ml-0">
+      <span class="text-nowrap">{{ label}}</span>
+      <input type="file" class="btn btn-sm float-left" [accept]="accept" (change)="onFileChange($event)" #fileInput>
+    </div>
+    <div class="file-path-wrapper">
+      <input type="text" [value]="fileName || 'Cargar archivo...'" [readonly]="true" (click)="fileInput.click()"
+        class="file-path" />
+    </div>
   </div>
-  <div class="file-path-wrapper">
-    <input type="text" [value]="fileName || 'Cargar archivo...'" [readonly]="true" (click)="fileInput.click()" class="file-path" />
+  <app-error-msg [control]="control"></app-error-msg>
+</ng-container>
+
+<div class="row" *ngIf="campo.lista.length > 0">
+  <div class="col-12">
+    <p class="mb-3" *ngFor="let archivo of campo.lista">
+      <a href="#">
+        <span class="d-inline-flex align-items-center font-weight-bold">
+          <i class="material-icons icon-lg mr-2 d-inline-flex align-items-center">attach_file</i> {{
+          archivo.nombre_archivo }}
+        </span>
+      </a>
+    </p>
   </div>
 </div>
-<app-error-msg [control]="control"></app-error-msg>

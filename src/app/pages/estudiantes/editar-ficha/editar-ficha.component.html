@@ -8,32 +8,38 @@
       </section>
       <div class="card mb-4">
         <div class="card-header d-flex justify-content-between">
-          <h4 class="float-left heading h4-responsive mb-0">Asignar Ficha <span class="mx-2">|</span> Enfermería Básica
+          <h4 class="float-left heading h4-responsive mb-0">Asignar Ficha <span class="mx-2">|</span> {{ seccion?.asignatura }}
           </h4>
           <!-- <div class="d-flex align-items-center">
-      <div class="badge badge-warning font-weight-normal mr-3">3 Fichas Pendientes de Completar</div>
-      <a class="btn btn-default waves-effect waves-light" onclick="showLoading();">Descargar Caso Clínico</a>
-    </div> -->
+            <div class="badge badge-warning font-weight-normal mr-3">3 Fichas Pendientes de Completar</div>
+            <a class="btn btn-default waves-effect waves-light" onclick="showLoading();">Descargar Caso Clínico</a>
+          </div> -->
         </div>
         <div class="row mb-1 mt-4">
           <div class="col-md-4 mt-3">
             <p class="mb-3">
               <span class="mr-2 font-weight-bold">Sede: </span>
-              <span>{{ cabecera?.sede }}</span>
+              <span>{{ seccion?.sede }}</span>
             </p>
           </div>
           <div class="col-md-4 mt-3">
             <p class="mb-3">
               <span class="mr-2 font-weight-bold">Sección: </span>
-              <span>{{ cabecera?.seccCcod }}</span>
+              <span>{{ seccion?.seccion }}</span>
             </p>
           </div>
           <div class="col-md-4 mt-3">
             <p class="mb-3">
-              <span class="mr-2 font-weight-bold">Cantidad Estudiantes: </span>
-              <span>{{ seccion?.numalum }}</span>
+              <span class="mr-2 font-weight-bold">Docente: </span>
+              <span>{{ seccion?.nombreDocente }}</span>
             </p>
           </div>
+          <!-- <div class="col-md-4 mt-3">
+            <p class="mb-3">
+              <span class="mr-2 font-weight-bold">Fichas Completadas: </span>
+              <span>{{ seccion?.cantidadfichascompletadas }}</span>
+            </p>
+          </div> -->
         </div>
       </div>
       <div class="card mb-5">
@@ -44,58 +50,61 @@
           <div class="col-md-4 mt-3">
             <p class="mb-3">
               <span class="mr-2 font-weight-bold">RUT:</span>
-              <span>{{ ficha?.fspaRut }}</span>
+              <span>{{ paciente?.fspaRut }}</span>
             </p>
             <p class="mb-3">
               <span class="mr-2 font-weight-bold">Nombre Social:</span>
-              <span>{{ ficha?.fspaNombre }} {{ ficha?.fspaApellido }}</span>
+              <span>{{ paciente?.fspaNombreSocial }}</span>
             </p>
             <p class="mb-3">
               <span class="mr-2 font-weight-bold">Edad:</span>
-              <span>{{ ficha?.fspaEdad }}</span>
+              <span>{{ paciente?.fspaEdad }}</span>
             </p>
             <p class="mb-3">
               <span class="mr-2 font-weight-bold">Dirección:</span>
-              <span>{{ ficha?.fspaDireccion }}</span>
+              <span>{{ paciente?.fspaDireccion }}</span>
             </p>
           </div>
           <div class="col-md-4 mt-3">
             <p class="mb-3">
               <span class="mr-2 font-weight-bold">Nombre:</span>
-              <span>{{ ficha?.fspaNombre }}</span>
+              <span>{{ paciente?.fspaNombre }}</span>
             </p>
             <p class="mb-3">
               <span class="mr-2 font-weight-bold">Sexo:</span>
-              <span>{{ ficha?.sexo }}</span>
+              <span>{{ paciente?.fspaSexo }}</span>
             </p>
             <p class="mb-3">
               <span class="mr-2 font-weight-bold">Nacionalidad:</span>
-              <span>{{ ficha?.fspaNacionalidad }}</span>
+              <span>{{ paciente?.fspaNacionalidad }}</span>
             </p>
             <p class="mb-3">
               <span class="mr-2 font-weight-bold">Previsión:</span>
-              <span>{{ ficha?.fireInstitucion }}</span>
+              <span>{{ paciente?.fspaPrevision }}</span>
             </p>
           </div>
           <div class="col-md-4 mt-3">
             <p class="mb-3">
               <span class="mr-2 font-weight-bold">Apellidos:</span>
-              <span>{{ ficha?.fspaApellido }}</span>
+              <span>{{ paciente?.fspaApellido1 }} {{ paciente?.fspaApellido2 }}</span>
             </p>
             <p class="mb-3">
               <span class="mr-2 font-weight-bold">Nacimiento:</span>
-              <span>{{ ficha?.fspaFechaNac }}</span>
+              <span>{{ paciente?.fspaFechaNac }}</span>
             </p>
             <p class="mb-3">
               <span class="mr-2 font-weight-bold">Teléfono: </span>
-              <span>{{ ficha?.fspaTcelular }}</span>
+              <span>{{ paciente?.fspaTcelular }}</span>
             </p>
           </div>
           <div class="col-12 mt-4">
-            <div class="card-header d-flex justify-content-between">
+            <!-- <div class="card-header d-flex justify-content-between">
               <h4 class="float-left heading h4-responsive mb-0">Ficha Clínica</h4>
-            </div>
-            <form [formGroup]="fichaForm" (ngSubmit)="guardar()">
+            </div> -->
+
+            <app-ficha-dinamica #fichaDinamica [ficha]="ficha"></app-ficha-dinamica>
+
+            <!-- <form [formGroup]="fichaForm" (ngSubmit)="guardar()">
               <div #accordion="ngbAccordion" ngbAccordion class="md-accordion mt-4" [closeOthers]="true">
                 <div ngbAccordionItem="a1" [collapsed]="false" [destroyOnHide]="false">
                   <h2 ngbAccordionHeader class="grey lighten-3">
@@ -417,7 +426,6 @@
                             </div>
                           </div>
                           <div class="w-25"></div>
-                          <!-- Pulso / Frecuencia Cardiaca -->
                           <div class="w-100 mb-4"></div>
                           <div class="col-12">
                             <h6 class="font-weight-bold mb-2 py-1 border-bottom" style="max-width: 250px;">Pulso /
@@ -440,7 +448,6 @@
                             </div>
                           </div>
                           <div class="w-25"></div>
-                          <!-- Control Respiratorio -->
                           <div class="w-100 mb-4"></div>
                           <div class="col-12">
                             <h6 class="font-weight-bold mb-2 py-1 border-bottom" style="max-width: 250px;">Control
@@ -487,7 +494,6 @@
                             </div>
                           </div>
                           <div class="w-25"></div>
-                          <!-- Temperatura y Otros -->
                           <div class="w-100 mb-4"></div>
                           <div class="col-12">
                             <h6 class="font-weight-bold mb-2 py-1 border-bottom" style="max-width: 250px;">Temperatura y
@@ -1048,7 +1054,6 @@
                                 <tr>
                                   <td>
                                     <div class="md-form py-0">
-                                      <!-- <input formControlName="CtrRiesgoCaidas" type="text" name="riegoCaidas" id="riegoCaidas" class="form-control mb-0 py-0 my-0" placeholder="S&iacute; o No" /> -->
                                       <select [chosen] formControlName="CtrRiesgoCaidas" class="mdb-select">
                                         <option value="" disabled selected>Seleccione Riesgo</option>
                                         <option value="1">Alto</option>
@@ -1454,7 +1459,22 @@
                   </div>
                 </div>
               </div>
-            </form>
+            </form> -->
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-12 d-flex justify-content-between">
+              <div class="md-form">
+                <button routerLink="/estudiantes" class="btn btn-outline waves-effect waves-light">
+                  <span>Volver a Inicio</span>
+                </button>
+              </div>
+              <div class="md-form d-flex">
+                <button type="button" (click)="guardarBorrador()" class="btn btn-secondary py-2">Guardar Borrador</button>
+                <button type="button" (click)="enviarFicha()" class="btn btn-default py-2">Enviar Ficha</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-<section>
+<section *ngIf="!mostrarError && cursos">
   <form [formGroup]="filtroForm">
     <div class="container">
       <div class="container">
@@ -13,8 +13,8 @@
                 <label for="filtro-curso">Filtrar por Curso:</label>
                 <select id="filtro-curso" class="filtr d-flex" formControlName="curso">
                   <option value="" disabled="">Seleccione</option>
-                  <option value="123">Curso XXX</option>
-                  <option *ngFor="let curso of cursos" [value]="curso.seccCcod">{{ curso.tifiTdesc }}</option>
+                  <!-- <option value="123">Curso XXX</option> -->
+                  <option *ngFor="let curso of cursos" [value]="curso.seccCcod">{{ curso.fstiTnombre }}</option>
                 </select>
               </div>
             </div>
@@ -68,7 +68,6 @@
             </div>
             <div class="row mb-4">
               <div class="col-12">
-                <!-- <form [formGroup]="buscador"> -->
                 <div class="row py-3">
                   <div class="col-md-3"></div>
                   <div class="col-md-6"></div>
@@ -79,12 +78,11 @@
                     </div>
                   </div>
                 </div>
-                <!-- </form> -->
                 <div class="table-responsive">
                   <table class="table table-bordered table-hover">
                     <thead>
                       <tr>
-                        <th>Acciones</th>
+                        <th class="text-center">Acciones</th>
                         <th sortable="estado" (sort)="onSort($event)"
                           [direction]="sortColumn === 'estado' ? sortDirection : ''">Estado</th>
                         <th sortable>Nombre Paciente</th>
@@ -96,24 +94,20 @@
                     <tbody>
                       <tr *ngFor="let ficha of data">
                         <td>
-
-                          <div class="d-flex justify-content-start">
-                            <a (click)="editarFicha(ficha)" type="button"
-                              class="mr-0 d-flex align-items-center float-left" ngbTooltip="Editar Ficha">
-                              <i class="material-icons mr-1 icon-lg grey-text" data-toggle="tooltip"
-                                data-placement="bottom" title="" data-original-title="Editar Ficha">edit</i>
+                          <div class="d-flex justify-content-center">
+                            <a *ngIf="ficha.efisCcod == 1 || ficha.efisCcod == 2" (click)="editarFicha(ficha)" class="mr-0 d-flex align-items-center float-left" ngbTooltip="Editar Ficha">
+                              <i class="material-icons mr-1 icon-lg grey-text">edit</i>
+                            </a>
+                            <a *ngIf="ficha.efisCcod == 5" (click)="detalleFicha(ficha)" class="mr-0 d-flex align-items-center float-left" ngbTooltip="Ver Detalle de Ficha">
+                              <i class="material-icons mr-1 icon-lg grey-text">visibility</i>
                             </a>
                           </div>
-
-                          <!-- <a [routerLink]="['/estudiantes/ficha', ficha.persNcorr, ficha.seccCcod]" class="btn btn-sm btn-primary" *ngIf="ficha.efisCcod == 1">
-                    <i class="fas fa-edit mr-1"></i> Editar Ficha
-                  </a> -->
                         </td>
-                        <td>{{ ficha.estado }}</td>
+                        <td [class.text-info]="ficha.efisCcod == 2" [class.text-warning]="ficha.efisCcod == 1" [class.text-success]="ficha.efisCcod == 5">{{ ficha.estadoFicha }}</td>
                         <td>{{ ficha.nombrePaciente }}</td>
                         <td>{{ ficha.rutPaciente }}</td>
-                        <td>{{ ficha.fechaNacimiento | date: 'dd/MM/yyyy' }}</td>
-                        <td>{{ ficha.fechaFicha | date: 'dd/MM/yyyy' }}</td>
+                        <td>{{ ficha.fechaNacimiento }}</td>
+                        <td>{{ ficha.fechaFicha }}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -149,3 +143,12 @@
     </div>
   </form>
 </section>
+
+<div *ngIf="mostrarError"
+    style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; color: #666;">
+    <span class="material-icons" style="font-size: 64px; color: #c0392b;">block</span>
+    <h2 style="margin: 16px 0 8px;">Sección no disponible</h2>
+    <p style="max-width: 450px; text-align: center;">
+        Ocurrió un error al cargar los cursos. <br/>Por favor, intente nuevamente más tarde.
+    </p>
+</div>

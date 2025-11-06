@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { StorageService } from '../../core/services/storage.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { DocenteService } from '../../core/services/docente.service';
 
 @Component({
   selector: 'app-docentes',
@@ -12,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class DocentesComponent implements OnInit {
 
-  private api = inject(GestionservicesService);
+  private api = inject(DocenteService);
   private fb = inject(FormBuilder);
   private storage = inject(StorageService);
   private router = inject(Router);

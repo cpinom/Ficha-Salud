@@ -1,25 +1,25 @@
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { GestionservicesService } from '../../../core/services/gestionservices.service';
+import { Router } from '@angular/router';
 import { NgbAccordionDirective } from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { cinturaValidator, frecuenciaRespValidator, imcValidator, pesoValidator, presionValidator, saturacionO2Validator, tallaValidator, temperaturaAxilarValidator, temperaturaRectalValidator } from '../../../core/validators/bio.validators';
-import { textValidator } from '../../../core/validators/text.validator';
+import { FormGroup } from '@angular/forms';
+import { AlumnoService } from '../../../core/services/alumno.service';
+import { ToastrService } from 'ngx-toastr';
+import { AlertService } from '../../../core/services/alert.service';
 
 @Component({
   selector: 'app-editar-ficha',
-  templateUrl: './editar-ficha.component.html',
-  styleUrl: './editar-ficha.component.scss'
+  templateUrl: './editar-ficha.component.html'
 })
 export class EditarFichaComponent implements OnInit {
 
-  private route = inject(ActivatedRoute);
   private router = inject(Router);
-  private api = inject(GestionservicesService);
-  private fb = inject(FormBuilder);
+  private api = inject(AlumnoService);
+  private toastr = inject(ToastrService);
+  private alertService = inject(AlertService);
 
   @ViewChild('accordion') accordion!: NgbAccordionDirective;
-  cabecera: any;
+  @ViewChild('fichaDinamica') fichaDinamicaComponent: any;
+  paciente: any;
   ficha: any;
   seccion: any;
   fichaForm!: FormGroup;
@@ -28,151 +28,123 @@ export class EditarFichaComponent implements OnInit {
     const navigation = this.router.getCurrentNavigation();
 
     if (navigation?.extras.state) {
-      this.cabecera = navigation.extras.state['ficha'];
+      this.paciente = navigation.extras.state['paciente'];
+      this.ficha = navigation.extras.state['ficha'];
+      this.seccion = navigation.extras.state['seccion'];
+      console.log(this.paciente);
     }
+  }
+  ngOnInit() {
+    if (!this.paciente || !this.ficha) {
+      this.router.navigate(['/estudiantes']);
+      return;
+    }
+  }
+  async enviarFicha(borrador?: boolean) {
+    this.fichaDinamicaComponent.form.markAllAsTouched();
 
-    if (this.cabecera) {
-      this.fichaForm = this.fb.group({
-        // accordion 2
-        CtrDiagnosticoMedico: ['', [textValidator({ maxLength: 500, required: true })]],
-        CtrAnamnesisRemota: ['', [textValidator({ maxLength: 500, required: true })]],
-        CtrExamenFisico: ['', [textValidator({ maxLength: 500, required: true })]],
-        CtrAnamnesisProxima: ['', [textValidator({ maxLength: 500, required: true })]],
-        CtrAdjunto: [''],
-        CtrArchivoAdjunto: [''],
-        // accordion 3
-        CtrIndicacionesMedica: ['', [textValidator({ maxLength: 500, required: true })]],
-        // accordion 4
-        CtrPeso: ['', [Validators.required, pesoValidator]],
-        CtrTalla: ['', [Validators.required, tallaValidator]],
-        CtrImc: ['', [Validators.required, imcValidator]],
-        CtrCintura: ['', [Validators.required, cinturaValidator]],
-        CtrClasificacionImc: ['', [Validators.required]],
-        CtrPresionSistolica: ['', [Validators.required]],
-        CtrPresionDistolica: ['', [Validators.required]],
-        CtrPresionMedia: ['', [Validators.required]],
-        CtrClasificacionPA: [''],
-        CtrPulsoFC: [''],
-        CtrClasificacionFC: [''],
-        CtrFrecueciaRespiratoria: ['', [Validators.required, frecuenciaRespValidator]],
-        CtrTipoRespiracion: [''],
-        CtrSaturacionO2: ['', [Validators.required, saturacionO2Validator]],
-        CtrFiO2: [''],
-        CtrLenguajeTecnico: [''],
-        CtrTemperaturaAxilar: ['', [Validators.required, temperaturaAxilarValidator]],
-        CtrTemperaturaRectal: ['', [Validators.required, temperaturaRectalValidator]],
-        CtrHgt: [''],
-        CtrEvaEna: [''],
-        CtrClasificacionTemHgt: [''],
-        CtrIndicacionesMedicas: [''],
-        // accordion 5
-        CtrTipoReposo: [''],
-        CtrObservaciones: [''],
-        CtrSignosVitales: [''],
-        CtrObservaciones1: [''],
-        CtrAseoGenital: [''],
-        CtrObservaciones2: [''],
-        CtrCiudadoIntra: [''],
-        CtrObservaciones3: [''],
-        CtrPautaRiesgoAR: [''],
-        CtrPautaRiesgoBR: [''],
-        CtrPautaRiesgoCaidas: [''],
-        CtrBarandasAlto: [''],
-        CtrCartelNivelRiesgo: [''],
-        CtrSujecionesSuav: [''],
-        CtrSitio: [''],
-        CtrVisitaSeguridad: [''],
-        CtrLpp: [''],
-        CtrObservaciones4: [''],
-        CtrCae: [''],
-        CtrObservaciones5: [''],
-        CtrCambiosPosicion: [''],
-        CtrObservaciones6: [''],
-        CtrLubricacionPiel: [''],
-        CtrLubPielCon: [''],
-        CtrObservaciones7: [''],
-        CtrApoyoEmocional30: [''],
-        CtrObservaciones8: [''],
-        CtrPautaContencion: [''],
-        CtrObservaciones9: [''],
-        CtrBrazalete: [''],
-        CtrObservaciones10: [''],
-        CtrEscalaEva: [''],
-        CtrObservaciones11: [''],
-        // accordion 6
-        CtrDescripcionAPC: [''],
-        CtrDescripcionAPC1: [''],
-        CtrDescripcionAPC2: [''],
-        CtrDescripcionAPC3: [''],
-        CtrDescripcionAPC4: [''],
-        CtrDescripcionAPC5: [''],
-        CtrDescripcionAPC6: [''],
-        CtrDescripcionAPC7: [''],
-        CtrDescripcionAPC8: [''],
-        CtrDescripcionAPC9: [''],
-        CtrDescripcionAPC10: [''],
-        // accordion 7
-        CtrRiesgoCaidas: [''],
-        CtrActPreventiva: [''],
-        CtrPrecaucionesEspe: [''],
-        CtrEpp: [''],
-        CtrCaracteristicas: [''],
-        // accordion 8
-        CtrPrecaucionesEspe1: [''],
-        CtrEpp1: [''],
-        CtrPrecaucionesEspe2: [''],
-        CtrEpp2: [''],
-        CtrPrecaucionesEspe3: [''],
-        CtrEpp3: [''],
-        CtrPrecaucionesEspe4: [''],
-        CtrEpp4: [''],
-        CtrPrecaucionesEspe5: [''],
-        CtrEpp5: [''],
-        CtrPrecaucionesEspe6: [''],
-        CtrEpp6: [''],
-        // accordion 9
-        CtrNecesidades: [''],
-        CtrJustificacion: [''],
-        CtrPlan: [''],
-        CtrNecesidades1: [''],
-        CtrJustificacion1: [''],
-        CtrPlan1: [''],
-        CtrNecesidades2: [''],
-        CtrJustificacion2: [''],
-        CtrPlan2: [''],
-        // accordion 10
-        CtrIndicacionesMedicas1: [''],
+    if (this.fichaDinamicaComponent.form.valid) {
+      const fichaData = { ...this.fichaDinamicaComponent.form.value };
+      let valores: any[] = [];
+      let archivos: any[] = [];
+
+      this.ficha.grupos.forEach((grupo: any) => {
+        grupo.campos.forEach((campo: any) => {
+          if (fichaData.hasOwnProperty(campo.codigo)) {
+            if (campo.codigo !== "CASO_CLINICO" && campo.tipo !== "FILE") {
+
+              if (fichaData[campo.codigo] != null) {
+                let valorCampo = fichaData[campo.codigo] || '';
+
+                if (campo.tipo === 'DECIMAL') {
+                  valorCampo = valorCampo.toString().replace(',', '.');
+                }
+
+                valores.push({
+                  id: campo.id_campo,
+                  valor: valorCampo
+                });
+
+              }
+            }
+            else if (campo.tipo === "FILE" && fichaData[campo.codigo] instanceof File) {
+              archivos.push({ archivo: fichaData[campo.codigo], id_campo: campo.id_campo });
+            }
+          }
+        });
       });
-    }
-  }
 
-  async ngOnInit() {
-    if (!this.cabecera) {
-      await this.router.navigate(['/estudiantes']);
-      return
-    }
+      if (archivos.length > 0) {
+        try {
+          for (const item of archivos) {
+            const base64 = await this.fileToBase64(item.archivo);
+            valores.push({
+              id: item.id_campo,
+              valor: base64,
+              nombreArchivo: item.archivo.name,
+              tipoArchivo: item.archivo.type
+            });
+          }
+        }
+        catch (error) {
+          this.toastr.error('Error al procesar los archivos adjuntos: ' + error);
+          return;
+        }
+      }
 
-    await this.cargar();
-  }
-  async cargar() {
-    try {
-      const response = await this.api.getDetalleFicha<any>(this.cabecera.seccCcod);
+      if (!borrador) {
+        const confirm = await this.alertService.confirm('Enviar Ficha', '¿Estás seguro de que deseas enviar la ficha? Una vez enviada, no podrá realizar más modificaciones.');
 
-      if (response.success) {
-        this.ficha = response.data.ficha;
-        this.seccion = response.data.seccion;
+        if (!confirm) {
+          return;
+        }
+      }
+
+      const params = {
+        fsclNcorr: this.ficha.fsclNcorr,
+        campos: valores,
+        borrador: borrador === true ? 1 : 0
+      };
+
+      try {
+        const response = await this.api.guardarFicha<any>(params);
+
+        if (response.success) {
+          this.toastr.success(response.message || 'Ficha guardada correctamente.');
+          await this.router.navigate(['/estudiantes']);
+        }
+        else {
+          throw Error(response.message || 'Error desconocido');
+        }
+      }
+      catch (error) {
+        this.toastr.error('Error al guardar la ficha: ' + error);
       }
     }
-    catch (error) {
-      console.error('Error al cargar los datos:', error);
-    }
-
   }
-  async guardar(borrador?: boolean) {
-    debugger
-    this.fichaForm.markAllAsTouched();
-    
-    if (this.fichaForm.valid) { }
+  async guardarBorrador() {
+    await this.enviarFicha(true);
+  }
+  async fileToBase64(file: File, allowedExtensions: string[] = ['jpg', 'jpeg', 'png', 'pdf'], maxSizeMB: number = 5): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const extension = file.name.split('.').pop()?.toLowerCase();
+      if (!extension || !allowedExtensions.includes(extension)) {
+        return reject(`Extensión no permitida. Solo se aceptan: ${allowedExtensions.join(', ')}`);
+      }
+
+      const maxSizeBytes = maxSizeMB * 1024 * 1024;
+      if (file.size > maxSizeBytes) {
+        return reject(`El archivo supera el tamaño máximo permitido de ${maxSizeMB} MB`);
+      }
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64String = (reader.result as string).split(',')[1];
+        resolve(base64String);
+      };
+      reader.onerror = (error) => reject('Error al leer el archivo: ' + error);
+      reader.readAsDataURL(file);
+    });
   }
 
 }

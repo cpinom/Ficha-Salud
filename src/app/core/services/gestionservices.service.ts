@@ -20,33 +20,15 @@ export class GestionservicesService {
     return firstValueFrom(this.http.post<T>(`${this.global.baseUrl}/${this.prefix}/${url}`, params));
   }
 
-  getPeriodos<T>() {
-    return this.get<T>(`periodos`);
-  }
-  getTableroDocentes<T>(periCcod: any) {
-    return this.get<T>(`docentes/tablero?periCcod=${periCcod}`);
-  }
-  getEstudiantes<T>(seccCcod: any) {
-    return this.get<T>(`docentes/estudiantes?seccCcod=${seccCcod}`);
-  }
-  getFichasEstudiantes<T>(persNcorr: any, seccCcod: any) {
-    return this.get<T>(`docentes/fichas-estudiantes?persNcorr=${persNcorr}&seccCcod=${seccCcod}`);
-  }
-  getFichaAsignatura<T>(asigCcod: any) {
-    return this.get<T>(`docentes/ficha-asignatura?asigCcod=${asigCcod}`);
-  }
-  getDetalleFichaAsignatura<T>(asigCcod: any, persNcorr: any, fisaNcorr: any) {
-    return this.get<T>(`docentes/detalle-ficha-asignatura?asigCcod=${asigCcod}&persNcorr=${persNcorr}&fisaNcorr=${fisaNcorr}`);
-  }
-  asignarFicha<T>(data: any) {
-    return this.post<T>(`docentes/asignar-ficha`, data);
-  }
-  buscarPaciente<T>(rut: string) {
-    return this.get<T>(`docentes/buscar-paciente?rut=${rut}`);
-  }
-  terminarRevisionficha<T>(data: any) {
-    return this.post<T>(`docentes/terminar-revision-ficha`, data);
-  }
+  
+  
+  
+ 
+ 
+  
+  
+  
+  
 
   getTableroDocente(periodo?: number): Observable<any> {
     return this.http.get(
@@ -131,8 +113,8 @@ export class GestionservicesService {
 
   // SERVICE ESTUDIANTES
 
-  getListaCursoEstudiante<T>() {
-    return this.get<T>('getlistacursoestudiante');
+  getCursosEstudiante<T>() {
+    return this.get<T>('estudiantes/cursos');
   }
 
   getTableroEstudiantes<T>(seccion: any) {
@@ -143,8 +125,8 @@ export class GestionservicesService {
     return this.get<T>(`estudiantes/fichas?seccCcod=${seccion}&inicio=${inicio}&limite=${limite}&orden=${orden}&direccion=${direccion}&filtro=${filtro}`);
   }
 
-  getDetalleFicha<T>(seccion: any) {
-    return this.get<T>(`estudiantes/detalle-ficha?seccCcod=${seccion}`);
+  getDetalleFicha<T>(asigCcod: any, persNcorr: any, fisaNcorr: any) {
+    return this.get<T>(`estudiantes/detalle-ficha?asigCcod=${asigCcod}&persNcorr=${persNcorr}&fisaNcorr=${fisaNcorr}`);
   }
 
   getEditFichaEstudiante(persNcorr: number, seccCcod: number): Observable<any> {

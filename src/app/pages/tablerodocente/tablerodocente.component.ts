@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GestionservicesService } from '../../core/services/gestionservices.service';
 import { Router } from '@angular/router';
+import { DocenteService } from '../../core/services/docente.service';
 
 interface TableroDocente {
   SECC_CCOD: number;
@@ -34,6 +35,7 @@ export class TablerodocenteComponent implements OnInit {
   ficharevisadascompletadas: any[] = [];
   constructor(
     private service: GestionservicesService,
+    private api : DocenteService,
     private router: Router
   ) {}
 
@@ -64,7 +66,7 @@ export class TablerodocenteComponent implements OnInit {
 
 getPeriodos(): void {
 
-  this.service.getPeriodos<any>().then((response)=> {
+  this.api.getPeriodos<any>().then((response)=> {
     this.periodos = response.data;
   });
 

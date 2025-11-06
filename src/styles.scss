@@ -451,6 +451,13 @@
 // regular style toast
 @use 'ngx-toastr/toastr';
 
+
+body {
+  ngb-modal-backdrop {
+    z-index: 1040 !important;
+  }
+}
+
 .card {
   border-radius: 10px;
 }
@@ -500,7 +507,8 @@
   line-height: normal;
 
   &:disabled {
-    background-color: transparent;;
+    background-color: transparent;
+    ;
   }
 }
 

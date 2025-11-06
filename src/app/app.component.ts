@@ -3,6 +3,7 @@ import { AppGlobal } from './app.global';
 import { Router } from '@angular/router';
 import { HeaderComponent } from './core/components/header/header.component';
 import { ToastrService } from 'ngx-toastr';
+import { HttpService } from './core/services/http.service';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ export class AppComponent implements AfterViewInit {
 
   private toastr = inject(ToastrService);
   private global = inject(AppGlobal);
+  private api = inject(HttpService);
 
   @ViewChild('header') headerComponent!: HeaderComponent;
 
@@ -40,7 +42,7 @@ export class AppComponent implements AfterViewInit {
       data: { ...this.global.preferencias, ...preferences }
     };
     try {
-      // await this.api.guardarPreferencias(params);
+      await this.api.guardarPreferencias(params);
     }
     catch (error) {
       this.toastr.error('Error al guardar preferencias');

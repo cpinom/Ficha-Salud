@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { GestionservicesService } from '../../../../core/services/gestionservices.service';
+import { DocenteService } from '../../../../core/services/docente.service';
 
 @Component({
   selector: 'app-detalle-ficha',
@@ -10,7 +10,7 @@ import { GestionservicesService } from '../../../../core/services/gestionservice
 export class DetalleFichaComponent implements OnInit {
 
   private router = inject(Router);
-  private api = inject(GestionservicesService);
+  private api = inject(DocenteService);
 
   @ViewChild('fichaDetalle') fichaDetalleComponent: any;
 

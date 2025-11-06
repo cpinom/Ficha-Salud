@@ -1,4 +1,4 @@
-<main class="container">
+<main class="container mb-4">
   <section class="row breadcrumb py-2">
     <a class="breadcrumb-item" routerLink="/docentes">Inicio</a>
     <span class="breadcrumb-item active detCursoB">Detalle Curso</span>
@@ -42,21 +42,23 @@
               <thead>
                 <tr>
                   <th style="width: 75px;" class="text-center">Acciones</th>
-                  <th>Nombre Estudiante</th>
-                  <th>Correo Estudiante</th>
-                  <th>% Asistencia</th>
-                  <th>Promedio Curso</th>
-                  <th>Promedio Semestre</th>
-                  <th>Cursos Semestre</th>
-                  <th>Tipo Estudiante</th>
-                  <th>Fichas Pendientes por Revisar</th>
+                  <th>Nombre<br />Estudiante</th>
+                  <th>Correo<br />Estudiante</th>
+                  <th>% De<br />Asistencia</th>
+                  <th>Promedio<br />Curso</th>
+                  <th>Promedio<br />Semestre</th>
+                  <th>Cursos<br />Semestre</th>
+                  <th>Tipo<br />Estudiante</th>
+                  <th>Fichas Pendientes<br />Por Revisar</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let item of estudiantes">
                   <td>
                     <div class="d-flex justify-content-center">
-                      <button (click)="fichaEstudiante(item)" type="button" class="btn-clear mr-0 d-flex align-items-center float-left" ngbTooltip="Ver Fichas del estudiante">
+                      <button (click)="fichaEstudiante(item)" type="button"
+                        class="btn-clear mr-0 d-flex align-items-center float-left"
+                        ngbTooltip="Ver Fichas del estudiante">
                         <i class="material-icons mr-1 icon-lg grey-text">description</i>
                       </button>
                     </div>
@@ -70,6 +72,9 @@
                   <td>{{ item.alumTrabajador }}</td>
                   <td>{{ item.fichapendientes }}</td>
                 </tr>
+                <tr *ngIf="estudiantes && estudiantes.length == 0">
+                  <td colspan="9" class="text-center">No hay estudiantes disponibles</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -78,11 +83,12 @@
       <div class="card-footer">
         <div class="row">
           <div class="col-12 d-flex justify-content-between">
-            <div class="md-form">
-              <a routerLink="/docentes" class="btn btn-outline waves-effect waves-light">
-                <span>Volver a inicio</span>
-              </a>
-            </div>
+            <a routerLink="/docentes" class="btn btn-outline waves-effect waves-light">
+              <span>Volver a inicio</span>
+            </a>
+            <button (click)="asignarFicha()" class="btn btn-default waves-effect waves-light">
+              <span>Asignar Nueva Ficha</span>
+            </button>
           </div>
         </div>
       </div>

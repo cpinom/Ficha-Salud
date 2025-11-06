@@ -5,6 +5,7 @@ import { EditarFichaComponent } from './editar-ficha.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DirectivesModule } from '../../../core/directives/directives.module';
+import { ComponentsModule } from '../../../core/components/components.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { DirectivesModule } from '../../../core/directives/directives.module';
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    DirectivesModule
+    DirectivesModule,
+    ComponentsModule
   ]
 })
 export class EditarFichaModule { }

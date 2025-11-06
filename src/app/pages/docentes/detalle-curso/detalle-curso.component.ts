@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { GestionservicesService } from '../../../core/services/gestionservices.service';
+import { DocenteService } from '../../../core/services/docente.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-detalle-curso',
@@ -10,7 +11,8 @@ import { GestionservicesService } from '../../../core/services/gestionservices.s
 export class DetalleCursoComponent implements OnInit {
 
   private router = inject(Router);
-  private api = inject(GestionservicesService);
+  private api = inject(DocenteService);
+  private toastr = inject(ToastrService);
 
   data: any;
   estudiantes: any;
@@ -48,6 +50,27 @@ export class DetalleCursoComponent implements OnInit {
   }
   async fichaEstudiante(estudiante: any) {
     await this.router.navigate(['/docentes/ficha-estudiante'], { state: { data: { estudiante, curso: this.data } } });
+  }
+  async asignarFicha() {
+    debugger
+    try {
+      const response = await this.api.getFichaAsignatura<any>(this.data.asigCcod);
+
+      if (response.success) {
+        const ficha = response.data;
+        const previsiones = response.previsiones;
+        await this.router.navigate(['/docentes/asignar-ficha'], { state: { data: this.data, ficha, previsiones } });
+      }
+      else if (response.message) {
+        this.toastr.error(response.message);
+      }
+      else {
+        throw Error();
+      }
+    }
+    catch (error) {
+      this.toastr.error('No se pudo cargar la ficha de asignatura.');
+    }
   }
 
 }

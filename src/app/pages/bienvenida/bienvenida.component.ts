@@ -13,7 +13,6 @@ export class BienvenidaComponent {
   private router = inject(Router);
 
   ingresarTap() {
-    debugger
     if (this.global.rolUsuario === 'docente') {
       this.router.navigate(['/docentes']);
     }

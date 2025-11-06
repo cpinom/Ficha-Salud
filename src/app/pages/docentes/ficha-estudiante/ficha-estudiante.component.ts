@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GestionservicesService } from '../../../core/services/gestionservices.service';
+import { DocenteService } from '../../../core/services/docente.service';
 
 @Component({
   selector: 'app-ficha-estudiante',
@@ -10,7 +11,7 @@ import { GestionservicesService } from '../../../core/services/gestionservices.s
 export class FichaEstudianteComponent implements OnInit {
 
   private router = inject(Router);
-  private api = inject(GestionservicesService);
+  private api = inject(DocenteService);
 
   data: any;
   estudiante: any;

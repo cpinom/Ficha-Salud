@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path: 'editar-ficha',
     loadChildren: () => import('./editar-ficha/editar-ficha.module').then(m => m.EditarFichaModule)
+  },
+  {
+    path: 'detalle-ficha',
+    loadChildren: () => import('./detalle-ficha/detalle-ficha.module').then(m => m.DetalleFichaModule)
   }
 ];
 

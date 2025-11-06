@@ -1,0 +1,123 @@
+<section *ngIf="ficha">
+  <div class="container">
+    <div class="container">
+      <section class="row breadcrumb pt-3">
+        <span class="breadcrumb-item"><a routerLink="/bienvenida">Inicio</a></span>
+        <span class="breadcrumb-item"><a routerLink="/estudiantes">Detalle Curso</a></span>
+        <span class="breadcrumb-item active">Detalle Ficha</span>
+      </section>
+      <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between">
+          <h4 class="float-left heading h4-responsive mb-0">Asignar Ficha <span class="mx-2">|</span> {{
+            seccion?.asignatura }}
+          </h4>
+          <!-- <div class="d-flex align-items-center">
+            <div class="badge badge-warning font-weight-normal mr-3">3 Fichas Pendientes de Completar</div>
+            <a class="btn btn-default waves-effect waves-light" onclick="showLoading();">Descargar Caso Clínico</a>
+          </div> -->
+        </div>
+        <div class="row mb-1 mt-4">
+          <div class="col-md-4 mt-3">
+            <p class="mb-3">
+              <span class="mr-2 font-weight-bold">Sede: </span>
+              <span>{{ seccion?.sede }}</span>
+            </p>
+          </div>
+          <div class="col-md-4 mt-3">
+            <p class="mb-3">
+              <span class="mr-2 font-weight-bold">Sección: </span>
+              <span>{{ seccion?.seccion }}</span>
+            </p>
+          </div>
+          <div class="col-md-4 mt-3">
+            <p class="mb-3">
+              <span class="mr-2 font-weight-bold">Docente: </span>
+              <span>{{ seccion?.nombreDocente }}</span>
+            </p>
+          </div>
+          <!-- <div class="col-md-4 mt-3">
+            <p class="mb-3">
+              <span class="mr-2 font-weight-bold">Fichas Completadas: </span>
+              <span>{{ seccion?.cantidadfichascompletadas }}</span>
+            </p>
+          </div> -->
+        </div>
+      </div>
+      <div class="card mb-5">
+        <div class="card-header d-flex justify-content-between">
+          <h4 class="float-left heading h4-responsive mb-0">Perfil Paciente</h4>
+        </div>
+        <div class="row mb-1 mt-4">
+          <div class="col-md-4 mt-3">
+            <p class="mb-3">
+              <span class="mr-2 font-weight-bold">RUT:</span>
+              <span>{{ paciente?.fspaRut }}</span>
+            </p>
+            <p class="mb-3">
+              <span class="mr-2 font-weight-bold">Nombre Social:</span>
+              <span>{{ paciente?.fspaNombreSocial }}</span>
+            </p>
+            <p class="mb-3">
+              <span class="mr-2 font-weight-bold">Edad:</span>
+              <span>{{ paciente?.fspaEdad }}</span>
+            </p>
+            <p class="mb-3">
+              <span class="mr-2 font-weight-bold">Dirección:</span>
+              <span>{{ paciente?.fspaDireccion }}</span>
+            </p>
+          </div>
+          <div class="col-md-4 mt-3">
+            <p class="mb-3">
+              <span class="mr-2 font-weight-bold">Nombre:</span>
+              <span>{{ paciente?.fspaNombre }}</span>
+            </p>
+            <p class="mb-3">
+              <span class="mr-2 font-weight-bold">Sexo:</span>
+              <span>{{ paciente?.fspaSexo }}</span>
+            </p>
+            <p class="mb-3">
+              <span class="mr-2 font-weight-bold">Nacionalidad:</span>
+              <span>{{ paciente?.fspaNacionalidad }}</span>
+            </p>
+            <p class="mb-3">
+              <span class="mr-2 font-weight-bold">Previsión:</span>
+              <span>{{ paciente?.fspaPrevision }}</span>
+            </p>
+          </div>
+          <div class="col-md-4 mt-3">
+            <p class="mb-3">
+              <span class="mr-2 font-weight-bold">Apellidos:</span>
+              <span>{{ paciente?.fspaApellido1 }} {{ paciente?.fspaApellido2 }}</span>
+            </p>
+            <p class="mb-3">
+              <span class="mr-2 font-weight-bold">Nacimiento:</span>
+              <span>{{ paciente?.fspaFechaNac }}</span>
+            </p>
+            <p class="mb-3">
+              <span class="mr-2 font-weight-bold">Teléfono: </span>
+              <span>{{ paciente?.fspaTcelular }}</span>
+            </p>
+          </div>
+          <div class="col-12 mt-4">
+            <app-ficha-detalle #fichaDetalle [ficha]="ficha" (archivoDescargado)="descargarArchivo($event)"></app-ficha-detalle>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-12 d-flex justify-content-between">
+              <div class="md-form">
+                <button routerLink="/estudiantes" class="btn btn-outline waves-effect waves-light">
+                  <span>Volver a Inicio</span>
+                </button>
+              </div>
+              <div class="md-form d-flex">
+                <!-- <button type="button" (click)="guardarBorrador()" class="btn btn-secondary py-2">Guardar Borrador</button>
+                <button type="button" (click)="enviarFicha()" class="btn btn-default py-2">Enviar Ficha</button> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

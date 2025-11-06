@@ -76,10 +76,22 @@ export class FichaDinamicaComponent implements OnInit, AfterViewInit {
           required: campoObligatorio,
           type: campoTipo
         }));
+
+        if (campo.tipo === 'FILE') {
+          // debugger
+          // group[campo.codigo].valueChanges.subscribe((value: any) => {
+          //   debugger
+          // });
+        }
       });
     });
 
     this.form = this.fb.group(group);
+
+    // this.form.valueChanges.subscribe(value => {
+    //   debugger
+    //   // console.log('Formulario cambiado:', value);
+    // });
   }
   private processTemplate(container: HTMLElement, grupo: any) {
 
@@ -122,7 +134,7 @@ export class FichaDinamicaComponent implements OnInit, AfterViewInit {
   }
   prevTap(acc: any) {
     const currentIndex = this.ficha.grupos.findIndex((g: any) => g.id_grupo === this.currentGroupId);
-    
+
     if (currentIndex > 0) {
       this.currentGroupId = this.ficha.grupos[currentIndex - 1].id_grupo;
       acc?.expand(`grupo_${this.currentGroupId}`);
@@ -130,7 +142,7 @@ export class FichaDinamicaComponent implements OnInit, AfterViewInit {
   }
   nextTap(acc: any) {
     const currentIndex = this.ficha.grupos.findIndex((g: any) => g.id_grupo === this.currentGroupId);
-    
+
     if (currentIndex < this.ficha.grupos.length - 1) {
       this.currentGroupId = this.ficha.grupos[currentIndex + 1].id_grupo;
       acc?.expand(`grupo_${this.currentGroupId}`);

@@ -1,4 +1,4 @@
-<main class="container">
+<main class="container mb-4">
   <section class="row breadcrumb py-2">
     <a class="breadcrumb-item" routerLink="/docentes">Inicio</a>
     <span class="breadcrumb-item active">Asignar Ficha</span>
@@ -11,20 +11,20 @@
         </h4>
       </div>
       <div class="row justify-content-between">
-        <div class="col-md-4 mt-3">
-          <p class="mb-3">
+        <div class="col-md-4 mt-4">
+          <p class="mb-4">
             <span class="mr-2 font-weight-bold">Sede: </span>
             <span> {{ data?.sedeTdesc }}</span>
           </p>
         </div>
-        <div class="col-md-4 mt-3">
-          <p class="mb-3">
+        <div class="col-md-4 mt-4">
+          <p class="mb-4">
             <span class="mr-2 font-weight-bold">Sección: </span>
             <span> {{ data?.seccTdesc }}</span>
           </p>
         </div>
-        <div class="col-md-4 mt-3">
-          <p class="mb-3">
+        <div class="col-md-4 mt-4">
+          <p class="mb-4">
             <span class="mr-2 font-weight-bold">Cantidad Estudiantes: </span>
             <span> {{ data?.contador }}</span>
           </p>
@@ -32,6 +32,7 @@
       </div>
     </div>
     <div class="card mt-4">
+      
       <div class="card-header d-flex justify-content-between">
         <h4 class="float-left heading h4-responsive mb-0">Perfil Paciente</h4>
       </div>
@@ -256,30 +257,7 @@
           </div>
         </div>
       </div>
-      <!-- <div class="card-header d-flex mt-4 justify-content-between">
-        <h4 class="float-left heading h4-responsive mb-0">{{ficha?.descripcion || 'Ficha Clínica'}}</h4>
-      </div>
-      <div #accordion_ficha="ngbAccordion" ngbAccordion class="md-accordion mt-4" [closeOthers]="true">
-        <ng-container *ngFor="let item of ficha?.grupos">
-          <div [ngbAccordionItem]="item?.id_grupo" [collapsed]="false" [destroyOnHide]="false">
-            <h2 ngbAccordionHeader class="grey lighten-3">
-              <button ngbAccordionButton>
-                <h5 class="mb-0 pl-3 pr-3">
-                  <span>{{ item?.nombre }}</span>
-                  <span class="accordion-arrow">
-                    <i class="material-icons rotate-icon float-right">keyboard_arrow_up</i>
-                  </span>
-                </h5>
-              </button>
-            </h2>
-            <div ngbAccordionCollapse>
-              <div ngbAccordionBody class="p-3">
-                <ng-template></ng-template>
-              </div>
-            </div>
-          </div>
-        </ng-container>
-      </div> -->
+      
     </div>
   </section>
 </main>

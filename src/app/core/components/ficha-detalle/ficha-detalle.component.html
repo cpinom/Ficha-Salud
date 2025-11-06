@@ -1,3 +1,6 @@
+<div class="card-header d-flex mt-4 justify-content-between">
+  <h4 class="float-left heading h4-responsive mb-0">{{ficha?.descripcion || 'Ficha Clínica'}}</h4>
+</div>
 <form [formGroup]="form">
   <div #acc="ngbAccordion" ngbAccordion class="md-accordion mt-4 normal-size" [closeOthers]="true">
     <ng-container *ngFor="let grupo of ficha?.grupos; let i = index">
@@ -19,7 +22,7 @@
               
               <div #contenedorGrupo [innerHTML]="grupo._safeHtml"></div>
               
-              <div class="row mb-3" *ngIf="i > 0">
+              <div class="row mb-3" *ngIf="i > 0 && editable">
                 <div class="col-12">
                   <button type="button" (click)="grupo.mostrarComentario = !grupo.mostrarComentario"
                     class="btn-i pb-1 d-flex align-items-center justify-content-end flex-row btn-icon float-right comment-toggle-btn">
@@ -36,6 +39,19 @@
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
+
+              <div class="row mb-4 mt-4">
+                <div class="col-12 d-flex justify-content-between align-items-center px-0">
+                  <button type="button" (click)="prevTap(acc)" [disabled]="grupo.id_grupo === ficha.grupos[0].id_grupo"
+                    class="btn btn-sgte font-weight-bold collapsed px-1">
+                    &lt;&lt; Anterior
+                  </button>
+                  <button type="button" (click)="nextTap(acc)" *ngIf="grupo.id_grupo !== ficha.grupos[ficha.grupos.length -1].id_grupo"
+                    class="btn btn-sgte font-weight-bold collapsed px-1">
+                    Siguiente &gt;&gt;
+                  </button>
                 </div>
               </div>
 

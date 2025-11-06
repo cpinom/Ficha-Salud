@@ -1,21 +1,21 @@
 import { Component, inject, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { GestionservicesService } from '../../core/services/gestionservices.service';
-import { debounceTime, lastValueFrom } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { debounceTime } from 'rxjs';
+import { Router } from '@angular/router';
 import { SortableHeaderDirective, SortEvent } from '../../core/directives/sortable-header.directive';
+import { ToastrService } from 'ngx-toastr';
+import { AlumnoService } from '../../core/services/alumno.service';
 
 @Component({
   selector: 'app-estudiantes',
-  templateUrl: './estudiantes.component.html',
-  styleUrl: './estudiantes.component.scss'
+  templateUrl: './estudiantes.component.html'
 })
 export class EstudiantesComponent implements OnInit {
 
   filtroForm!: FormGroup;
   cursos: any;
+  mostrarError = false;
   data: any;
-
   page = 1;
   pageSize = 10;
   collectionSize = 0;
@@ -25,9 +25,9 @@ export class EstudiantesComponent implements OnInit {
   @ViewChildren(SortableHeaderDirective) headers!: QueryList<SortableHeaderDirective>;
 
   private fb = inject(FormBuilder);
-  private api = inject(GestionservicesService);
+  private api = inject(AlumnoService);
   private router = inject(Router);
-  private route = inject(ActivatedRoute);
+  private toastr = inject(ToastrService);
 
   constructor() {
     this.filtroForm = this.fb.group({
@@ -54,7 +54,7 @@ export class EstudiantesComponent implements OnInit {
   }
   async cargar() {
     try {
-      const response = await this.api.getListaCursoEstudiante<any>();
+      const response = await this.api.getCursos<any>();
 
       if (response.success) {
         this.cursos = response.data;
@@ -63,9 +63,13 @@ export class EstudiantesComponent implements OnInit {
           this.filtroForm.get('curso')?.setValue(this.cursos[0].seccCcod);
         }
       }
+      else {
+        throw Error();
+      }
     }
     catch (error) {
-      console.error('Error cargando cursos de estudiantes', error);
+      this.toastr.error('Error al cargar los cursos de estudiantes.');
+      this.mostrarError = true;
     }
   }
   async cargarFichas() {
@@ -73,7 +77,7 @@ export class EstudiantesComponent implements OnInit {
       const { start, limit } = this.getPaginationParams(this.page, this.pageSize);
       const seccCcod = this.filtroForm.get('curso')?.value;
       const searchTerm = this.filtroForm.get('filtro')?.value;
-      const response = await this.api.getFichasEstudiante<any>(seccCcod, start, limit, this.sortColumn, this.sortDirection, searchTerm);
+      const response = await this.api.getFichas<any>(seccCcod, start, limit, this.sortColumn, this.sortDirection, searchTerm);
 
       if (response.success) {
         this.data = response.data;
@@ -100,7 +104,42 @@ export class EstudiantesComponent implements OnInit {
     await this.cargarFichas();
   }
   async editarFicha(ficha: any) {
-    await this.router.navigate(['/estudiantes/editar-ficha'], { state: { ficha } });
+    try {
+      const { asigCcod, persNcorr, fisaNcorr, fsclNcorr } = ficha;
+      const response = await this.api.getDetalleFicha<any>(asigCcod, persNcorr, fisaNcorr, 1);
+
+      if (response.success) {
+        const ficha = { ...response.data, fsclNcorr };
+        const paciente = response.paciente;
+        const seccion = { ...this.seccion };
+        await this.router.navigate(['/estudiantes/editar-ficha'], { state: { ficha, paciente, seccion } });
+      }
+      else {
+        throw Error();
+      }
+    }
+    catch (error) {
+      this.toastr.error('Error al cargar los detalles de la ficha.');
+    }
+  }
+  async detalleFicha(ficha: any) {
+    try {
+      const { asigCcod, persNcorr, fisaNcorr, fsclNcorr } = ficha;
+      const response = await this.api.getDetalleFicha<any>(asigCcod, persNcorr, fisaNcorr, 0);
+
+      if (response.success) {
+        const ficha = { ...response.data, fsclNcorr };
+        const paciente = response.paciente;
+        const seccion = { ...this.seccion };
+        await this.router.navigate(['/estudiantes/detalle-ficha'], { state: { ficha, paciente, seccion } });
+      }
+      else {
+        throw Error();
+      }
+    }
+    catch (error) {
+      this.toastr.error('Error al cargar los detalles de la ficha.');
+    }
   }
   getPaginationParams(page: number, pageSize: number): { start: number, limit: number } {
     const start = (page - 1) * pageSize;
@@ -113,7 +152,7 @@ export class EstudiantesComponent implements OnInit {
       return {
         asignatura: this.data[0].asignatura,
         sede: this.data[0].sede,
-        seccion: this.data[0].seccCcod,
+        seccion: this.data[0].seccTdesc,
         nombreDocente: this.data[0].nombreDocente,
         cantidadfichascompletadas: this.data.filter((item: any) => item.efisCcod == 5).length
       };

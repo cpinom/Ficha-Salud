@@ -5,10 +5,10 @@ import { TextInputComponent } from '../text-input/text-input.component';
 import { CAMPO_TOKEN, CONTROL_TOKEN, HIDDENLABEL_TOKEN, PLACEHOLDER_TOKEN, UID_TOKEN } from '../ficha-dinamica/ficha-dinamica.component';
 import { TextareaInputComponent } from '../textarea-input/textarea-input.component';
 
-@Component({
-  selector: 'app-control-renderer',
-  templateUrl: './control-renderer.component.html'
-})
+// @Component({
+//   selector: 'app-control-renderer',
+//   templateUrl: './control-renderer.component.html'
+// })
 export class ControlRendererComponent {
 
   constructor(private appRef: ApplicationRef, private injector: Injector) { }
