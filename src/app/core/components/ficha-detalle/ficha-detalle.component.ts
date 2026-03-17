@@ -56,23 +56,31 @@ export class FichaDetalleComponent implements OnInit, AfterViewInit {
     controlSlots.forEach((slot: any) => {
       const codigo = slot.getAttribute('campo');
       const hiddenLabel = slot.getAttribute('data-hidden-label') == 'true';
-      // debugger
       const campo = grupo.campos.find((c: any) => c.codigo === codigo);
-
       const host = this.renderer.createElement('p');
       const valor = campo ? campo.valor : '';
-      // debugger
 
       if (campo.codigo == "DOCUMENTOS") {
-        host.innerHTML = `<a data-id="${campo.id_valor}"><span class="d-inline-flex align-items-center font-weight-bold mt-4">${campo.nombre}: </span>
-                            <div><span><i _ngcontent-ng-c1901134030="" class="material-icons icon-lg mr-2 d-inline-flex align-items-center">attach_file</i>${valor}</span></div></a>`;
+        if (valor) {
+          if (hiddenLabel == true) {
+            host.innerHTML = `<a data-id="${campo.id_valor}">
+                            <div><span><i class="material-icons icon-lg mr-2 d-inline-flex align-items-center">attach_file</i>${valor}</span></div></a>`;
+          }
+          else {
+            host.innerHTML = `<a data-id="${campo.id_valor}"><span class="d-inline-flex align-items-center font-weight-bold mt-4">${campo.nombre}: </span>
+                            <div><span><i class="material-icons icon-lg mr-2 d-inline-flex align-items-center">attach_file</i>${valor}</span></div></a>`;
+          }
+        }
+        else {
+          host.innerHTML = `<span class="font-weight-bold">${campo.nombre}: S/D</span>`;
+        }
       }
       else {
         if (hiddenLabel == true) {
-          host.innerHTML = `${valor}`;
+          host.innerHTML = `${valor || 'S/D'}`;
         }
         else {
-          host.innerHTML = `<span class="font-weight-bold">${campo.nombre}: </span>${valor}`;
+          host.innerHTML = `<span class="font-weight-bold">${campo.nombre}: </span>${valor || 'S/D'}`;
         }
       }
       this.renderer.addClass(host, 'my-1');

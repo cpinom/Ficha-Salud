@@ -3,13 +3,19 @@ import {
   forwardRef,
   Input,
   ViewChild,
-  ElementRef
+  ElementRef,
+  Output,
+  EventEmitter,
+  Inject,
+  Optional
 } from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
   NG_VALUE_ACCESSOR
 } from '@angular/forms';
+import { CAMPO_TOKEN } from '../ficha-dinamica/ficha-dinamica.component';
+import { ON_DOWNLOAD_TOKEN } from '../ficha-dinamica/ficha-dinamica.component';
 
 @Component({
   selector: 'file-input-wrapper',
@@ -29,8 +35,13 @@ export class FileInputWrapperComponent implements ControlValueAccessor {
   @Input() control!: FormControl;
   @Input() placeholder = '';
   @Input() hiddenLabel = false;
-
+  @Output() download = new EventEmitter<any>();
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+
+  constructor(
+    // @Inject(CAMPO_TOKEN) public campo: any,
+    @Optional() @Inject(ON_DOWNLOAD_TOKEN) private onDownload?: (payload: any) => void
+  ) { }
 
   fileName: string = '';
   private file: File | null = null;
@@ -108,6 +119,11 @@ export class FileInputWrapperComponent implements ControlValueAccessor {
 
     this.onChange(null);
     this.onTouched();
+  }
+
+  descargarTap(event: any, archivo: any) {
+    event.preventDefault();
+    this.onDownload?.({ data: archivo });
   }
 
   private isAcceptedExtension(fileName: string): boolean {

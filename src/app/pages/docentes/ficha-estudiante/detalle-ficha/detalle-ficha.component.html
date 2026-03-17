@@ -44,8 +44,7 @@
       <div class="row mb-1 mt-4">
         <div class="col-md-4">
           <p class="mb-3"><span class="mr-2 font-weight-bold">RUT: </span><span>{{paciente.fspaRut}}</span></p>
-          <p class="mb-3"><span class="mr-2 font-weight-bold">Nombre Social: </span><span>{{paciente.fspaNomSocial ||
-              'Sin Nombre Social'}}</span></p>
+          <p class="mb-3"><span class="mr-2 font-weight-bold">Nombre Social: </span><span>{{paciente.fspaNomSocial || 'Sin Nombre Social'}}</span></p>
           <p class="mb-3"><span class="mr-2 font-weight-bold">Edad: </span><span>{{paciente.fspaEdad}}</span></p>
           <p class="mb-3"><span class="mr-2 font-weight-bold">Dirección: </span><span>{{paciente.fspaDireccion}}</span>
           </p>
@@ -53,26 +52,20 @@
         <div class="col-md-4">
           <p class="mb-3"><span class="mr-2 font-weight-bold">Nombre: </span><span>{{paciente.fspaNombre}}</span></p>
           <p class="mb-3"><span class="mr-2 font-weight-bold">Sexo: </span><span>{{paciente.fspaSexo}}</span></p>
-          <p class="mb-3"><span class="mr-2 font-weight-bold">Nacionalidad:
-            </span><span>{{paciente.fspaNacionalidad}}</span></p>
+          <p class="mb-3"><span class="mr-2 font-weight-bold">Nacionalidad: </span><span>{{paciente.fspaNacionalidad}}</span></p>
           <p class="mb-3"><span class="mr-2 font-weight-bold">Previsión: </span><span>{{paciente.fspaPrevision}}</span>
           </p>
         </div>
         <div class="col-md-4">
-          <p class="mb-3"><span class="mr-2 font-weight-bold">Apellidos: </span><span>{{paciente.fspaApellido1}}
-              {{paciente.fspaApellido2}}</span></p>
-          <p class="mb-3"><span class="mr-2 font-weight-bold">Nacimiento: </span><span>{{paciente.fspaFechaNac}}</span>
+          <p class="mb-3"><span class="mr-2 font-weight-bold">Apellidos: </span><span>{{paciente.fspaApellido1}} {{paciente.fspaApellido2}}</span></p>
+          <p class="mb-3"><span class="mr-2 font-weight-bold">Fecha Nacimiento: </span><span>{{paciente.fspaFechaNac}}</span>
           </p>
           <p class="mb-3"><span class="mr-2 font-weight-bold">Teléfono: </span><span>{{paciente.fspaTcelular}}</span>
           </p>
         </div>
         <div class="col-12 mt-4">
           
-          <div class="card-header d-flex justify-content-between">
-            <h4 class="float-left heading h4-responsive mb-0">Ficha Clínica</h4>
-          </div>
-          
-          <app-ficha-detalle #fichaDetalle [ficha]="ficha"></app-ficha-detalle>
+          <app-ficha-detalle #fichaDetalle [ficha]="ficha" (archivoDescargado)="descargarArchivo($event.fsclNcorr, $event.id)"></app-ficha-detalle>
 
           <div class="card-footer">
             <div class="row">

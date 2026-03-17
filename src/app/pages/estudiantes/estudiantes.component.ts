@@ -151,6 +151,7 @@ export class EstudiantesComponent implements OnInit {
     if (this.data && this.data.length > 0) {
       return {
         asignatura: this.data[0].asignatura,
+        asigCcod: this.data[0].asigCcod,
         sede: this.data[0].sede,
         seccion: this.data[0].seccTdesc,
         nombreDocente: this.data[0].nombreDocente,

@@ -28,6 +28,7 @@ export class EditarFichaComponent implements OnInit {
     const navigation = this.router.getCurrentNavigation();
 
     if (navigation?.extras.state) {
+      debugger
       this.paciente = navigation.extras.state['paciente'];
       this.ficha = navigation.extras.state['ficha'];
       this.seccion = navigation.extras.state['seccion'];
@@ -145,6 +146,29 @@ export class EditarFichaComponent implements OnInit {
       reader.onerror = (error) => reject('Error al leer el archivo: ' + error);
       reader.readAsDataURL(file);
     });
+  }
+  async descargarArchivo(archivo: any) {
+    const fsclNcorr = this.ficha.fsclNcorr;
+    const fsvaNcorr = archivo.id;
+
+    try {
+      const response = await this.api.descargarArchivo(fsclNcorr, fsvaNcorr);
+
+      if (response.success) {
+        const { data } = response;
+        const linkSource = `data:${data.contentType};base64,${data.base64}`;
+        const downloadLink = document.createElement('a');
+        downloadLink.href = linkSource;
+        downloadLink.download = data.name;
+        downloadLink.click();
+      }
+      else {
+        throw Error();
+      }
+    }
+    catch (error) {
+      this.toastr.error('Error al descargar el archivo');
+    }
   }
 
 }

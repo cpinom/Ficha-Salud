@@ -1,4 +1,5 @@
 <section *ngIf="ficha">
+  
   <div class="container">
     <div class="container">
       <section class="row breadcrumb pt-3">
@@ -8,7 +9,7 @@
       </section>
       <div class="card mb-4">
         <div class="card-header d-flex justify-content-between">
-          <h4 class="float-left heading h4-responsive mb-0">Asignar Ficha <span class="mx-2">|</span> {{ seccion?.asignatura }}
+          <h4 class="float-left heading h4-responsive mb-0">{{ seccion?.asignatura }} - {{ seccion?.asigCcod }}
           </h4>
           <!-- <div class="d-flex align-items-center">
             <div class="badge badge-warning font-weight-normal mr-3">3 Fichas Pendientes de Completar</div>
@@ -89,7 +90,7 @@
               <span>{{ paciente?.fspaApellido1 }} {{ paciente?.fspaApellido2 }}</span>
             </p>
             <p class="mb-3">
-              <span class="mr-2 font-weight-bold">Nacimiento:</span>
+              <span class="mr-2 font-weight-bold">Fecha Nacimiento:</span>
               <span>{{ paciente?.fspaFechaNac }}</span>
             </p>
             <p class="mb-3">
@@ -102,7 +103,7 @@
               <h4 class="float-left heading h4-responsive mb-0">Ficha Clínica</h4>
             </div> -->
 
-            <app-ficha-dinamica #fichaDinamica [ficha]="ficha"></app-ficha-dinamica>
+            <app-ficha-dinamica #fichaDinamica [ficha]="ficha" rol="estudiante" (archivoDescargado)="descargarArchivo($event)"></app-ficha-dinamica>
 
             <!-- <form [formGroup]="fichaForm" (ngSubmit)="guardar()">
               <div #accordion="ngbAccordion" ngbAccordion class="md-accordion mt-4" [closeOthers]="true">
@@ -1480,4 +1481,7 @@
       </div>
     </div>
   </div>
+
+  <inacap-help-fab title="Caso Clínico" [description]="ficha.grupos[0].campos[0].valor"></inacap-help-fab>
+
 </section>

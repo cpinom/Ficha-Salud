@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { obtenerRutYDV, validarRut } from '../../../core/validators/rut-utils';
 import { debounceTime } from 'rxjs';
 import { DocenteService } from '../../../core/services/docente.service';
+import { AlertService } from '../../../core/services/alert.service';
 
 @Component({
   selector: 'app-asignar-ficha',
@@ -21,6 +22,7 @@ export class AsignarFichaComponent implements OnInit {
   private fb = inject(FormBuilder);
   private toastr = inject(ToastrService);
   private api = inject(DocenteService);
+  private alert = inject(AlertService);
 
   data: any;
   ficha: any;
@@ -120,6 +122,8 @@ export class AsignarFichaComponent implements OnInit {
   }
   async asignarFicha() {
 
+    debugger
+
     if (this.pacienteForm.invalid) {
       this.pacienteForm.markAllAsTouched();
       this.toastr.error('Por favor, complete correctamente el formulario del paciente.');
@@ -132,15 +136,100 @@ export class AsignarFichaComponent implements OnInit {
       return;
     }
 
+    const confirmacion = await this.alert.confirm('Confirmar Asignación', '¿Está seguro de asignar esta ficha al curso?');
+
+    if (!confirmacion) {
+      return;
+    }
+
     const pacienteData = this.pacienteForm.value;
-    const fichaData = this.fichaDinamicaComponent.form.value;
-    const campoCasoClinico = this.ficha.grupos[0].campos.find((c: any) => c.codigo === "CASO_CLINICO");
+    const fichaData = { ...this.fichaDinamicaComponent.form.value };
+    let valores: any[] = [];
+    let archivos: any[] = [];
+
+    this.ficha.grupos.forEach((grupo: any) => {
+
+      grupo.campos.forEach((campo: any) => {
+        if (fichaData.hasOwnProperty(campo.codigo)) {
+
+          if (campo.tipo === "FILE" && fichaData[campo.codigo] instanceof File) {
+            archivos.push({
+              archivo: fichaData[campo.codigo],
+              id_campo: campo.id_campo
+            });
+          }
+          else {
+            let valorCampo = fichaData[campo.codigo] || '';
+
+            valores.push({
+              id: campo.id_campo,
+              valor: valorCampo
+            });
+          }
+
+        }
+      });
+
+    });
+
+    /*this.ficha.grupos[0].campos.forEach((campo: any) => {
+      if (fichaData.hasOwnProperty(campo.codigo)) {
+        let valorCampo = fichaData[campo.codigo] || '';
+
+        valores.push({
+          id: campo.id_campo,
+          valor: valorCampo
+        });
+      }
+    });
+
+    this.ficha.grupos[1].campos.forEach((campo: any) => {
+      if (fichaData.hasOwnProperty(campo.codigo)) {
+
+        if (campo.tipo === "FILE" && fichaData[campo.codigo] instanceof File) {
+          archivos.push({
+            archivo: fichaData[campo.codigo],
+            id_campo: campo.id_campo
+          });
+        }
+        else {
+          let valorCampo = fichaData[campo.codigo] || '';
+
+          valores.push({
+            id: campo.id_campo,
+            valor: valorCampo
+          });
+        }
+      }
+    });*/
+
+    if (archivos.length > 0) {
+      try {
+        for (const item of archivos) {
+          const base64 = await this.fileToBase64(item.archivo);
+          valores.push({
+            id: item.id_campo,
+            valor: base64,
+            nombreArchivo: item.archivo.name,
+            tipoArchivo: item.archivo.type
+          });
+        }
+      }
+      catch (error) {
+        this.toastr.error('Error al procesar los archivos adjuntos: ' + error);
+        return;
+      }
+    }
+
+
+    // const campoCasoClinico = this.ficha.grupos[0].campos.find((c: any) => c.codigo === "CASO_CLINICO");
     const params = {
       paciente: pacienteData,
-      ficha: fichaData,
+      campos: valores,
+      // ficha: fichaData,
       tipoFichaId: this.ficha.id_tipo_ficha,
       seccionId: this.data.seccCcod,
-      casoClinicoId: campoCasoClinico ? campoCasoClinico.id_campo : null
+      // casoClinicoId: campoCasoClinico ? campoCasoClinico.id_campo : null
     };
 
     debugger
@@ -161,6 +250,28 @@ export class AsignarFichaComponent implements OnInit {
   }
   async mostrarFicha() {
     debugger
+  }
+
+  async fileToBase64(file: File, allowedExtensions: string[] = ['jpg', 'jpeg', 'png', 'pdf'], maxSizeMB: number = 5): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const extension = file.name.split('.').pop()?.toLowerCase();
+      if (!extension || !allowedExtensions.includes(extension)) {
+        return reject(`Extensión no permitida. Solo se aceptan: ${allowedExtensions.join(', ')}`);
+      }
+
+      const maxSizeBytes = maxSizeMB * 1024 * 1024;
+      if (file.size > maxSizeBytes) {
+        return reject(`El archivo supera el tamaño máximo permitido de ${maxSizeMB} MB`);
+      }
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64String = (reader.result as string).split(',')[1];
+        resolve(base64String);
+      };
+      reader.onerror = (error) => reject('Error al leer el archivo: ' + error);
+      reader.readAsDataURL(file);
+    });
   }
 
 }

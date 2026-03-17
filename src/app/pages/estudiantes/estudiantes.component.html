@@ -6,7 +6,7 @@
           <span class="breadcrumb-item"><a routerLink="/bienvenida">Inicio</a></span>
           <span class="breadcrumb-item active">Detalle Curso</span>
         </section>
-        <div class="row">
+        <div class="row" [class.d-none]="cursos?.length === 1">
           <div class="col-12 mb-4 px-0">
             <div id="filtros" class="d-flex justify-content-start">
               <div class="filter-button px-4 p-2 d-flex flex-row mr-4">
@@ -26,7 +26,8 @@
 
           <div class="card-header d-flex justify-content-between">
             <h4 id="titleEB" style="display: block;" class="float-left heading h4-responsive mb-0">
-              Asignar Ficha <span class="mx-2">|</span> {{seccion?.asignatura }}</h4>
+              {{seccion?.asignatura }} - {{seccion?.asigCcod}}
+            </h4>
           </div>
 
           <div class="row mb-1 mt-4">

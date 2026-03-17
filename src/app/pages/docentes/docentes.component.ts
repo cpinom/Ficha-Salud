@@ -84,6 +84,10 @@ export class DocentesComponent implements OnInit {
   async asignarFicha(data: any) {
     try {
       const response = await this.api.getFichaAsignatura<any>(data.asigCcod);
+      // const response = await this.api.getFichaAsignatura<any>('TEEB01'); // ENFERMERIA 1
+      // const response = await this.api.getFichaAsignatura<any>('TESD01'); // SALUD DIGITAL 2
+      // const response = await this.api.getFichaAsignatura<any>('TEMQ01'); // MEDICO QUIRURGICO 3
+      // const response = await this.api.getFichaAsignatura<any>('INPF01'); // PRACTICA PROFESIONAL 4
 
       if (response.success) {
         const ficha = response.data;

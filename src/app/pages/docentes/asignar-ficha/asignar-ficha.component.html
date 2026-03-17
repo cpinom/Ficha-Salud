@@ -42,7 +42,7 @@
             <h2 ngbAccordionHeader class="grey lighten-3">
               <button ngbAccordionButton>
                 <h5 class="mb-0 pl-3 pr-3">
-                  <span>Datos Personales</span>
+                  <span>Datos Personales (Docente)</span>
                   <span class="accordion-arrow"><i
                       class="material-icons rotate-icon float-right">keyboard_arrow_up</i></span>
                 </h5>
@@ -113,7 +113,7 @@
                       <div class="md-form">
                         <input formControlName="fechaNacimiento" name="campo_fecha" id="campo_fecha" type="text"
                           placeholder="DD/MM/AAAA" class="form-control" Datepicker>
-                        <label for="campo_fecha" class="active">Seleccionar fecha</label>
+                        <label for="campo_fecha" class="active">Fecha Nacimiento</label>
                         <app-error-msg [control]="pacienteForm.get('fechaNacimiento')"></app-error-msg>
                       </div>
                     </div>
@@ -151,7 +151,7 @@
             <h2 ngbAccordionHeader class="grey lighten-3">
               <button ngbAccordionButton>
                 <h5 class="mb-0 pl-3 pr-3">
-                  <span>Contacto Paciente</span>
+                  <span>Contacto Paciente (Docente)</span>
                   <span class="accordion-arrow"><i
                       class="material-icons rotate-icon float-right">keyboard_arrow_up</i></span>
                 </h5>
@@ -164,7 +164,7 @@
                     <div class="col-md-4">
                       <div class="md-form mb-3">
                         <input formControlName="telefono" type="text" name="telefono" id="telefono"
-                          placeholder="Ingrese teléfono del usuario" class="form-control mb-0">
+                          placeholder="Ej: +56912345678" class="form-control mb-0">
                         <label for="telefono" class="active">Teléfono</label>
                         <app-error-msg [control]="pacienteForm.get('telefono')"></app-error-msg>
                       </div>
@@ -198,7 +198,7 @@
             <h2 ngbAccordionHeader class="grey lighten-3">
               <button ngbAccordionButton>
                 <h5 class="mb-0 pl-3 pr-3">
-                  <span>Previsión</span>
+                  <span>Previsión (Docente)</span>
                   <span class="accordion-arrow"><i
                       class="material-icons rotate-icon float-right">keyboard_arrow_up</i></span>
                 </h5>
@@ -226,10 +226,10 @@
                         class="btn btn-sgte font-weight-bold collapsed px-1">
                         &lt;&lt; Anterior
                       </button>
-                      <button type="button" (click)="mostrarFicha()"
+                      <!-- <button type="button" (click)="mostrarFicha()"
                         class="btn btn-sgte font-weight-bold collapsed px-1">
                         Siguiente &gt;&gt;
-                      </button>
+                      </button> -->
                     </div>
                   </div>
                 </ng-template>

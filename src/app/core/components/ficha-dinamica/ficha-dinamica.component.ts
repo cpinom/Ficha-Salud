@@ -1,4 +1,4 @@
-import { AfterViewInit, ApplicationRef, Component, ElementRef, inject, InjectionToken, Injector, Input, OnInit, QueryList, Renderer2, ViewChildren } from '@angular/core';
+import { AfterViewInit, ApplicationRef, Component, ElementRef, EventEmitter, inject, InjectionToken, Injector, input, Input, OnInit, Output, QueryList, Renderer2, ViewChildren } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ControlRendererComponent } from '../control-renderer/control-renderer.component';
@@ -9,6 +9,7 @@ export const UID_TOKEN = new InjectionToken<string>('UID_TOKEN');
 export const CAMPO_TOKEN = new InjectionToken<any>('CAMPO_TOKEN');
 export const PLACEHOLDER_TOKEN = new InjectionToken<string>('PLACEHOLDER_TOKEN');
 export const HIDDENLABEL_TOKEN = new InjectionToken<boolean>('HIDDENLABEL_TOKEN');
+export const ON_DOWNLOAD_TOKEN = new InjectionToken<(payload: any) => void>('ON_DOWNLOAD_TOKEN');
 
 @Component({
   selector: 'app-ficha-dinamica',
@@ -24,6 +25,8 @@ export class FichaDinamicaComponent implements OnInit, AfterViewInit {
   private appRef = inject(ApplicationRef);
 
   @Input() ficha: any;
+  @Input() rol!: 'docente' | 'estudiante';
+  @Output() archivoDescargado = new EventEmitter<any>();
   @ViewChildren('contenedorGrupo') contenedores!: QueryList<ElementRef>;
   form!: FormGroup;
   currentGroupId!: number;
@@ -31,7 +34,6 @@ export class FichaDinamicaComponent implements OnInit, AfterViewInit {
   async ngOnInit() {
     this.construirFormulario();
 
-    // Preprocesa cada grupo: crea versión segura de la plantilla
     this.ficha.grupos.forEach((g: any) => {
       g._safeHtml = this.sanitizer.bypassSecurityTrustHtml(g.plantilla);
     });
@@ -76,22 +78,10 @@ export class FichaDinamicaComponent implements OnInit, AfterViewInit {
           required: campoObligatorio,
           type: campoTipo
         }));
-
-        if (campo.tipo === 'FILE') {
-          // debugger
-          // group[campo.codigo].valueChanges.subscribe((value: any) => {
-          //   debugger
-          // });
-        }
       });
     });
 
     this.form = this.fb.group(group);
-
-    // this.form.valueChanges.subscribe(value => {
-    //   debugger
-    //   // console.log('Formulario cambiado:', value);
-    // });
   }
   private processTemplate(container: HTMLElement, grupo: any) {
 
@@ -112,22 +102,38 @@ export class FichaDinamicaComponent implements OnInit, AfterViewInit {
       this.renderer.addClass(host, 'md-form');
       slot.replaceWith(host);
 
+      const providers: any[] = [
+        { provide: CAMPO_TOKEN, useValue: campo },
+        { provide: CONTROL_TOKEN, useValue: this.form.get(campo.codigo) },
+        { provide: PLACEHOLDER_TOKEN, useValue: placeholder },
+        { provide: HIDDENLABEL_TOKEN, useValue: hiddenLabel },
+        { provide: UID_TOKEN, useValue: uid },
+      ];
+
+      if (campo.tipo === 'FILE') {
+        providers.push({
+          provide: ON_DOWNLOAD_TOKEN,
+          useValue: (payload: any) => {
+            this.archivoDescargado.emit(payload?.data);
+          }
+        });
+      }
+
       const injector = Injector.create({
-        providers: [
-          { provide: CAMPO_TOKEN, useValue: campo },
-          { provide: CONTROL_TOKEN, useValue: this.form.get(campo.codigo) },
-          { provide: PLACEHOLDER_TOKEN, useValue: placeholder },
-          { provide: HIDDENLABEL_TOKEN, useValue: hiddenLabel },
-          { provide: UID_TOKEN, useValue: uid }
-        ],
+        providers,
         parent: this.injector
       });
 
       const cmp = new ControlRendererComponent(this.appRef, injector);
       cmp.attachTo(host);
-    });
 
+    });
   }
+  // descargarArchivo(id: any) {
+  //   debugger
+  //   const fsclNcorr = this.ficha.fsclNcorr;
+  //   this.archivoDescargado.emit({ fsclNcorr: fsclNcorr, id: id });
+  // }
   onGroupExpandedChange(groupId: number) {
     // debugger
     this.currentGroupId = groupId;

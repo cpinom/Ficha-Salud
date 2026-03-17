@@ -14,6 +14,7 @@ import { TextInputComponent } from './text-input/text-input.component';
 import { TextareaInputComponent } from './textarea-input/textarea-input.component';
 import { ErrorMsgComponent } from './error-msg/error-msg.component';
 import { FichaDetalleComponent } from './ficha-detalle/ficha-detalle.component';
+import { InacapHelpFabComponent } from './inacap-help-fab/inacap-help-fab.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FichaDetalleComponent } from './ficha-detalle/ficha-detalle.component';
     TextInputComponent,
     TextareaInputComponent,
     ErrorMsgComponent,
-    FichaDetalleComponent
+    FichaDetalleComponent,
+    InacapHelpFabComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +48,8 @@ import { FichaDetalleComponent } from './ficha-detalle/ficha-detalle.component';
     TextInputComponent,
     TextareaInputComponent,
     ErrorMsgComponent,
-    FichaDetalleComponent
+    FichaDetalleComponent,
+    InacapHelpFabComponent
   ]
 })
 export class ComponentsModule { }

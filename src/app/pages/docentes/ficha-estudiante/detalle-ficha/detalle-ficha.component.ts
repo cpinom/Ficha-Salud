@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { DocenteService } from '../../../../core/services/docente.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-detalle-ficha',
@@ -11,6 +12,7 @@ export class DetalleFichaComponent implements OnInit {
 
   private router = inject(Router);
   private api = inject(DocenteService);
+  private toastr = inject(ToastrService);
 
   @ViewChild('fichaDetalle') fichaDetalleComponent: any;
 
@@ -54,9 +56,42 @@ export class DetalleFichaComponent implements OnInit {
       comentarios: comentarios
     };
 
-    const response = await this.api.terminarRevisionficha<any>(params);
+    try {
+      const response = await this.api.terminarRevisionficha<any>(params);
 
-    debugger
+      if (response.success) {
+        this.toastr.success('Revisión terminada con éxito');
+        this.router.navigate(['/docentes']);
+        return;
+      }
+      else {
+        throw Error();
+      }
+    }
+    catch (error) {
+      this.toastr.error('Error al terminar la revisión de la ficha');
+      console.error('Error al terminar la revisión de la ficha:', error);
+    }
+  }
+  async descargarArchivo(fsclNcorr: any, fsvaNcorr: any) {
+    try {
+      const response = await this.api.descargarArchivo(fsclNcorr, fsvaNcorr);
+
+      if (response.success) {
+        const { data } = response;
+        const linkSource = `data:${data.contentType};base64,${data.base64}`;
+        const downloadLink = document.createElement('a');
+        downloadLink.href = linkSource;
+        downloadLink.download = data.name;
+        downloadLink.click();
+      }
+      else {
+        throw Error();
+      }
+    }
+    catch (error) {
+      this.toastr.error('Error al descargar el archivo');
+    }
   }
 
 }

@@ -34,7 +34,12 @@ export class AppComponent implements AfterViewInit {
 
   onHeaderClicked() { }
   onLogout() {
-    window.close();
+    if (window.opener) {
+      window.close();
+    }
+    else {
+      window.location.href = 'https://portal.inacap.cl/';
+    }
   }
   async onPreferencesChanged(preferences: any) {
     debugger

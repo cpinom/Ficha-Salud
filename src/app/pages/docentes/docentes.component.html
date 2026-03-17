@@ -7,7 +7,7 @@
           <span class="breadcrumb-item r-busqueda" style="display: none;">Resultados de Búsqueda</span>
         </section>
         <div class="row">
-          <div class="col-12 mb-4">
+          <div class="col-12 mb-4" *ngIf="periodos?.length > 1">
             <form [formGroup]="form">
               <div id="filtros" class="d-flex justify-content-start">
                 <div class="filter-button px-4 p-2 d-flex flex-row mr-4">
@@ -46,7 +46,7 @@
               </div>
             </div>
           </div>
-          <div class="col mb-4">
+          <!-- <div class="col mb-4">
             <div class="card card-home">
               <div class="d-flex align-items-center">
                 <div class="px-2">
@@ -58,7 +58,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="col mb-4">
             <div class="card card-home">
               <div class="d-flex align-items-center">
@@ -86,12 +86,10 @@
                 <p class="mb-2"><span class="font-weight-bold">Sección: </span>{{ item.seccCcod }}</p>
                 <p class="mb-2"><span class="font-weight-bold">Cantidad Estudiantes: </span>{{ item.contador }}</p>
                 <div class="w-100 border-bottom my-3"></div>
-                <p class="mb-2"><span class="font-weight-bold">Fichas Completadas: </span>{{ item.fichas?.completadas }}
-                </p>
+                <p class="mb-2"><span class="font-weight-bold">Fichas Completadas: </span>{{ item.fichas?.completadas }}</p>
                 <p class="mb-2"><span class="font-weight-bold">Fichas Revisadas: </span>{{ item.fichas?.revisadas }}</p>
                 <p></p>
-                <div class="badge badge-warning font-weight-normal">{{ item.fichas?.pendientes }} Fichas Pendientes de
-                  Revisar</div>
+                <div class="badge badge-warning font-weight-normal">{{ item.fichas?.pendientes }} Fichas Pendientes de Revisar</div>
                 <p></p>
               </div>
               <div class="card-footer pt-2">

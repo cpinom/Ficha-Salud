@@ -15,7 +15,7 @@
 <div class="row" *ngIf="campo.lista.length > 0">
   <div class="col-12">
     <p class="mb-3" *ngFor="let archivo of campo.lista">
-      <a href="#">
+      <a (click)="descargarTap($event, archivo)">
         <span class="d-inline-flex align-items-center font-weight-bold">
           <i class="material-icons icon-lg mr-2 d-inline-flex align-items-center">attach_file</i> {{
           archivo.nombre_archivo }}
