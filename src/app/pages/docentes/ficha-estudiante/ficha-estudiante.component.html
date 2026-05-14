@@ -59,7 +59,9 @@
                       </button>
                     </div>
                   </td>
-                  <td [class.text-warning]="item.efisCcod == 1">{{ item.efisTdesc }}</td>
+                  <td [class.text-warning]="item.efisCcod == 1"
+                      [class.text-success]="item.efisCcod == 4"
+                      [class.text-info]="item.efisCcod == 5">{{ item.efisTdesc }}</td>
                   <td>{{ item.nombrePaciente }}</td>
                   <td>{{ item.rutPaciente }}</td>
                   <td>{{ item.fechaFicha }}</td>

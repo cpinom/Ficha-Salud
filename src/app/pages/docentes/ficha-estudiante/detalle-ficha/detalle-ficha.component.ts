@@ -51,6 +51,7 @@ export class DetalleFichaComponent implements OnInit {
     });
 
     const params = {
+      fsclNcorr: this.ficha.fsclNcorr,
       persNcorr: this.estudiante.persNcorr,
       fisaNcorr: this.estudiante.fisaNcorr,
       comentarios: comentarios

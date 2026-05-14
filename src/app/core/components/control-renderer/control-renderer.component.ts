@@ -4,11 +4,8 @@ import { FileInputWrapperComponent } from '../file-input-wrapper/file-input-wrap
 import { TextInputComponent } from '../text-input/text-input.component';
 import { CAMPO_TOKEN, CONTROL_TOKEN, HIDDENLABEL_TOKEN, PLACEHOLDER_TOKEN, UID_TOKEN } from '../ficha-dinamica/ficha-dinamica.component';
 import { TextareaInputComponent } from '../textarea-input/textarea-input.component';
+import { LabelValueComponent } from '../label-value/label-value.component';
 
-// @Component({
-//   selector: 'app-control-renderer',
-//   templateUrl: './control-renderer.component.html'
-// })
 export class ControlRendererComponent {
 
   constructor(private appRef: ApplicationRef, private injector: Injector) { }
@@ -25,7 +22,8 @@ export class ControlRendererComponent {
       case 'SELECT': componentType = SelectInputComponent; break;
       case 'FILE': componentType = FileInputWrapperComponent; break;
       case 'TEXTAREA': componentType = TextareaInputComponent; break;
-      default: componentType = TextInputComponent;
+      case 'TEXT': componentType = TextInputComponent; break;
+      default: componentType = LabelValueComponent; break;
     }
 
     const cmpRef: ComponentRef<any> = createComponent(componentType, {

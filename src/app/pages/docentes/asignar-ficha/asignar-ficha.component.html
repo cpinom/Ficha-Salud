@@ -113,7 +113,7 @@
                       <div class="md-form">
                         <input formControlName="fechaNacimiento" name="campo_fecha" id="campo_fecha" type="text"
                           placeholder="DD/MM/AAAA" class="form-control" Datepicker>
-                        <label for="campo_fecha" class="active">Fecha Nacimiento</label>
+                        <label for="campo_fecha" class="active">Seleccionar Fecha de atención</label>
                         <app-error-msg [control]="pacienteForm.get('fechaNacimiento')"></app-error-msg>
                       </div>
                     </div>
@@ -226,10 +226,10 @@
                         class="btn btn-sgte font-weight-bold collapsed px-1">
                         &lt;&lt; Anterior
                       </button>
-                      <!-- <button type="button" (click)="mostrarFicha()"
+                      <button type="button" (click)="mostrarFicha(accordion)"
                         class="btn btn-sgte font-weight-bold collapsed px-1">
-                        Siguiente &gt;&gt;
-                      </button> -->
+                        Mostrar Ficha &gt;&gt;
+                      </button>
                     </div>
                   </div>
                 </ng-template>
@@ -239,7 +239,8 @@
         </div>
       </form>
 
-      <app-ficha-dinamica #fichaDinamica [ficha]="ficha"></app-ficha-dinamica>
+      <app-ficha-dinamica #fichaDinamica [ficha]="ficha" rol="docente" 
+      (onPanelHidden)="panelHidden($event)"></app-ficha-dinamica>
 
       <div class="card-footer">
         <div class="row">
@@ -250,9 +251,11 @@
               </button>
             </div>
             <div class="md-form d-flex">
+              @if (this.fichaId) {
               <button type="button" (click)="asignarFicha()"
                 class="btn btn-default d-flex align-items-center waves-effect waves-light py-2">Asignar Nueva
                 Ficha</button>
+              }
             </div>
           </div>
         </div>

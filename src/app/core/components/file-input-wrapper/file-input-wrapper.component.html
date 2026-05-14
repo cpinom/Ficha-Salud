@@ -1,4 +1,4 @@
-<ng-container *ngIf="campo.lista.length == 0">
+<!-- <ng-container *ngIf="campo.lista.length == 0">
   <div class="file-field d-flex align-items-center">
     <div class="btn btn-sm float-left ml-0">
       <span class="text-nowrap">{{ label}}</span>
@@ -23,4 +23,87 @@
       </a>
     </p>
   </div>
+</div> -->
+
+
+<ng-container *ngIf="campo.lista.length == 0">
+
+  <div class="file-field d-flex align-items-start flex-column">
+
+    <div class="d-flex align-items-center w-100">
+
+      <div class="btn btn-sm float-left ml-0">
+        <span class="text-nowrap">{{ label }}</span>
+
+        <input #fileInput type="file" class="btn btn-sm float-left" [accept]="accept" [multiple]="true"
+          (change)="onFileChange($event)">
+      </div>
+
+      <div class="file-path-wrapper flex-grow-1 ml-2">
+        <input type="text" [value]="fileNames.length > 0 ? fileNames.join(', ') : 'Cargar archivos...'"
+          [readonly]="true" (click)="fileInput.click()" class="file-path" />
+      </div>
+
+    </div>
+
+    <!-- LISTADO DE ARCHIVOS -->
+    <div class="w-100 mt-2" *ngIf="fileNames.length > 0">
+
+      <div class="d-flex align-items-center justify-content-between border rounded px-2 py-1 mb-1"
+        *ngFor="let file of fileNames; let i = index">
+
+        <div class="d-flex align-items-center text-truncate">
+          <i class="material-icons mr-2">attach_file</i>
+
+          <span class="text-truncate">
+            {{ file }}
+          </span>
+        </div>
+
+        <button type="button" class="btn btn-round waves-effect waves-light" (click)="removeFile(i)">
+          <i class="material-icons">close</i>
+        </button>
+
+        <!-- <button type="button" class="btn btn-sm btn-danger" (click)="removeFile(i)">
+          <i class="material-icons">close</i>
+        </button> -->
+
+      </div>
+
+      <small class="text-muted">
+        Máximo {{ maxFiles }} archivos
+      </small>
+
+    </div>
+
+  </div>
+
+  <app-error-msg [control]="control"></app-error-msg>
+
+</ng-container>
+
+<div class="row" *ngIf="campo.lista.length > 0">
+
+  <div class="col-12">
+
+    <p class="mb-3" *ngFor="let archivo of campo.lista">
+
+      <a (click)="descargarTap($event, archivo)">
+
+        <span class="d-inline-flex align-items-center font-weight-bold">
+
+          <i class="material-icons icon-lg mr-2 d-inline-flex align-items-center">
+            attach_file
+          </i>
+
+          {{ archivo.nombre_archivo }}
+
+        </span>
+
+      </a>
+
+    </p>
+
+  </div>
+
 </div>

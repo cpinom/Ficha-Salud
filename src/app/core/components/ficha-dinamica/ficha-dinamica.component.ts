@@ -1,8 +1,9 @@
-import { AfterViewInit, ApplicationRef, Component, ElementRef, EventEmitter, inject, InjectionToken, Injector, input, Input, OnInit, Output, QueryList, Renderer2, ViewChildren } from '@angular/core';
+import { AfterViewInit, ApplicationRef, Component, ElementRef, EventEmitter, inject, InjectionToken, Injector, input, Input, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ControlRendererComponent } from '../control-renderer/control-renderer.component';
 import { multiValidator } from '../../validators/multiValidator';
+import { NgbAccordionDirective } from '@ng-bootstrap/ng-bootstrap';
 
 export const CONTROL_TOKEN = new InjectionToken<FormControl>('CONTROL_TOKEN');
 export const UID_TOKEN = new InjectionToken<string>('UID_TOKEN');
@@ -27,6 +28,9 @@ export class FichaDinamicaComponent implements OnInit, AfterViewInit {
   @Input() ficha: any;
   @Input() rol!: 'docente' | 'estudiante';
   @Output() archivoDescargado = new EventEmitter<any>();
+  @Output() onPanelShown = new EventEmitter<any>();
+  @Output() onPanelHidden = new EventEmitter<any>();
+  @ViewChild('acc') accordion!: NgbAccordionDirective;
   @ViewChildren('contenedorGrupo') contenedores!: QueryList<ElementRef>;
   form!: FormGroup;
   currentGroupId!: number;
@@ -74,9 +78,14 @@ export class FichaDinamicaComponent implements OnInit, AfterViewInit {
             campoTipo = undefined;
         }
 
+        // if (campo.etiqueta && campo.etiqueta != this.rol) {
+        //   campoTipo = undefined;
+        // }
+
         group[campo.codigo] = new FormControl(campo.valor || null, multiValidator({
           required: campoObligatorio,
-          type: campoTipo
+          type: campoTipo,
+          disabled: campo.etiqueta && campo.etiqueta != this.rol,
         }));
       });
     });
@@ -102,6 +111,10 @@ export class FichaDinamicaComponent implements OnInit, AfterViewInit {
       this.renderer.addClass(host, 'md-form');
       slot.replaceWith(host);
 
+      if (campo.etiqueta && campo.etiqueta != this.rol) {
+        campo.tipo = undefined;
+      }
+
       const providers: any[] = [
         { provide: CAMPO_TOKEN, useValue: campo },
         { provide: CONTROL_TOKEN, useValue: this.form.get(campo.codigo) },
@@ -109,6 +122,15 @@ export class FichaDinamicaComponent implements OnInit, AfterViewInit {
         { provide: HIDDENLABEL_TOKEN, useValue: hiddenLabel },
         { provide: UID_TOKEN, useValue: uid },
       ];
+
+      if (campo.codigo == 'DOCUMENTOS' && campo.lista.length > 0) {
+        providers.push({
+          provide: ON_DOWNLOAD_TOKEN,
+          useValue: (payload: any) => {
+            this.archivoDescargado.emit(payload?.data);
+          }
+        });
+      }
 
       if (campo.tipo === 'FILE') {
         providers.push({
@@ -129,14 +151,12 @@ export class FichaDinamicaComponent implements OnInit, AfterViewInit {
 
     });
   }
-  // descargarArchivo(id: any) {
-  //   debugger
-  //   const fsclNcorr = this.ficha.fsclNcorr;
-  //   this.archivoDescargado.emit({ fsclNcorr: fsclNcorr, id: id });
-  // }
-  onGroupExpandedChange(groupId: number) {
-    // debugger
-    this.currentGroupId = groupId;
+  onGroupShow(grupo: any) {
+    this.onPanelShown.emit(grupo);
+    this.currentGroupId = grupo.id_grupo;
+  }
+  onGroupHidden(grupo: any) {
+    this.onPanelHidden.emit(grupo);
   }
   prevTap(acc: any) {
     const currentIndex = this.ficha.grupos.findIndex((g: any) => g.id_grupo === this.currentGroupId);
@@ -152,6 +172,16 @@ export class FichaDinamicaComponent implements OnInit, AfterViewInit {
     if (currentIndex < this.ficha.grupos.length - 1) {
       this.currentGroupId = this.ficha.grupos[currentIndex + 1].id_grupo;
       acc?.expand(`grupo_${this.currentGroupId}`);
+    }
+  }
+  showFirstTap() {
+    if (this.ficha?.grupos?.length > 0) {
+      // Obtiene el primer grupo
+      const firstGroup = this.ficha.grupos[0];
+      // Actualiza el grupo actual
+      this.currentGroupId = firstGroup.id_grupo;
+      // Expande el acordeón
+      this.accordion?.expand(`grupo_${this.currentGroupId}`);
     }
   }
 

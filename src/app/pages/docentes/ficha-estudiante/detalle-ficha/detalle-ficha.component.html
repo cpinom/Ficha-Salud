@@ -58,7 +58,7 @@
         </div>
         <div class="col-md-4">
           <p class="mb-3"><span class="mr-2 font-weight-bold">Apellidos: </span><span>{{paciente.fspaApellido1}} {{paciente.fspaApellido2}}</span></p>
-          <p class="mb-3"><span class="mr-2 font-weight-bold">Fecha Nacimiento: </span><span>{{paciente.fspaFechaNac}}</span>
+          <p class="mb-3"><span class="mr-2 font-weight-bold">Fecha Atención: </span><span>{{paciente.fspaFechaNac}}</span>
           </p>
           <p class="mb-3"><span class="mr-2 font-weight-bold">Teléfono: </span><span>{{paciente.fspaTcelular}}</span>
           </p>
@@ -75,7 +75,7 @@
                     <span>Volver a Inicio</span>
                   </button>
                 </div>
-                <div class="md-form d-flex">
+                <div class="md-form d-flex" *ngIf="ficha && ficha.fsclRevisada == 3">
                   <button type="button" class="btn btn-default py-2" (click)="terminarRevision()">Terminar Revisión</button>
                 </div>
               </div>

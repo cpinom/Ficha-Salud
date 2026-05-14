@@ -32,6 +32,15 @@ export class DocenteService extends HttpService {
   terminarRevisionficha<T>(data: any) {
     return this.post<T>(`docentes/terminar-revision-ficha`, data);
   }
+  crearFichaBorrador<T>(data: any) {
+    return this.post<T>(`docentes/crear-ficha-borrador`, data);
+  }
+  guardarFichaPaciente<T>(data: any) {
+    return this.post<T>(`docentes/guardar-ficha-paciente`, data);
+  }
+  guardarCamposFicha<T>(data: any) {
+    return this.post<T>(`docentes/guardar-campos-valores`, data);
+  }
   asignarFicha<T>(data: any) {
     return this.post<T>(`docentes/asignar-ficha`, data);
   }

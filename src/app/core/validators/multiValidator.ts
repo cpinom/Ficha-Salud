@@ -2,6 +2,7 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 export function multiValidator(options?: {
   required?: boolean;
+  disabled?: boolean;
   minLength?: number;
   maxLength?: number;
   type?: 'rut' | 'telefono' | 'texto' | 'digitos' | 'decimal' | 'fecha';
@@ -12,6 +13,20 @@ export function multiValidator(options?: {
   maxDate?: string;    // para 'fecha' → formato 'DD/MM/YYYY'
 }): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
+
+    // --- Disabled ---
+    if (options?.disabled) {
+      control.disable({ emitEvent: false });
+
+      // Si está deshabilitado no validar
+      return null;
+    }
+    else if (control.disabled) {
+      // Si previamente estaba deshabilitado y ahora no
+      control.enable({ emitEvent: false });
+    }
+
+
     const value = (control.value ?? '').toString().trim();
     const isEmpty = value.length === 0;
 

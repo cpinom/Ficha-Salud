@@ -44,12 +44,12 @@
                   <th style="width: 75px;" class="text-center">Acciones</th>
                   <th>Nombre<br />Estudiante</th>
                   <th>Correo<br />Estudiante</th>
-                  <th>% De<br />Asistencia</th>
-                  <th>Promedio<br />Curso</th>
-                  <th>Promedio<br />Semestre</th>
-                  <th>Cursos<br />Semestre</th>
-                  <th>Tipo<br />Estudiante</th>
-                  <th>Fichas Pendientes<br />Por Revisar</th>
+                  <th class="text-center">% De<br />Asistencia</th>
+                  <!-- <th>Promedio<br />Curso</th> -->
+                  <th class="text-center">Promedio<br />Semestre</th>
+                  <!-- <th>Cursos<br />Semestre</th> -->
+                  <!-- <th>Tipo<br />Estudiante</th> -->
+                  <th class="text-center">Fichas Pendientes<br />Por Revisar</th>
                 </tr>
               </thead>
               <tbody>
@@ -65,12 +65,12 @@
                   </td>
                   <td>{{ item.tnombreestudiante | titleCase }}</td>
                   <td>{{ item.persTemailInacap }}</td>
-                  <td>{{ item.procAsistencia }}</td>
-                  <td>{{ item.promedioCurso }}</td>
-                  <td>{{ item.notaSemestre }}</td>
-                  <td>{{ item.cursoSemestre }}</td>
-                  <td>{{ item.alumTrabajador }}</td>
-                  <td>{{ item.fichapendientes }}</td>
+                  <td class="text-center">{{ item.procAsistencia }}%</td>
+                  <!-- <td>{{ item.promedioCurso }}</td> -->
+                  <td class="text-center">{{ item.notaSemestre }}</td>
+                  <!-- <td>{{ item.cursoSemestre }}</td> -->
+                  <!-- <td>{{ item.alumTrabajador }}</td> -->
+                  <td class="text-center">{{ item.fichapendientes }}</td>
                 </tr>
                 <tr *ngIf="estudiantes && estudiantes.length == 0">
                   <td colspan="9" class="text-center">No hay estudiantes disponibles</td>

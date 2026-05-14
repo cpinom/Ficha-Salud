@@ -12,16 +12,16 @@ import { NgIf } from '@angular/common';
       type="button"
       (click)="toggle()"
       [attr.aria-expanded]="open"
-      aria-label="Abrir ayuda"
+      aria-label="Visualizar ayuda"
       title="Ayuda"
     >
-      Caso Clínico
+      Visualizar Caso Clínico
     </button>
 
     <!-- Panel tipo chat -->
     <div class="inacap-chat" *ngIf="open" role="dialog" aria-label="Panel de ayuda">
       <div class="inacap-chat__header">
-        <div class="inacap-chat__title">{{ title }}</div>
+        <div class="inacap-chat__title">Caso Clínico</div>
 
         <button class="inacap-chat__close" type="button" (click)="open=false" aria-label="Cerrar">
           ✕
@@ -63,7 +63,7 @@ import { NgIf } from '@angular/common';
       align-items: center;
       justify-content: center;
 
-      font: 700 20px/1 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font: 700 18px/1 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color: #fff;
 
       /* Rojo INACAP aproximado */

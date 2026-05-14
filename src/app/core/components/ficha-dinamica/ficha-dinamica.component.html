@@ -4,7 +4,7 @@
 <form [formGroup]="form">
   <div #acc="ngbAccordion" ngbAccordion class="md-accordion mt-4" [closeOthers]="true">
     <ng-container *ngFor="let grupo of ficha?.grupos">
-      <div [ngbAccordionItem]="'grupo_' + grupo?.id_grupo" [collapsed]="false" [destroyOnHide]="false" (shown)="onGroupExpandedChange(grupo?.id_grupo)">
+      <div [ngbAccordionItem]="'grupo_' + grupo?.id_grupo" [collapsed]="false" [destroyOnHide]="false" (shown)="onGroupShow(grupo)" (hidden)="onGroupHidden(grupo)">
         <h2 ngbAccordionHeader class="grey lighten-3">
           <button ngbAccordionButton>
             <h5 class="mb-0 pl-3 pr-3">

@@ -28,7 +28,6 @@ export class EditarFichaComponent implements OnInit {
     const navigation = this.router.getCurrentNavigation();
 
     if (navigation?.extras.state) {
-      debugger
       this.paciente = navigation.extras.state['paciente'];
       this.ficha = navigation.extras.state['ficha'];
       this.seccion = navigation.extras.state['seccion'];
@@ -126,6 +125,53 @@ export class EditarFichaComponent implements OnInit {
   async guardarBorrador() {
     await this.enviarFicha(true);
   }
+  panelShown(grupo: any) { }
+  async panelHidden(grupo: any) {
+    const fichaData = { ...this.fichaDinamicaComponent.form.value };
+    let valores: any[] = [];
+
+    grupo.campos.forEach((campo: any) => {
+      if (campo.etiqueta == 'estudiante') {
+        const control = this.fichaDinamicaComponent.form.get(campo.codigo);
+
+        if (control) {
+          const valorCampo = control.value || '';
+          // debugger
+
+          valores.push({
+            id: campo.id_campo,
+            valor: valorCampo
+          });
+
+        }
+      }
+    });
+
+    if (valores.length > 0) {
+
+      const params = {
+        fsclNcorr: this.ficha.fsclNcorr,
+        campos: valores,
+        borrador: 1
+      };
+
+      try {
+        const response = await this.api.guardarFicha<any>(params);
+
+        if (response.success) {
+          // this.toastr.success(response.message || 'Ficha guardada correctamente.');
+          // await this.router.navigate(['/estudiantes']);
+        }
+        else {
+          throw Error(response.message || 'Error desconocido');
+        }
+      }
+      catch (error) {
+        this.toastr.error('Error al guardar la ficha: ' + error);
+      }
+
+    }
+  }
   async fileToBase64(file: File, allowedExtensions: string[] = ['jpg', 'jpeg', 'png', 'pdf'], maxSizeMB: number = 5): Promise<string> {
     return new Promise((resolve, reject) => {
       const extension = file.name.split('.').pop()?.toLowerCase();
@@ -163,11 +209,11 @@ export class EditarFichaComponent implements OnInit {
         downloadLink.click();
       }
       else {
-        throw Error();
+        throw Error(response.message || 'Error desconocido');
       }
     }
     catch (error) {
-      this.toastr.error('Error al descargar el archivo');
+      this.toastr.error('Error al descargar el archivo: ' + error);
     }
   }
 
