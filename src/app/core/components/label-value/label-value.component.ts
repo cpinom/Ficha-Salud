@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Input, Optional, Output } from '@angular/core';
+import { Component, Inject, Input, Optional } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { ON_DOWNLOAD_TOKEN } from '../ficha-dinamica/ficha-dinamica.component';
 
@@ -12,7 +12,7 @@ import { ON_DOWNLOAD_TOKEN } from '../ficha-dinamica/ficha-dinamica.component';
 
       <div class="form-control-plaintext label-value-text">
 
-        @if(campo?.lista?.length > 0) {
+        @if(esListaArchivos()) {
           <div class="file-list">
             @for(archivo of campo.lista; track archivo) {
               <button
@@ -65,6 +65,13 @@ export class LabelValueComponent {
     @Optional() @Inject(ON_DOWNLOAD_TOKEN) private onDownload?: (payload: any) => void
   ) { }
 
+  esListaArchivos(): boolean {
+    return Array.isArray(this.campo?.lista)
+      && this.campo.lista.length > 0
+      && this.campo.lista.every((item: any) =>
+        item && typeof item === 'object' && 'nombre_archivo' in item
+      );
+  }
 
   descargarArchivo(archivo: any): void {
     this.onDownload?.({ data: archivo });

@@ -79,9 +79,9 @@ export function multiValidator(options?: {
     // --- Tipo: Texto ---
     if (options?.type === 'texto') {
       // const defaultPattern = options.pattern || /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s]+$/;
-      const defaultPattern = options.pattern || /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s\/()#%,;.\:\-_"']+$/;
+      const defaultPattern = options.pattern || /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s\/()+°#%,;.\:\-_"']+$/;
       if (!defaultPattern.test(value)) {
-        return { pattern: 'Solo se permiten letras, números y espacios' };
+        return { pattern: 'Solo se permiten letras, números y caracteres especiales' };
       }
     }
 

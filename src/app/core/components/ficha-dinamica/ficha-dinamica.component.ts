@@ -133,6 +133,7 @@ export class FichaDinamicaComponent implements OnInit, AfterViewInit {
       }
 
       if (campo.tipo === 'FILE') {
+        debugger;
         providers.push({
           provide: ON_DOWNLOAD_TOKEN,
           useValue: (payload: any) => {
