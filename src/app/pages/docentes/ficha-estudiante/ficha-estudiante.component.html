@@ -8,7 +8,7 @@
     <div class="card">
       <div class="card-header d-flex justify-content-between align-items-center">
         <h4 class="float-left heading h4-responsive mb-0">
-          Fichas del Estudiante <span class="px-2">|</span> {{ estudiante?.tnombreestudiante | titleCase }}
+          Fichas del Estudiante <span class="px-2">|</span> {{ estudiante?.nombreEstudiante | titleCase }}
         </h4>
         <div class="d-flex align-items-center">
           <div class="badge badge-warning font-weight-normal">{{ estudiante?.fichapendientes}} Fichas Pendientes de
@@ -26,7 +26,7 @@
         <div class="col-md-4 mt-4">
           <p class="mb-4">
             <span class="mr-2 font-weight-bold">Sección: </span>
-            <span> {{ data?.seccTdesc }}</span>
+            <span>{{ data?.seccTdesc }} / {{ data?.ssecTdesc }}</span>
           </p>
         </div>
         <div class="col-md-4 mt-4">

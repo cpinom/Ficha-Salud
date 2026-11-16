@@ -19,19 +19,19 @@
         <div class="col-md-4 mt-4">
           <p class="mb-4">
             <span class="mr-2 font-weight-bold">Sede: </span>
-            <span> {{ data?.sedeTdesc }}</span>
+            <span>{{ data?.sedeTdesc }}</span>
           </p>
         </div>
         <div class="col-md-4 mt-4">
           <p class="mb-4">
             <span class="mr-2 font-weight-bold">Sección: </span>
-            <span> {{ data?.seccTdesc }}</span>
+            <span>{{ data?.seccTdesc }} / {{ data?.ssecTdesc }}</span>
           </p>
         </div>
         <div class="col-md-4 mt-4">
           <p class="mb-4">
             <span class="mr-2 font-weight-bold">Cantidad Estudiantes: </span>
-            <span> {{ data?.contador }}</span>
+            <span>{{ data?.contador }}</span>
           </p>
         </div>
       </div>
@@ -46,7 +46,7 @@
                   <th>Correo<br />Estudiante</th>
                   <th class="text-center">% De<br />Asistencia</th>
                   <!-- <th>Promedio<br />Curso</th> -->
-                  <th class="text-center">Promedio<br />Semestre</th>
+                  <!-- <th class="text-center">Promedio<br />Semestre</th> -->
                   <!-- <th>Cursos<br />Semestre</th> -->
                   <!-- <th>Tipo<br />Estudiante</th> -->
                   <th class="text-center">Fichas Pendientes<br />Por Revisar</th>
@@ -63,11 +63,11 @@
                       </button>
                     </div>
                   </td>
-                  <td>{{ item.tnombreestudiante | titleCase }}</td>
-                  <td>{{ item.persTemailInacap }}</td>
-                  <td class="text-center">{{ item.procAsistencia }}%</td>
+                  <td>{{ item.nombreEstudiante | titleCase }}</td>
+                  <td>{{ item.correo }}</td>
+                  <td class="text-center">{{ item.asistencia }}%</td>
                   <!-- <td>{{ item.promedioCurso }}</td> -->
-                  <td class="text-center">{{ item.notaSemestre }}</td>
+                  <!-- <td class="text-center">{{ item.notaSemestre }}</td> -->
                   <!-- <td>{{ item.cursoSemestre }}</td> -->
                   <!-- <td>{{ item.alumTrabajador }}</td> -->
                   <td class="text-center">{{ item.fichapendientes }}</td>

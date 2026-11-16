@@ -34,13 +34,16 @@ export class DetalleCursoComponent implements OnInit {
     await this.cargar();
   }
   async cargar() {
-    const seccCcod = this.data.seccCcod;
+    const { seccCcod, ssecNcorr } = this.data;
 
     try {
-      const response = await this.api.getEstudiantes<any>(seccCcod);
+      const response = await this.api.getEstudiantes<any>(seccCcod, ssecNcorr);
 
       if (response.success) {
         this.estudiantes = response.data;
+      }
+      else {
+        throw Error();
       }
     }
     catch (error) {

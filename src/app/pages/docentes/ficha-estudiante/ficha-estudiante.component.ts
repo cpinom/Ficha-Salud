@@ -39,8 +39,8 @@ export class FichaEstudianteComponent implements OnInit {
   async cargar() {
 
     const persNcorr = this.estudiante.persNcorr;
-    const seccCcod = this.data.seccCcod;
-    const response = await this.api.getFichasEstudiantes<any>(persNcorr, seccCcod);
+    const { seccCcod, ssecNcorr } = this.data;
+    const response = await this.api.getFichasEstudiantes<any>(persNcorr, seccCcod, ssecNcorr);
 
     if (response.success) {
       this.fichas = response.data;

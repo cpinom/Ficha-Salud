@@ -36,7 +36,7 @@ export class EstudiantesComponent implements OnInit {
       pageSize: [10]
     });
 
-    this.filtroForm.get('curso')?.valueChanges.subscribe(value => {
+    this.filtroForm.get('curso')?.valueChanges.subscribe((value:any) => {
       this.cargarFichas();
     });
 
@@ -60,7 +60,7 @@ export class EstudiantesComponent implements OnInit {
         this.cursos = response.data;
 
         if (this.cursos.length > 0) {
-          this.filtroForm.get('curso')?.setValue(this.cursos[0].seccCcod);
+          this.filtroForm.get('curso')?.setValue(this.cursos[0]);
         }
       }
       else {
@@ -75,16 +75,20 @@ export class EstudiantesComponent implements OnInit {
   async cargarFichas() {
     try {
       const { start, limit } = this.getPaginationParams(this.page, this.pageSize);
-      const seccCcod = this.filtroForm.get('curso')?.value;
+      const { seccCcod, ssecNcorr } = this.filtroForm.get('curso')?.value;
       const searchTerm = this.filtroForm.get('filtro')?.value;
-      const response = await this.api.getFichas<any>(seccCcod, start, limit, this.sortColumn, this.sortDirection, searchTerm);
+      const response = await this.api.getFichas<any>(seccCcod, ssecNcorr, start, limit, this.sortColumn, this.sortDirection, searchTerm);
 
       if (response.success) {
         this.data = response.data;
         this.collectionSize = response.total;
       }
+      else {
+        throw Error();
+      }
     }
     catch (error) {
+      this.toastr.error('Error al cargar las fichas del curso.');
       console.error('Error cargando curso de estudiantes', error);
     }
   }
@@ -149,12 +153,14 @@ export class EstudiantesComponent implements OnInit {
   }
   get seccion() {
     if (this.data && this.data.length > 0) {
+      const data = this.data[0];
+
       return {
-        asignatura: this.data[0].asignatura,
-        asigCcod: this.data[0].asigCcod,
-        sede: this.data[0].sede,
-        seccion: this.data[0].seccTdesc,
-        nombreDocente: this.data[0].nombreDocente,
+        asignatura: data.asignatura,
+        asigCcod: data.asigCcod,
+        sede: data.sede,
+        seccion: `${data.seccTdesc} / ${data.ssecTdesc}`,
+        nombreDocente: data.nombreDocente,
         cantidadfichascompletadas: this.data.filter((item: any) => item.efisCcod == 5).length
       };
     }

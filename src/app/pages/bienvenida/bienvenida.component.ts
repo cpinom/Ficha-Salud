@@ -16,8 +16,11 @@ export class BienvenidaComponent {
     if (this.global.rolUsuario === 'docente') {
       this.router.navigate(['/docentes']);
     }
-    else {
+    else if (this.global.rolUsuario === 'alumno') {
       this.router.navigate(['/estudiantes']);
+    }
+    else {
+      this.router.navigate(['/no-disponible']);
     }
   }
 

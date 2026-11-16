@@ -42,27 +42,21 @@ export class GestionservicesService {
     );
   }
 
-  getinfoseccion(seccion?: number): Observable<any> {
-    return this.http.get(
-      `${this.global.baseUrl}/${this.prefix}/getinfoseccion/${seccion}`
-    );
-  }
+  // asignarfichas(jsonString: string): Observable<any> {
+  //   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  //   var url = `${this.global.baseUrl}/${this.prefix}/asignarfichas`;
+  //   //return this.http.post(`${this.apiUrl}/v1/asignarfichas`, jsonString, { headers });
+  //   return this.http.post(url, { jsonficha: jsonString }, { headers });
+  // }
 
-  asignarfichas(jsonString: string): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    var url = `${this.global.baseUrl}/${this.prefix}/asignarfichas`;
-    //return this.http.post(`${this.apiUrl}/v1/asignarfichas`, jsonString, { headers });
-    return this.http.post(url, { jsonficha: jsonString }, { headers });
-  }
-
-  getListFichasEstudiante(
-    persNcorr?: number,
-    seccion?: number
-  ): Observable<any> {
-    return this.http.get(
-      `${this.global.baseUrl}/${this.prefix}/getlistfichasestudiante/${persNcorr}/${seccion}`
-    );
-  }
+  // getListFichasEstudiante(
+  //   persNcorr?: number,
+  //   seccion?: number
+  // ): Observable<any> {
+  //   return this.http.get(
+  //     `${this.global.baseUrl}/${this.prefix}/getlistfichasestudiante/${persNcorr}/${seccion}`
+  //   );
+  // }
 
   getFichaEstudianteRespuesta(
     fisaNcorr: number,

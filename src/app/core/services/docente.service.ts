@@ -20,14 +20,14 @@ export class DocenteService extends HttpService {
   getFichaAsignatura<T>(asigCcod: any) {
     return this.get<T>(`docentes/ficha-asignatura?asigCcod=${asigCcod}`);
   }
-  getEstudiantes<T>(seccCcod: any) {
-    return this.get<T>(`docentes/estudiantes?seccCcod=${seccCcod}`);
+  getEstudiantes<T>(seccCcod: any, ssecNcorr: any) {
+    return this.get<T>(`docentes/estudiantes?seccCcod=${seccCcod}&ssecNcorr=${ssecNcorr}`);
   }
   getDetalleFichaAsignatura<T>(asigCcod: any, persNcorr: any, fisaNcorr: any) {
     return this.get<T>(`docentes/detalle-ficha-asignatura?asigCcod=${asigCcod}&persNcorr=${persNcorr}&fisaNcorr=${fisaNcorr}`);
   }
-  getFichasEstudiantes<T>(persNcorr: any, seccCcod: any) {
-    return this.get<T>(`docentes/fichas-estudiantes?persNcorr=${persNcorr}&seccCcod=${seccCcod}`);
+  getFichasEstudiantes<T>(persNcorr: any, seccCcod: any, ssecNcorr?: any) {
+    return this.get<T>(`docentes/fichas-estudiantes?persNcorr=${persNcorr}&seccCcod=${seccCcod}&ssecNcorr=${ssecNcorr}`);
   }
   terminarRevisionficha<T>(data: any) {
     return this.post<T>(`docentes/terminar-revision-ficha`, data);

@@ -38,6 +38,7 @@ export class AsignarFichaComponent implements OnInit {
       this.ficha = navigation.extras.state['ficha'];
       this.previsiones = navigation.extras.state['previsiones'];
       this.pacienteForm = this.fb.group({
+        fspaNcorr: [0],
         rut: ['', multiValidator({ required: true, type: 'rut' })],
         nombre: ['', multiValidator({ required: true, type: 'texto' })],
         nombreSocial: ['', multiValidator({ required: false, type: 'texto' })],
@@ -94,7 +95,8 @@ export class AsignarFichaComponent implements OnInit {
   async crearFichaBorrador() {
     const params = {
       tipoFichaId: this.ficha.id_tipo_ficha,
-      seccionId: this.data.seccCcod
+      seccionId: this.data.seccCcod,
+      subseccionId: this.data.ssecNcorr
     };
 
     try {
@@ -102,6 +104,9 @@ export class AsignarFichaComponent implements OnInit {
 
       if (response.success) {
         this.fichaId = response.fichaId;
+      }
+      else {
+        throw Error(response.message || 'Error desconocido al crear ficha borrador');
       }
     }
     catch (error) {
@@ -117,6 +122,7 @@ export class AsignarFichaComponent implements OnInit {
       if (response.success) {
         const paciente = response.data;
         this.pacienteForm.patchValue({
+          fspaNcorr: paciente.fspaNcorr,
           rut: paciente.fspaRut,
           nombre: paciente.fspaNombre,
           nombreSocial: paciente.fspaNombreSocial,
@@ -133,14 +139,16 @@ export class AsignarFichaComponent implements OnInit {
       }
       else {
         this.pacienteForm.patchValue({
+          fspaNcorr: 0,
           rut: rut
         }, { emitEvent: false });
       }
     }
-    catch (error) {
-    }
+    catch (error) { }
   }
   async guardarFichaPaciente() {
+
+    debugger
 
     if (this.pacienteForm.invalid) {
       this.pacienteForm.markAllAsTouched();
@@ -159,7 +167,13 @@ export class AsignarFichaComponent implements OnInit {
       const response = await this.api.guardarFichaPaciente<any>(params);
 
       if (!response.success) {
-        this.toastr.error('Ocurrió un error al guardar los datos del paciente. Por favor, inténtelo de nuevo.');
+        throw Error(response.message || 'Error desconocido al guardar datos del paciente');
+      }
+
+      if (pacienteData.fspaNcorr === 0 && response.pacienteId) {
+        this.pacienteForm.patchValue({
+          fspaNcorr: response.pacienteId
+        }, { emitEvent: false });
       }
     }
     catch (error) {

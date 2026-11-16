@@ -625,5 +625,10 @@ table {
   }
 }
 
+::selection {
+  background-color: #cc0000;
+  color: #ffffff;
+}
+
 /* Importing Bootstrap SCSS file. */
 // @import 'bootstrap/scss/bootstrap';

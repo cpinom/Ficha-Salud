@@ -13,8 +13,7 @@
                 <label for="filtro-curso">Filtrar por Curso:</label>
                 <select id="filtro-curso" class="filtr d-flex" formControlName="curso">
                   <option value="" disabled="">Seleccione</option>
-                  <!-- <option value="123">Curso XXX</option> -->
-                  <option *ngFor="let curso of cursos" [value]="curso.seccCcod">{{ curso.fstiTnombre }}</option>
+                  <option *ngFor="let item of cursos" [ngValue]="item">{{ item.fstiTnombre }} / {{ item.ssecTdesc }}</option>
                 </select>
               </div>
             </div>

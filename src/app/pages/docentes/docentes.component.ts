@@ -59,6 +59,7 @@ export class DocentesComponent implements OnInit {
       }
     }
     catch (error) {
+      debugger;
       this.toastr.error('No se pudieron cargar los periodos');
     }
   }
