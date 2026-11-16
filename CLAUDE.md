@@ -10,11 +10,29 @@ App para **alumnos** (completan fichas de salud de pacientes atendidos en asigna
   - `src/app/core/components/ficha-dinamica` + `control-renderer` — render dinámico de la ficha desde la definición que entrega el backend (grupos → campos; plantilla HTML por grupo con `<control-slot>`).
   - `src/app/core/services/` — `http.service.ts` (base), `alumno.service.ts`, `docente.service.ts`, `spinner.interceptor.ts`.
   - Config de usuario (id, nombre, rol, preferencias, baseUrl) se inyecta en `window.config` desde `Views/Home/Index.cshtml` del backend; en dev viene de `src/index.html`.
+  - **URL del API:** `config.baseUrl` sale de `ViewBag.BaseUrl` ← appSetting `BASE_URL` del `Web.config` del backend, que en desa/test/prod sigue la convención estándar de las apps INACAP (p.ej. `https://siga.desa.inacap.cl/Inacap.FichasdeSalud`). El front llama a `${baseUrl}/${prefix}/...` (`http.service.ts`). No hardcodear URLs por ambiente en Angular: `environments/*.ts` no se usa para esto (solo `/api` del proxy en dev). Ojo con la barra final en `BASE_URL` (local tiene `http://localhost:59353/` → genera `//api`).
 - **Backend:** `C:\Proyectos\.NET\Inacap.FichasdeSalud` — ASP.NET Web API 2 / MVC 5 sobre .NET Framework 4.7.1, Oracle (`Oracle.DataAccess`), todo vía stored procedures `SIGA.PKG_FICHAS_SALUD.*` (el PL/SQL no está en el repo).
   - Controladores: `AlumnoController` (Roles=Alumno), `DocenteController` (Roles=Docente), `TableroDocenteController`, `TableroEstudianteController`, `BaseController`, `HomeController` (MVC, sirve la SPA).
   - Auth: cookie `HTPSESIONIC` validada con `SessionValidationFilter` → `db.ValidarAcceso`. Con `AMBIENTE=LOCAL` usa `SESI_CCOD` fijo del Web.config.
   - Las respuestas siguen el patrón `Ok(new { success, data, message })` (errores también con HTTP 200).
-- **Dev:** `npm start` (proxy `/api` → `http://localhost:59353/`, ver `proxy.conf.json`). `ng build` escribe directo en `C:/Proyectos/.NET/Inacap.FichasdeSalud/Inacap.FichasdeSalud/App` y los bundles con hash están referenciados a mano en `Index.cshtml`.
+- **Dev:** `npm start` (proxy `/api` → `http://localhost:59353/`, ver `proxy.conf.json`).
+
+## Build y despliegue en el proyecto .NET (hacer SIEMPRE después de compilar)
+
+1. `npx ng build` → la salida va directo a `C:/Proyectos/.NET/Inacap.FichasdeSalud/Inacap.FichasdeSalud/App` (`App/browser/index.html` + bundles con hash).
+2. Actualizar `C:\Proyectos\.NET\Inacap.FichasdeSalud\Inacap.FichasdeSalud\Views\Home\Index.cshtml` con los archivos que referencia `App/browser/index.html`, **solo los locales** (no los CDN), con prefijo relativo `~/App/browser/`:
+   - `styles-*.css` (el `<link media="print" onload=...>` y el `<noscript>`).
+   - Todos los `<link rel="modulepreload" href="~/App/browser/chunk-*.js">`, en el mismo orden.
+   - `polyfills-*.js` (type=module), `scripts-*.js` (defer), `main-*.js` (type=module), al final del body.
+   - No tocar el resto del cshtml (bloque `var config = {...}` con ViewBag, CDN, `<base href="~/">`).
+3. Verificar que todos los `~/App/browser/*` referenciados existan en disco y que la lista coincida exactamente con la de `index.html` (mismo orden). Si coinciden, no hace falta editar.
+4. El proyecto .NET no está en git: el cambio del cshtml no se commitea.
+
+## Versión de la app
+
+`C:\Proyectos\.NET\Inacap.FichasdeSalud\Inacap.FichasdeSalud\Controllers\VersionController.cs` expone `GET /version` y devuelve la versión fija, p.ej. `return Ok("1.2.8"); // 24/08/2026`.
+- **Después de cada cambio que se despliegue** (frontend o backend), incrementar la versión (por defecto el patch: 1.2.8 → 1.2.9) y actualizar el comentario con la fecha del cambio en formato `dd/MM/yyyy`.
+- Sirve para confirmar en desa/test/prod qué versión quedó publicada.
 
 ## Convenciones
 
